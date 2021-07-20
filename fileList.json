@@ -1,32 +1,17 @@
 [
     {
+        "date": "1999-02-18",
+        "title": "Hello Friend. Hello Friend.",
+        "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/cron@daily/1999/02-February/18-february-2021.md"
+    },
+    {
         "date": "2021-07-17",
-        "title": "Hello, Friend",
-        "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/july-17-2021.md"
+        "title": "That's lame. May be I should give you a name.",
+        "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/cron@daily/2021/07-July/17-july-2021.md"
     },
     {
         "date": "2021-07-18",
-        "title": "Thats, Lame. May be I should give you a name.",
-        "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/july-18-2021.md"
-    },
-    {
-        "date": "2021-07-19",
-        "title": "test 123",
-        "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/july-19-2021.md"
-    },
-    {
-        "date": "2021-07-20",
-        "title": "test 123",
-        "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/july-20-2021.md"
-    },
-    {
-        "date": "2021-02-18",
-        "title": "test 123",
-        "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/february-18-2021.md"
-    },
-    {
-        "date": "2033-12-30",
-        "title": "test 123",
-        "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/december-30-2033.md"
+        "title": "But that's a slippery slope. You're only in my head.",
+        "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/cron@daily/2021/07-July/18-july-2021.md"
     }
 ]
