@@ -1,7 +1,10 @@
-{
-    "postno": 1,
-    "title": "Hello Friend",
-    "date": "1998-10-10",
-    "url": "https://raw.githubusercontent.com/wannabemrrobot/dailyprogress/main/posts/2021/07-July/20-July-2021/20-july-2021.md",
-    "tags": ["love", "hack", "elliot", "5/9"]
-}
+[
+    {
+        "postno": 1,
+        "title": "Hello Friend",
+        "date": "1998-10-10",
+        "url": "https://raw.githubusercontent.com/wannabemrrobot/dailyprogress/main/posts/2021/07-July/20-July-2021/20-july-2021.md",
+        "tags": ["love", "hack", "elliot", "5/9"]
+    }
+    
+]
