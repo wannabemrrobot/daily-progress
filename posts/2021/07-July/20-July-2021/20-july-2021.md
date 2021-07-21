@@ -11,7 +11,7 @@
 <tbody valign=top align=left>
 <tr><th>
 Browsers
-</th><td width=100%>
+</th><td>
 Load <code>@octokit/rest</code> directly from <a href="https://cdn.skypack.dev">cdn.skypack.dev</a>
         
 ```html
