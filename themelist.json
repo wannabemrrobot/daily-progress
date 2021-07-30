@@ -1,0 +1,10 @@
+[
+    {
+        "theme": "light",
+        "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/themes/light.json"
+    },
+    {
+        "theme": "dark",
+        "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/themes/dark.json"
+    }
+]
