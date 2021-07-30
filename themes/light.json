@@ -17,6 +17,7 @@
     "--subheader-bg": "#fff",
     "--border": "#d1d1d1",
     "--icons-social": "#5e5e5e",
-    "--timeline-connector": "#000",
+    "--timeline-connector-0.3": "rgba(black, .3)",
+    "--timeline-connector-1": "rgba(rgba(black, .3), 0))",
     "--drop-shadow": "#2222224f"
 }
