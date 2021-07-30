@@ -1,14 +1,14 @@
 [
     {
-        "theme": "light",
+        "theme": "zen white",
         "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/themes/light.json"
     },
     {
-        "theme": "dark",
+        "theme": "dark knight",
         "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/themes/dark.json"
     },
     {
-        "theme": "hackr",
+        "theme": "hackr bleed",
         "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/themes/hackr.json"
     }
 ]
