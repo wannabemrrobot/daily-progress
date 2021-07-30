@@ -6,5 +6,9 @@
     {
         "theme": "dark",
         "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/themes/dark.json"
+    },
+    {
+        "theme": "hackr",
+        "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/themes/hackr.json"
     }
 ]
