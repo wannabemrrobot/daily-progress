@@ -14,8 +14,8 @@
 
     "--background": "#141d2b",
     "--header-bg": "#111927",
-    "--subheader-bg": "#181a1b",
+    "--subheader-bg": "#111927",
     "--border": "#3d4245",
-    "--icons-social": "#ada59b",
+    "--icons-social": "#f5ffe1",
     "--drop-shadow": "#2222224f"
 }
