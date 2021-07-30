@@ -1,0 +1,1 @@
+Contains theme configurations for the app

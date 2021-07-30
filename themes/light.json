@@ -1,0 +1,22 @@
+{
+        "--accent-primary": "#ff1e56",
+
+        "--text-primary": "#444444",
+        "--text-secondary": "#4d4d4d",
+        "--home-heading": "#646464",
+        "--heading-primary": "#3d3d3d",
+        "--heading-secondary": "#444",
+        "--animation-text": "#757575",
+        "--tags": "#a0a0a0",
+        "--tag-text": "#757575",
+        "--tagcount-bg": "#e6e6e6",
+        "--tagbg-hover": "#ff5e860c",
+    
+        "--background": "#fff",
+        "--header-bg": "#f8f9fa",
+        "--subheader-bg": "#fff",
+        "--border": "#d1d1d1",
+        "--icons-social": "#5e5e5e",
+        "--timeline-connector": "#000",
+        "--drop-shadow": "#2222224f"
+}
