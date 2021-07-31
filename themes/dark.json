@@ -7,6 +7,7 @@
     "--heading-primary": "#bdb7af",
     "--heading-secondary": "#444",
     "--animation-text": "#9e9689",
+    "--badge-text": "#f8f9fa",
     "--tags": "#aca59a",
     "--tag-text": "#9e9689",
     "--tagcount-bg": "#26292b",
