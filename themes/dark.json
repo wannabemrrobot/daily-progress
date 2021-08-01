@@ -1,4 +1,6 @@
 {
+    "$theme": "Dark Knight",
+
     "--accent-primary": "#ff1e56",
 
     "--text-primary": "#dfdbd5",
