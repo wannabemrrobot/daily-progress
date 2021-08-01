@@ -1,4 +1,6 @@
 {
+    "$theme": "Zen White",
+
     "--accent-primary": "#ff1e56",
 
     "--text-primary": "#444444",

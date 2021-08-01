@@ -1,4 +1,6 @@
 {
+    "$theme": "Hackr Bleed",
+
     "--accent-primary": "#9fef00",
 
     "--text-primary": "#fff",
