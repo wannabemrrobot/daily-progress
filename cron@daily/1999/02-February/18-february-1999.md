@@ -1,3 +1,4 @@
-Hello Friend, Hello Friend. This is the day I was born. Certainly a notable timeline event, isn't it? Well, I've never thought of making a career in computer science in my childhood, but here I am, destined to do so. 
+### Hello Friend, Hello Friend.
+This is the day I was born. Certainly a notable timeline event, isn't it? Well, I've never thought of making a career in computer science in my childhood, but here I am, destined to do so. 
 
 Not to lie though, its fun, being in this domain. So challenging, that everyday learning is important to level up your game! Will try to learn everyday, something new that I'll post here as an act of contribution to this evergrowing community as well as for my self-motivation. By the way, am a guy who is a MR.ROBOT fanboy, so the website's aesthetics mostly represents the MR.ROBOT theme. Happy Living! :hugs: :heavy_heart_exclamation:
