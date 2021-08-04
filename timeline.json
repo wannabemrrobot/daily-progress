@@ -1,17 +1,17 @@
 [
     {
-        "date": "1999-02-18",
-        "title": "Hello Friend. Hello Friend.",
-        "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/cron@daily/1999/02-February/18-february-1999.md"
-    },
-    {
-        "date": "2021-08-01",
-        "title": "That's lame. May be I should give you a name.",
-        "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/cron@daily/2021/08-August/01-august-2021.md"
-    },
-    {
         "date": "2021-08-02",
         "title": "August 2 suneo",
         "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/cron@daily/2021/08-August/02-august-2021.md"
+    },
+    {
+        "date": "2021-08-01",
+        "title": "Initial Release V0.1 of @wannabemrrobot",
+        "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/cron@daily/2021/08-August/01-august-2021.md"
+    },
+    {
+        "date": "1999-02-18",
+        "title": "Hello Friend. Hello Friend.",
+        "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/cron@daily/1999/02-February/18-february-1999.md"
     }
 ]
