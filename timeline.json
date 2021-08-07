@@ -1,8 +1,12 @@
-[
-    {
+[    {
         "date": "2021-08-03",
-        "title": "Release V1.0 - Themes, Tags",
+        "title": "Understanding GraphQL",
         "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/cron@daily/2021/08-August/03-august-2021.md"
+    },
+    {
+        "date": "2021-08-04",
+        "title": "Release V1.0 - Themes, Tags",
+        "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/cron@daily/2021/08-August/04-august-2021.md"
     },
     {
         "date": "2021-08-02",
