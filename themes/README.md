@@ -1,1 +1,1 @@
-Contains theme configurations for the app
+Contains theme configurations for the [app](https://wannabemrrobot.web.app)
