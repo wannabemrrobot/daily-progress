@@ -1,42 +1,84 @@
 #!/usr/bin/env python3
 import os
 import json
-from simple_term_menu import TerminalMenu
 #----------------------------------------
+
 def createTimeline(year_dict):
-    print("timeline")
 
-    date = input(">> Input date in the format (1998-10-10/yyyy-mm-dd):\n")
+    # get the date and title from the user to populate the json file
+    date = input(">> Input date in the format (1998-10-10/yyyy-mm-dd):\n   date: ")
+    print("-----------------------")
+    title = input(">> Input title for the timeline:\n   title: ")
+    print("-----------------------")
+
+
     print("[+] Entered Date: ", date)
-
-    title = input(">> Input title for the timeline: ")
     print("[+] Entered Title: ", title)
+    print("-----------------------")
 
-    timeline_file = "./timelinecopy.json"
-    parent_url = "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/cron@daily/"
+    # json file to populate data
+    timeline_file = "./timeline.json"
+    # current working directory for the task
+    working_dir = "./cron@daily"
+    # github url to fetch the timeline markdown file
+    github_url = "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/cron@daily/"
+
+    
     year = date.split('-')[0]
     month = date.split('-')[1]
     day = date.split('-')[2]
 
-    file_url = f"{parent_url}{year}/{month}-{year_dict.get(month)}/{day}-{year_dict.get(month)}-{year}.md"
+    # the file that needs to be created
+    file_name = f"{day}-{year_dict.get(month)}-{year}.md"
+    # the complete file url for public access
+    file_url = f"{github_url}{year}/{month}-{year_dict.get(month)}/{day}-{year_dict.get(month)}-{year}.md"
 
-    # create entry for updating timeline object json
+    # json object with data from the user
     timeline_obj = {
         "date": date,
         "title": title,
         "url": file_url
     }
 
-
+    # open json file to get the file contents(json list)
     json_file = open(timeline_file)
     data = json.load(json_file)
 
+    # insert new json object into existing list of json objects
     data.insert(0, timeline_obj)
-    print(data)
-    with open(timeline_file, 'w') as json_out:
-        json.dump(data, json_out, indent=4)
+    file_exist = False
 
-def createPosts():
+    if(os.path.isdir(f"{working_dir}/{year}") == False):
+        print(f"[!] {working_dir}/{year} : no such directory, creating directory and timeline markdown...")
+        os.mkdir(f"{working_dir}/{year}")
+        os.mkdir(f"{working_dir}/{year}/{month}-{year_dict.get(month)}")
+        file = open(f"{working_dir}/{year}/{month}-{year_dict.get(month)}/{file_name}", "x")
+        file.close()
+    else:
+        if(os.path.isdir(f"{working_dir}/{year}/{month}-{year_dict.get(month)}") == False):
+            print(f"[!] {working_dir}/{year}/{month}-{year_dict.get(month)} : no such directory, creating directory and timeline markdown...")
+            os.mkdir(f"{working_dir}/{year}/{month}-{year_dict.get(month)}")
+            file = open(f"{working_dir}/{year}/{month}-{year_dict.get(month)}/{file_name}", "x")
+            file.close()
+        else:
+            if(os.path.isfile(f"{working_dir}/{year}/{month}-{year_dict.get(month)}/{file_name}") == False):
+                print(f"[!] {working_dir}/{year}/{month}-{year_dict.get(month)}/{file_name} : no such file, creating timeline markdown...")
+                file = open(f"{working_dir}/{year}/{month}-{year_dict.get(month)}/{file_name}", "x")
+                file.close()
+            else:
+                print(f"[!] {working_dir}/{year}/{month}-{year_dict.get(month)}/{file_name} : file already exists.")
+                file_exist = True
+    
+    if(file_exist == False):
+        with open(timeline_file, 'w') as json_out:
+            json.dump(data, json_out, indent=4)
+            print("-----------------------")
+            print("[!] Timeline entry addition successful")
+            print("-----------------------")
+            json_out.close()
+
+
+def createPost():
     print(">> posts triggered")
     pass
 
@@ -60,17 +102,19 @@ def main():
         '12': 'december' 
         }
 
-    print(">> Select function: ")
-    options = ["1. create timeline event", "2. create posts", "3. create theme"]
-    terminal_menu = TerminalMenu(options)
-    menu_entry_index = terminal_menu.show()
-    # print(f"You have selected {options[menu_entry_index]}")
-    if(menu_entry_index == 0):
+    print("\n>> Select function: \n   1. Create Timeline\n   2. Create post\n   3. Create Theme\n")
+    choice = input("\nSelection: ")
+    print("-----------------------")
+
+    if(int(choice) == 1):
         createTimeline(year_dict)
-    elif(menu_entry_index == 1):
-        createPosts()
-    elif(menu_entry_index == 2):
+    elif(int(choice) == 2):
+        createPost(year_dict)
+    elif(int(choice) == 3):
         createTheme()
+    else:
+        main()
+
 
 
 
