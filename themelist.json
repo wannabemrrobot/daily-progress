@@ -10,9 +10,5 @@
     {
         "theme": "Hackr Bleed",
         "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/themes/hackr.json"
-    },
-    {
-        "theme": "mrrobot",
-        "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/themes/mrrobot.json"
     }
 ]
