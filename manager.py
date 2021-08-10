@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+from genericpath import isfile
 import os
 import json
 #----------------------------------------
@@ -49,20 +50,20 @@ def createTimeline(year_dict):
     file_exist = False
 
     if(os.path.isdir(f"{working_dir}/{year}") == False):
-        print(f"[!] {working_dir}/{year} : no such directory, creating directory and timeline markdown...")
+        print(f"[!] {working_dir}/{year} : does not exists, creating directory and timeline markdown...")
         os.mkdir(f"{working_dir}/{year}")
         os.mkdir(f"{working_dir}/{year}/{month}-{year_dict.get(month)}")
         file = open(f"{working_dir}/{year}/{month}-{year_dict.get(month)}/{file_name}", "x")
         file.close()
     else:
         if(os.path.isdir(f"{working_dir}/{year}/{month}-{year_dict.get(month)}") == False):
-            print(f"[!] {working_dir}/{year}/{month}-{year_dict.get(month)} : no such directory, creating directory and timeline markdown...")
+            print(f"[!] {working_dir}/{year}/{month}-{year_dict.get(month)} : does not exists, creating directory and timeline markdown...")
             os.mkdir(f"{working_dir}/{year}/{month}-{year_dict.get(month)}")
             file = open(f"{working_dir}/{year}/{month}-{year_dict.get(month)}/{file_name}", "x")
             file.close()
         else:
             if(os.path.isfile(f"{working_dir}/{year}/{month}-{year_dict.get(month)}/{file_name}") == False):
-                print(f"[!] {working_dir}/{year}/{month}-{year_dict.get(month)}/{file_name} : no such file, creating timeline markdown...")
+                print(f"[!] {working_dir}/{year}/{month}-{year_dict.get(month)}/{file_name} : does not exists, creating timeline markdown...")
                 file = open(f"{working_dir}/{year}/{month}-{year_dict.get(month)}/{file_name}", "x")
                 file.close()
             else:
@@ -83,8 +84,41 @@ def createPost():
     pass
 
 def createTheme():
-    print("theme")
-    pass
+    # get the theme name from the user
+    theme_name = input(">> Input theme name: \n   theme name: ")
+    print("-----------------------")
+    
+    themelist_file = "./themelist.json"
+    working_dir = "./themes"
+    github_url = "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/themes/"
+    
+    theme_file = f"{theme_name}.json"
+    theme_url = f"{github_url}{theme_file}"
+
+    theme_obj = {
+        "theme": theme_name,
+        "url": theme_url
+    }
+
+    # open json file to get the file contents(json list)
+    json_file = open(themelist_file)
+    data = json.load(json_file)
+    data.append(theme_obj)
+    
+    if(os.path.isfile(f"{working_dir}/{theme_file}") == False):
+        print(f"[!] {theme_file} does not exists. Creating file...")
+        file = open(f"{working_dir}/{theme_file}", "x")
+        file.close()
+
+        with open(themelist_file, 'w') as json_out:
+            json.dump(data, json_out, indent=4)
+            json_out.close()
+            print("-----------------------")
+            print("[!] Theme entry addition successful")
+            print("-----------------------")
+    else:
+        print(f"[!] {theme_file} : file already exists. Try giving new name to the theme.")
+        main()
 
 def main():
     year_dict = { 
