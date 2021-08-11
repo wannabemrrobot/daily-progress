@@ -79,9 +79,84 @@ def createTimeline(year_dict):
             json_out.close()
 
 
-def createPost():
-    print(">> posts triggered")
-    pass
+def createPost(year_dict):
+    # get the post name, date, tags and description from the user
+    post_title = input(">> Input the post title: \n   post title: ")
+    post_date = input(">> Input date in the format (1998-10-10/yyyy-mm-dd): \n   date: ")
+    post_tags = list(map(str, input(">> Input the tags for the post, separated by commas: \n   tags: ").split(',')))
+    post_description = input(">> Input the post description: \n   description: ")
+    print("-----------------------")
+    
+    # json file to populate data
+    postslist_file = "./posts.json"
+    # current working directory for the task
+    working_dir = "./posts"
+    # github url to fetch the posts file
+    github_url = "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/posts/"
+
+    year = post_date.split('-')[0]
+    month = post_date.split('-')[1]
+    day = post_date.split('-')[2]
+
+    # the file that needs to be created
+    file_name = f"{day}-{year_dict.get(month)}-{year}.md"
+    # the complete file url for public access
+    file_url = f"{github_url}{year}/{month}-{year_dict.get(month)}/{day}-{year_dict.get(month)}-{year}/{day}-{year_dict.get(month)}-{year}.md"
+
+    # open json file to get the file contents(json list)
+    json_file = open(postslist_file)
+    data = json.load(json_file)
+
+    # json object with data from user
+    post_obj = {
+        "postno": len(data) + 1,
+        "title": post_title,
+        "date": post_date,
+        "url": file_url,
+        "tags": post_tags,
+        "description": post_description
+    }
+
+    # insert new json object into existing list of json objects
+    data.insert(0, post_obj)
+    file_exist = False
+
+    if(os.path.isdir(f"{working_dir}/{year}") == False):
+        print(f"[!] {working_dir}/{year} : does not exists, creating directory and post markdown...")
+        os.mkdir(f"{working_dir}/{year}")
+        os.mkdir(f"{working_dir}/{year}/{month}-{year_dict.get(month)}")
+        os.mkdir(f"{working_dir}/{year}/{month}-{year_dict.get(month)}/{day}-{year_dict.get(month)}-{year}")
+        file = open(f"{working_dir}/{year}/{month}-{year_dict.get(month)}/{day}-{year_dict.get(month)}-{year}/{file_name}", "x")
+        file.close()
+    else:
+        if(os.path.isdir(f"{working_dir}/{year}/{month}-{year_dict.get(month)}") == False):
+            print(f"[!] {working_dir}/{year}/{month}-{year_dict.get(month)} : does not exists, creating directory and post markdown...")
+            os.mkdir(f"{working_dir}/{year}/{month}-{year_dict.get(month)}")
+            os.mkdir(f"{working_dir}/{year}/{month}-{year_dict.get(month)}/{day}-{year_dict.get(month)}-{year}")
+            file = open(f"{working_dir}/{year}/{month}-{year_dict.get(month)}/{day}-{year_dict.get(month)}-{year}/{file_name}", "x")
+            file.close()
+        else:
+            if(os.path.isdir(f"{working_dir}/{year}/{month}-{year_dict.get(month)}/{day}-{year_dict.get(month)}-{year}") == False):
+                print(f"[!] {working_dir}/{year}/{month}-{year_dict.get(month)}/{day}-{year_dict.get(month)}-{year} : does not exists, creating directory and post markdown...")
+                os.mkdir(f"{working_dir}/{year}/{month}-{year_dict.get(month)}/{day}-{year_dict.get(month)}-{year}")
+                file = open(f"{working_dir}/{year}/{month}-{year_dict.get(month)}/{day}-{year_dict.get(month)}-{year}/{file_name}", "x")
+                file.close()
+            else:
+                if(os.path.isfile(f"{working_dir}/{year}/{month}-{year_dict.get(month)}/{day}-{year_dict.get(month)}-{year}/{file_name}") == False):
+                    print(f"[!] {working_dir}/{year}/{month}-{year_dict.get(month)}/{day}-{year_dict.get(month)}-{year}/{file_name} : does not exists, creating post markdown...")
+                    file = open(f"{working_dir}/{year}/{month}-{year_dict.get(month)}/{day}-{year_dict.get(month)}-{year}/{file_name}", "x")
+                    file.close()
+                else:
+                    print(f"[!] {working_dir}/{year}/{month}-{year_dict.get(month)}/{day}-{year_dict.get(month)}-{year}/{file_name} : file already exists.")
+                    file_exist = True
+    
+    if(file_exist == False):
+        with open(postslist_file, 'w') as json_out:
+            json.dump(data, json_out, indent=4)
+            print("-----------------------")
+            print("[!] Post entry addition successful")
+            print("-----------------------")
+            json_out.close()
 
 def createTheme():
     # get the theme name from the user
@@ -147,6 +222,7 @@ def main():
     elif(int(choice) == 3):
         createTheme()
     else:
+        print("[-] Please enter valid selection.")
         main()
 
 
