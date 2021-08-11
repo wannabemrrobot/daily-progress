@@ -1,29 +1,5 @@
 [
     {
-        "postno": 3,
-        "title": "test title",
-        "date": "2020-08-30",
-        "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/posts/2020/08-august/30-august-2020/30-august-2020.md",
-        "tags": [
-            "hello",
-            "friend"
-        ],
-        "description": "hello friend thats lame"
-    },
-    {
-        "postno": 2,
-        "title": "test_post",
-        "date": "2020-08-31",
-        "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/posts/2020/08-august/31-august-2020/31-august-2020.md",
-        "tags": [
-            "elliot",
-            "hack",
-            "love",
-            "hack in motion"
-        ],
-        "description": "this is a test description"
-    },
-    {
         "postno": 1,
         "title": "Hello Friend :clown_face:",
         "date": "2021-08-04",
