@@ -1,23 +1,18 @@
 [
     {
         "postno": 1,
-        "title": "Hello Friend :clown_face:",
+        "title": "Eternal Blue :large_blue_diamond: :space_invader:",
         "date": "2021-08-04",
         "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/posts/2021/08-august/04-august-2021/04-august-2021.md",
         "tags": [
-            "love",
-            "hack",
-            "elliot",
-            "tyrell",
-            "whiterose",
-            "bufferoverflow",
-            "terminal",
-            "mrrobot",
-            "dogecoin",
-            "musksuck",
-            "veni",
-            "vidi",
-            "vici"
+            "windows",
+            "hackthebox",
+            "smb",
+            "easy",
+            "blue",
+            "eternal blue",
+            "ransomware",
+            "exploit"
         ],
         "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
     }
