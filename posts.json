@@ -1,12 +1,13 @@
 [
     {
         "postno": 1,
-        "title": "Hack The Box - Blue :large_blue_diamond: :space_invader:",
+        "title": "HTB - Blue :large_blue_diamond: :space_invader:",
         "date": "2021-08-04",
         "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/posts/2021/08-august/04-august-2021/04-august-2021.md",
         "tags": [
             "windows",
             "hackthebox",
+            "oscp",
             "smb",
             "easy",
             "blue",
@@ -15,6 +16,6 @@
             "exploit",
             "withoutmetasploit"
         ],
-        "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+        "description": "The path for the user/system owning is clear as blue! One of the fatest machines that players got 'first blood' in a couple of minutes. Get a detailed walkthrough of Blue machine in Hack The Box, which is also a OSCP like windows machine."
     }
 ]
