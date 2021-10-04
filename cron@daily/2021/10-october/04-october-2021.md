@@ -1,4 +1,4 @@
-### Implemented Circular LinkedList
+### Implemented Doubly LinkedList
 Vanilla Implementation of Doubly LinkedList, where there are two variables namely `first` and `last` to keep track of the first and last positions in the list. Along with these variables, the Node class have an extra attribute called `previous` along with the `next`, to keep of the previous nodes as well.
 
 #### Note:
