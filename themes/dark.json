@@ -20,5 +20,6 @@
     "--subheader-bg": "#181a1b",
     "--border": "#3d4245",
     "--icons-social": "#ada59b",
-    "--drop-shadow": "#2222224f"
+    "--drop-shadow": "#2222224f",
+    "--orb-hue": 330
 }
