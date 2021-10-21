@@ -4,7 +4,7 @@ Solved the `valid parentheses` problem, but the thing is that I found more inter
 Wrapped up the day, with a `Tree Overview` lecture from `Jenny's tutorial`.
 
 #### Insights:
-- Valid Parentheses can be solved using an array, which was brilliant.
+- Valid Parentheses can be solved using an array, which is brilliant.
 - Various Tree concepts, which includes `trees are acyclic`.
 - Trees are unidirectional.
 
