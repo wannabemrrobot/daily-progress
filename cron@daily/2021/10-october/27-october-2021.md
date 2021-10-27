@@ -1,5 +1,5 @@
 ### ZOHO ASSESSMENT @12.15 PM IST
-It was quite a good interview, certainly not based upon my performance, but the behavior of the interview ;)  
+It was quite a good interview, certainly not based upon my performance, but the behavior of the interviewer ;)  
 
 I thought it was a Managerial HR(Poor Dumbass me!),
 but it was a technical round.  
