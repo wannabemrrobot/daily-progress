@@ -1,10 +1,10 @@
 ### ZOHO ASSESSMENT @12.15 PM IST
 It was quite a good interview, certainly not based upon my performance, but the behavior of the interviewer ;)  
 
-I thought it was a Managerial HR(Poor Dumbass me!),
-but it was a technical round.  
+I thought it will be a Managerial HR round, but it was a technical round(Poor Dumbass me!).  
 
-He asked me 3 problems, which are in my case considering my skill level in DSA, **FUCKING HARD**!  
+
+He asked me 3 problems, considering my skill level in the DSA, it was **FUCKING HARD**!  
 
 He is nice though, calm and attentive throughout my vague explanations of non-workable approaches for a problem.
 
