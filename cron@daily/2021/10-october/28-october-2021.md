@@ -1,4 +1,5 @@
 ### Dry ran a matrix problem, which I had in interview
+It took some time, to know the problem initially. Then, I devised a shitty approach, that had the worst complexity. But, the problem statement is that to calculate the minimum operations needed to make all the elements in the binary matrix as 1.
 
 #### Insights:
 - Should learn to approach a problem in a different angle
