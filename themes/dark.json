@@ -14,6 +14,7 @@
     "--tag-text": "#9e9689",
     "--tagcount-bg": "#26292b",
     "--tagbg-hover": "#ff5e860c",
+    "--tagbg-opaq": "#231d20",
 
     "--background": "#181a1b",
     "--header-bg": "#1b1e1f",
