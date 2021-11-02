@@ -2,221 +2,265 @@
     {
         "date": "2021-11-01",
         "title": "Release V1.3 - Longest Streak, Milestone tab",
+        "milestone": false,
         "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/cron@daily/2021/11-november/01-november-2021.md"
     },
     {
         "date": "2021-10-31",
         "title": "Release - V1.2 - StyleSheet Fixes",
+        "milestone": false,
         "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/cron@daily/2021/10-october/31-october-2021.md"
     },
     {
         "date": "2021-10-30",
         "title": "LeetCode - 09",
+        "milestone": false,
         "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/cron@daily/2021/10-october/30-october-2021.md"
     },
     {
         "date": "2021-10-29",
         "title": "Problem Solving - Min ops to change bin to unit matrix",
+        "milestone": false,
         "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/cron@daily/2021/10-october/29-october-2021.md"
     },
     {
         "date": "2021-10-28",
         "title": "Dry Run - Min ops to change bin to unit matrix",
+        "milestone": false,
         "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/cron@daily/2021/10-october/28-october-2021.md"
     },
     {
         "date": "2021-10-27",
         "title": "ZOHO Assessment - L3(Got to know where I am)",
+        "milestone": false,
         "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/cron@daily/2021/10-october/27-october-2021.md"
     },
     {
         "date": "2021-10-26",
         "title": "ZOHO Assessment - L2",
+        "milestone": false,
         "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/cron@daily/2021/10-october/26-october-2021.md"
     },
     {
         "date": "2021-10-25",
         "title": "ZOHO Prep - Basic Java PS",
+        "milestone": false,
         "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/cron@daily/2021/10-october/25-october-2021.md"
     },
     {
         "date": "2021-10-24",
         "title": "LeetCode - 118",
+        "milestone": false,
         "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/cron@daily/2021/10-october/24-october-2021.md"
     },
     {
         "date": "2021-10-23",
         "title": "Problem Solving - String Multiplication",
+        "milestone": false,
         "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/cron@daily/2021/10-october/23-october-2021.md"
     },
     {
         "date": "2021-10-22",
         "title": "LeetCode - 232",
+        "milestone": false,
         "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/cron@daily/2021/10-october/22-october-2021.md"
     },
     {
         "date": "2021-10-21",
         "title": "LeetCode - 20, Tree DS Overview",
+        "milestone": false,
         "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/cron@daily/2021/10-october/21-october-2021.md"
     },
     {
         "date": "2021-10-20",
         "title": "LeetCode - 121, 566",
+        "milestone": false,
         "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/cron@daily/2021/10-october/20-october-2021.md"
     },
     {
         "date": "2021-10-19",
         "title": "LeetCode - 350, 383",
+        "milestone": false,
         "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/cron@daily/2021/10-october/19-october-2021.md"
     },
     {
         "date": "2021-10-18",
         "title": "LeetCode - 242, 387",
+        "milestone": false,
         "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/cron@daily/2021/10-october/18-october-2021.md"
     },
     {
         "date": "2021-10-17",
         "title": "LeetCode - Maximum Subarray - O(n)",
+        "milestone": false,
         "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/cron@daily/2021/10-october/17-october-2021.md"
     },
     {
         "date": "2021-10-16",
         "title": "Kubernetes - Overview",
+        "milestone": false,
         "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/cron@daily/2021/10-october/16-october-2021.md"
     },
     {
         "date": "2021-10-15",
         "title": "Problem Solving - Pattern Printing",
+        "milestone": false,
         "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/cron@daily/2021/10-october/15-october-2021.md"
     },
     {
         "date": "2021-10-14",
         "title": "LeetCode - 88, Miscell - Sort 0's & 1's",
+        "milestone": false,
         "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/cron@daily/2021/10-october/14-october-2021.md"
     },
     {
         "date": "2021-10-13",
         "title": "LeetCode - 1, 53(TLE), 217",
+        "milestone": false,
         "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/cron@daily/2021/10-october/13-october-2021.md"
     },
     {
         "date": "2021-10-12",
         "title": "DSA - Merge Sort Implementation",
+        "milestone": false,
         "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/cron@daily/2021/10-october/12-october-2021.md"
     },
     {
         "date": "2021-10-11",
         "title": "DSA - Merge Sort Again ;)",
+        "milestone": false,
         "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/cron@daily/2021/10-october/11-october-2021.md"
     },
     {
         "date": "2021-10-10",
         "title": "DSA - Merge Sort Overview",
+        "milestone": false,
         "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/cron@daily/2021/10-october/10-october-2021.md"
     },
     {
         "date": "2021-10-09",
         "title": "DSA - Insertion Sort",
+        "milestone": false,
         "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/cron@daily/2021/10-october/09-october-2021.md"
     },
     {
         "date": "2021-10-08",
         "title": "DSA - Selection Sort",
+        "milestone": false,
         "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/cron@daily/2021/10-october/08-october-2021.md"
     },
     {
         "date": "2021-10-07",
         "title": "DSA - Revisiting Asymptotic notations(log n)",
+        "milestone": false,
         "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/cron@daily/2021/10-october/07-october-2021.md"
     },
     {
         "date": "2021-10-06",
         "title": "DSA - Recursion and Recursive Search",
+        "milestone": false,
         "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/cron@daily/2021/10-october/06-october-2021.md"
     },
     {
         "date": "2021-10-05",
         "title": "DSA - Linear & Binary Search",
+        "milestone": false,
         "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/cron@daily/2021/10-october/05-october-2021.md"
     },
     {
         "date": "2021-10-04",
         "title": "DSA - Doubly LinkedList Implementation",
+        "milestone": false,
         "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/cron@daily/2021/10-october/04-october-2021.md"
     },
     {
         "date": "2021-10-03",
         "title": "DSA - Circular LinkedList Implementation",
+        "milestone": false,
         "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/cron@daily/2021/10-october/03-october-2021.md"
     },
     {
         "date": "2021-10-02",
         "title": "Docker - Building Custom Docker Images",
+        "milestone": false,
         "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/cron@daily/2021/10-october/02-october-2021.md"
     },
     {
         "date": "2021-10-01",
         "title": "Getting Started With Docker",
+        "milestone": false,
         "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/cron@daily/2021/10-october/01-october-2021.md"
     },
     {
         "date": "2021-09-12",
         "title": "DSA - LinkedLists Implementation",
+        "milestone": false,
         "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/cron@daily/2021/09-september/12-september-2021.md"
     },
     {
         "date": "2021-09-11",
         "title": "DSA - LinkedLists",
+        "milestone": false,
         "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/cron@daily/2021/09-september/11-september-2021.md"
     },
     {
         "date": "2021-09-10",
         "title": "DSA - LinkedList, @wannabemrrobot release",
+        "milestone": false,
         "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/cron@daily/2021/09-september/10-september-2021.md"
     },
     {
         "date": "2021-09-09",
         "title": "DSA - Queue",
+        "milestone": false,
         "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/cron@daily/2021/09-september/09-september-2021.md"
     },
     {
         "date": "2021-09-08",
         "title": "DSA - Asymptotic notations, Stack Implementation",
+        "milestone": false,
         "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/cron@daily/2021/09-september/08-september-2021.md"
     },
     {
         "date": "2021-09-07",
         "title": "DSA - abstract data types",
+        "milestone": false,
         "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/cron@daily/2021/09-september/07-september-2021.md"
     },
     {
         "date": "2021-09-01",
         "title": "Getting started with DSA",
+        "milestone": true,
         "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/cron@daily/2021/09-september/01-september-2021.md"
     },
     {
         "date": "2021-08-04",
         "title": "Understanding GraphQL",
+        "milestone": false,
         "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/cron@daily/2021/08-august/04-august-2021.md"
     },
     {
         "date": "2021-08-03",
         "title": "Release V1.0 - Themes, Tags",
+        "milestone": false,
         "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/cron@daily/2021/08-august/03-august-2021.md"
     },
     {
         "date": "2021-08-02",
         "title": "Release V0.2 - Services",
+        "milestone": false,
         "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/cron@daily/2021/08-august/02-august-2021.md"
     },
     {
         "date": "2021-08-01",
         "title": "Initial Release V0.1 of @wannabemrrobot",
+        "milestone": true,
         "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/cron@daily/2021/08-august/01-august-2021.md"
     },
     {
         "date": "1999-02-18",
         "title": "Hello Friend. Hello Friend.",
+        "milestone": true,
         "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/cron@daily/1999/02-february/18-february-1999.md"
     }
 ]
