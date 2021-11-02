@@ -11,10 +11,12 @@ def createTimeline(year_dict):
     print("-----------------------")
     title = input(">> Input title for the timeline:\n   title: ")
     print("-----------------------")
+    milestone = input(">> Mark this event as a Milestone?\n   Milestone(True/False): ")
 
 
     print("[+] Entered Date: ", date)
     print("[+] Entered Title: ", title)
+    print("[+] Milestone: ", milestone)
     print("-----------------------")
 
     # json file to populate data
@@ -35,11 +37,20 @@ def createTimeline(year_dict):
     file_url = f"{github_url}{year}/{month}-{year_dict.get(month)}/{day}-{year_dict.get(month)}-{year}.md"
 
     # json object with data from the user
-    timeline_obj = {
-        "date": date,
-        "title": title,
-        "url": file_url
-    }
+    if(milestone == "True"):
+        timeline_obj = {
+            "date": date,
+            "title": title,
+            "milestone": True,
+            "url": file_url
+        }
+    else:
+        timeline_obj = {
+            "date": date,
+            "title": title,
+            "milestone": False,
+            "url": file_url
+        }
 
     # open json file to get the file contents(json list)
     json_file = open(timeline_file)
