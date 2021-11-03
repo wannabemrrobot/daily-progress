@@ -1,5 +1,11 @@
 [
     {
+        "date": "2021-11-02",
+        "title": "Release - V1.3(fix) - Tab functionality",
+        "milestone": false,
+        "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/cron@daily/2021/11-november/02-november-2021.md"
+    },
+    {
         "date": "2021-11-01",
         "title": "Release V1.3 - Longest Streak, Milestone tab",
         "milestone": false,
@@ -88,6 +94,12 @@
         "title": "LeetCode - 242, 387",
         "milestone": false,
         "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/cron@daily/2021/10-october/18-october-2021.md"
+    },
+    {
+        "date": "2021-10-17",
+        "title": "LeetCode - Maximum Subarray - O(n)",
+        "milestone": false,
+        "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/cron@daily/2021/10-october/17-october-2021.md"
     },
     {
         "date": "2021-10-16",
