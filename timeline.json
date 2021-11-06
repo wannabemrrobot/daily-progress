@@ -1,5 +1,17 @@
 [
     {
+        "date": "2021-11-05",
+        "title": "LeetCode - 441",
+        "milestone": false,
+        "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/cron@daily/2021/11-november/05-november-2021.md"
+    },
+    {
+        "date": "2021-11-04",
+        "title": "LeetCode - 58",
+        "milestone": false,
+        "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/cron@daily/2021/11-november/04-november-2021.md"
+    },
+    {
         "date": "2021-11-03",
         "title": "Release - V1.4(fix) - Responsive fixes",
         "milestone": false,
