@@ -1,5 +1,11 @@
 [
     {
+        "date": "2021-11-07",
+        "title": "Release V1.5(fix) - Inaccurate Best Streak; Bit Manipulation Basics",
+        "milestone": false,
+        "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/cron@daily/2021/11-november/07-november-2021.md"
+    },
+    {
         "date": "2021-11-06",
         "title": "LeetCode - 260",
         "milestone": false,
