@@ -1,5 +1,17 @@
 [
     {
+        "date": "2021-11-11",
+        "title": "LeetCode - 66, 27, 202",
+        "milestone": false,
+        "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/cron@daily/2021/11-november/11-november-2021.md"
+    },
+    {
+        "date": "2021-11-10",
+        "title": "LeetCode - Problem Solving",
+        "milestone": false,
+        "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/cron@daily/2021/11-november/10-november-2021.md"
+    },
+    {
         "date": "2021-11-09",
         "title": "LeetCode - 1178[First Hard Attempt - TLE] ",
         "milestone": false,
