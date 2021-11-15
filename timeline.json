@@ -1,5 +1,11 @@
 [
     {
+        "date": "2021-11-15",
+        "title": "Let The Good Times Roll :)",
+        "milestone": true,
+        "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/cron@daily/2021/11-november/15-november-2021.md"
+    },
+    {
         "date": "2021-11-11",
         "title": "LeetCode - 66, 27, 202",
         "milestone": false,
