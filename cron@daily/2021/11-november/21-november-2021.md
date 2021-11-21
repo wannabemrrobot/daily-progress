@@ -5,4 +5,4 @@
 - [Notes on various terminologies](https://github.com/wannabemrrobot/knowledge-base/blob/master/terminologies.md)
 
 #### Badges:
-<iframe src="https://tryhackme.com/whoismrrobot/badges/intro-to-pentesting" style="width:100%; height: 200px;"></iframe>
+- [Intro to Pentesting Badge](https://tryhackme.com/whoismrrobot/badges/intro-to-pentesting)
