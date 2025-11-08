@@ -2,6 +2,7 @@
     "$theme": "Dark Knight",
 
     "--accent-primary": "#ff1e56",
+    "--accent-primary-rgb": "255, 30, 86",
 
     "--text-primary": "#dfdbd5",
     "--text-secondary": "#aca59a",
