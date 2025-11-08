@@ -2,6 +2,7 @@
     "$theme": "Zen White",
 
     "--accent-primary": "#ff1e56",
+    "--accent-primary-rgb": "255, 30, 86",
 
     "--text-primary": "#444444",
     "--text-secondary": "#4d4d4d",

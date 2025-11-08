@@ -2,6 +2,7 @@
     "$theme": "Hackr Bleed",
 
     "--accent-primary": "#9fef00",
+    "--accent-primary-rgb": "159, 239, 0",
 
     "--text-primary": "#fff",
     "--text-secondary": "#a4b1cd",
