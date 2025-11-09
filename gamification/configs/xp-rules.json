@@ -1,0 +1,81 @@
+{
+    "health_energy_overflow": {
+        "description": "When health/energy reaches 100, it overflows and resets with a bonus",
+        "overflow_reset_percentage": 20,
+        "overflow_bonus_to_other_stat": 10,
+        "comment": "At 100, reset to 20 and give 10 to the other stat (health↔energy)"
+    },
+    "levels": {
+        "1": {
+            "title": "Awakened",
+            "xp_to_next_level": 100,
+            "xp_bonus_multiplier": 1.0,
+            "abilities_cap": 100,
+            "reward_tier": "street"
+        },
+        "2": {
+            "title": "Seeker",
+            "xp_to_next_level": 250,
+            "xp_bonus_multiplier": 1.1,
+            "abilities_cap": 150,
+            "reward_tier": "street"
+        },
+        "3": {
+            "title": "Disciple",
+            "xp_to_next_level": 500,
+            "xp_bonus_multiplier": 1.2,
+            "abilities_cap": 200,
+            "reward_tier": "vanguard"
+        },
+        "4": {
+            "title": "Warrior",
+            "xp_to_next_level": 850,
+            "xp_bonus_multiplier": 1.3,
+            "abilities_cap": 250,
+            "reward_tier": "vanguard"
+        },
+        "5": {
+            "title": "Architect",
+            "xp_to_next_level": 1300,
+            "xp_bonus_multiplier": 1.4,
+            "abilities_cap": 300,
+            "reward_tier": "legendary"
+        },
+        "6": {
+            "title": "Sentinel",
+            "xp_to_next_level": 1900,
+            "xp_bonus_multiplier": 1.5,
+            "abilities_cap": 400,
+            "reward_tier": "legendary"
+        },
+        "7": {
+            "title": "Alpha",
+            "xp_to_next_level": 2700,
+            "xp_bonus_multiplier": 1.6,
+            "abilities_cap": 500,
+            "reward_tier": "apex"
+        },
+        "8": {
+            "title": "Sovereign",
+            "xp_to_next_level": 3700,
+            "xp_bonus_multiplier": 1.7,
+            "abilities_cap": 650,
+            "reward_tier": "apex"
+        },
+        "9": {
+            "title": "Transcendent",
+            "xp_to_next_level": 5000,
+            "xp_bonus_multiplier": 1.8,
+            "abilities_cap": 800,
+            "reward_tier": "mythic"
+        },
+        "10": {
+            "title": "Primal",
+            "xp_to_next_level": null,
+            "xp_bonus_multiplier": 2.0,
+            "abilities_cap": 1000,
+            "reward_tier": "mythic",
+            "comment": "Max level - no next level"
+        }
+    }
+}

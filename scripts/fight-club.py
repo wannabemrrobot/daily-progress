@@ -32,7 +32,7 @@ class Colors:
     UNDERLINE = '\033[4m'
 
 # Configuration
-REPO_ROOT = Path(__file__).parent
+REPO_ROOT = Path(__file__).parent.parent
 MISSIONS_DIR = REPO_ROOT / "gamification" / "missions"
 MISSIONS_NOT_COMPLETED = MISSIONS_DIR / "not-completed"
 MISSIONS_COMPLETED = MISSIONS_DIR / "completed"
@@ -41,12 +41,16 @@ DAILY_PROGRESS_DIR = REPO_ROOT / "cron@daily"
 REWARDS_DIR = REPO_ROOT / "gamification" / "rewards"
 REWARDS_LOCKED = REWARDS_DIR / "locked"
 REWARDS_UNLOCKED = REWARDS_DIR / "unlocked"
+CONFIGS_DIR = REPO_ROOT / "gamification" / "configs"
+XP_RULES_FILE = CONFIGS_DIR / "xp-rules.json"
+HISTORY_FILE = REPO_ROOT / "gamification" / "history.json"
 
 # Ensure directories exist
 MISSIONS_NOT_COMPLETED.mkdir(parents=True, exist_ok=True)
 MISSIONS_COMPLETED.mkdir(parents=True, exist_ok=True)
 REWARDS_LOCKED.mkdir(parents=True, exist_ok=True)
 REWARDS_UNLOCKED.mkdir(parents=True, exist_ok=True)
+CONFIGS_DIR.mkdir(parents=True, exist_ok=True)
 
 # Alter ego configurations with abilities
 ALTER_EGOS = {
@@ -224,6 +228,183 @@ def get_next_reward_id() -> str:
     return f"R{next_num:02d}"
 
 
+def load_xp_rules() -> Dict:
+    """Load XP progression rules from xp-rules.json."""
+    try:
+        with open(XP_RULES_FILE, 'r') as f:
+            return json.load(f)
+    except FileNotFoundError:
+        print(f"{Colors.FAIL}Error: XP rules file not found at {XP_RULES_FILE}{Colors.ENDC}")
+        return {}
+    except json.JSONDecodeError:
+        print(f"{Colors.FAIL}Error: Invalid JSON in XP rules file{Colors.ENDC}")
+        return {}
+
+
+def load_alter_ego(archetype: str) -> Optional[Dict]:
+    """Load alter-ego JSON data."""
+    ego_file = ALTER_EGOS_DIR / f"{archetype}.json"
+    try:
+        with open(ego_file, 'r') as f:
+            return json.load(f)
+    except FileNotFoundError:
+        print(f"{Colors.FAIL}Error: Alter-ego file not found: {ego_file}{Colors.ENDC}")
+        return None
+    except json.JSONDecodeError:
+        print(f"{Colors.FAIL}Error: Invalid JSON in alter-ego file: {ego_file}{Colors.ENDC}")
+        return None
+
+
+def save_alter_ego(archetype: str, data: Dict) -> bool:
+    """Save updated alter-ego JSON data."""
+    ego_file = ALTER_EGOS_DIR / f"{archetype}.json"
+    try:
+        with open(ego_file, 'w') as f:
+            json.dump(data, f, indent=2)
+        return True
+    except Exception as e:
+        print(f"{Colors.FAIL}Error saving alter-ego: {e}{Colors.ENDC}")
+        return False
+
+
+def get_next_history_index() -> int:
+    """Get next history index from history.json."""
+    try:
+        with open(HISTORY_FILE, 'r') as f:
+            history = json.load(f)
+        if not history:
+            return 1
+        return max(entry.get('history_index', 0) for entry in history) + 1
+    except FileNotFoundError:
+        return 1
+    except json.JSONDecodeError:
+        print(f"{Colors.WARNING}Warning: Invalid JSON in history file, starting from index 1{Colors.ENDC}")
+        return 1
+
+
+def apply_stat_changes(ego_data: Dict, changes: Dict, xp_rules: Dict) -> Dict:
+    """
+    Apply stat changes to alter-ego data with overflow and level-up logic.
+    
+    Args:
+        ego_data: The alter-ego data to modify (will be modified in place)
+        changes: Dict with keys like 'xp', 'health', 'energy', 'abilities'
+        xp_rules: XP progression rules
+    
+    Returns:
+        Dict containing the actual delta changes applied (after overflow handling)
+    """
+    delta_applied = {
+        'xp': 0,
+        'health': 0,
+        'energy': 0,
+        'abilities': {}
+    }
+    
+    # Apply XP changes and handle level-up (if XP is provided)
+    if 'xp' in changes and changes['xp'] != 0:
+        xp_change = changes['xp']
+        ego_data['xp_details']['current_xp'] += xp_change
+        delta_applied['xp'] = xp_change
+        
+        # Handle level-up
+        current_level = ego_data['level']
+        level_data = xp_rules.get('levels', {}).get(str(current_level), {})
+        xp_to_next = level_data.get('xp_to_next_level')
+        
+        while xp_to_next and ego_data['xp_details']['current_xp'] >= xp_to_next:
+            # Level up!
+            ego_data['xp_details']['current_xp'] -= xp_to_next
+            ego_data['level'] += 1
+            
+            # Update title and xp_to_next_level from new level
+            new_level_data = xp_rules.get('levels', {}).get(str(ego_data['level']), {})
+            ego_data['title'] = new_level_data.get('title', ego_data['title'])
+            ego_data['xp_details']['xp_to_next_level'] = new_level_data.get('xp_to_next_level')
+            
+            print(f"{Colors.OKGREEN}🎉 LEVEL UP! {ego_data['name']} is now Level {ego_data['level']} - {ego_data['title']}!{Colors.ENDC}")
+            
+            # Check if there's another level to reach
+            xp_to_next = ego_data['xp_details']['xp_to_next_level']
+    
+    # Apply health changes with overflow
+    if 'health' in changes and changes['health'] != 0:
+        health_change = changes['health']
+        ego_data['health_details']['current_health'] += health_change
+        delta_applied['health'] = health_change
+        
+        # Handle overflow
+        overflow_config = xp_rules.get('health_energy_overflow', {})
+        if ego_data['health_details']['current_health'] >= ego_data['health_details']['max_health']:
+            overflow_reset_pct = overflow_config.get('overflow_reset_percentage', 20)
+            overflow_bonus = overflow_config.get('overflow_bonus_to_other_stat', 10)
+            
+            # Reset health to overflow_reset_percentage%
+            ego_data['health_details']['current_health'] = overflow_reset_pct
+            
+            # Give bonus to energy
+            ego_data['energy_details']['current_energy'] += overflow_bonus
+            delta_applied['energy'] = delta_applied.get('energy', 0) + overflow_bonus
+            
+            print(f"{Colors.OKCYAN}💫 Health overflow! Reset to {overflow_reset_pct}, +{overflow_bonus} energy{Colors.ENDC}")
+    
+    # Apply energy changes with overflow
+    if 'energy' in changes and changes['energy'] != 0:
+        energy_change = changes['energy']
+        ego_data['energy_details']['current_energy'] += energy_change
+        delta_applied['energy'] = delta_applied.get('energy', 0) + energy_change
+        
+        # Handle overflow
+        overflow_config = xp_rules.get('health_energy_overflow', {})
+        if ego_data['energy_details']['current_energy'] >= ego_data['energy_details']['max_energy']:
+            overflow_reset_pct = overflow_config.get('overflow_reset_percentage', 20)
+            overflow_bonus = overflow_config.get('overflow_bonus_to_other_stat', 10)
+            
+            # Reset energy to overflow_reset_percentage%
+            ego_data['energy_details']['current_energy'] = overflow_reset_pct
+            
+            # Give bonus to health
+            ego_data['health_details']['current_health'] += overflow_bonus
+            delta_applied['health'] = delta_applied.get('health', 0) + overflow_bonus
+            
+            print(f"{Colors.OKCYAN}💫 Energy overflow! Reset to {overflow_reset_pct}, +{overflow_bonus} health{Colors.ENDC}")
+    
+    # Apply ability changes
+    if 'abilities' in changes:
+        for ability, value in changes['abilities'].items():
+            if value != 0:  # Only apply non-zero changes
+                if ability in ego_data['abilities']:
+                    ego_data['abilities'][ability] += value
+                    delta_applied['abilities'][ability] = value
+                else:
+                    print(f"{Colors.WARNING}Warning: Unknown ability '{ability}' for {ego_data['name']}{Colors.ENDC}")
+    
+    return delta_applied
+
+
+def record_history(event_data: Dict):
+    """Add entry to history.json."""
+    try:
+        # Load existing history
+        with open(HISTORY_FILE, 'r') as f:
+            history = json.load(f)
+    except FileNotFoundError:
+        history = []
+    except json.JSONDecodeError:
+        print(f"{Colors.WARNING}Warning: Invalid JSON in history file, starting fresh{Colors.ENDC}")
+        history = []
+    
+    # Add new entry
+    history.append(event_data)
+    
+    # Save updated history
+    try:
+        with open(HISTORY_FILE, 'w') as f:
+            json.dump(history, f, indent=2)
+    except Exception as e:
+        print(f"{Colors.FAIL}Error saving history: {e}{Colors.ENDC}")
+
+
 def get_reward_files(folder: Path) -> List[Path]:
     """Get all reward JSON files in a folder."""
     if not folder.exists():
@@ -354,7 +535,7 @@ def add_new_mission():
     # Get stat changes for completion
     print(f"\n{Colors.BOLD}STAT CHANGES ON COMPLETION:{Colors.ENDC}")
     health_complete = int(get_input("Health change", "0"))
-    energy_complete = int(get_input("Energy change", "5"))
+    energy_complete = int(get_input("Energy change", "0"))
     
     abilities_complete = {}
     print_info(f"\nAbility changes (for {ALTER_EGOS[alter_ego]['name']}):")
@@ -365,7 +546,7 @@ def add_new_mission():
     # Get stat changes for failure
     print(f"\n{Colors.BOLD}STAT CHANGES ON FAILURE:{Colors.ENDC}")
     health_failure = int(get_input("Health change", "0"))
-    energy_failure = int(get_input("Energy change", "-5"))
+    energy_failure = int(get_input("Energy change", "0"))
     
     abilities_failure = {}
     print_info(f"\nAbility changes (for {ALTER_EGOS[alter_ego]['name']}):")
@@ -531,6 +712,9 @@ def mark_mission_completed():
     mission["progress"]["current"] = mission["progress"]["total"]
     mission["completion_date"] = datetime.date.today().isoformat()
     
+    # Collect unlocked reward IDs
+    unlocked_rewards = []
+    
     # Unlock associated rewards
     if mission.get("reward"):
         for reward_info in mission["reward"]:
@@ -546,7 +730,57 @@ def mark_mission_completed():
                         new_reward_file = REWARDS_UNLOCKED / reward_file.name
                         if save_json(new_reward_file, reward_data):
                             reward_file.unlink()
+                            unlocked_rewards.append(reward_id)
                             print_success(f"🎁 Reward unlocked: {reward_data['title']}")
+    
+    # Apply stat changes to alter-ego
+    xp_rules = load_xp_rules()
+    ego_data = load_alter_ego(mission['archetype'])
+    
+    if ego_data and xp_rules:
+        # Get stat changes from mission
+        on_complete = mission["archetype_stat_change"]["on_complete"]
+        
+        # Store state before changes
+        state_before = {
+            'level': ego_data['level'],
+            'title': ego_data['title'],
+            'xp': ego_data['xp_details']['current_xp'],
+            'health': ego_data['health_details']['current_health'],
+            'energy': ego_data['energy_details']['current_energy'],
+            'abilities': ego_data['abilities'].copy()
+        }
+        
+        # Apply changes
+        delta_applied = apply_stat_changes(ego_data, on_complete, xp_rules)
+        
+        # Save updated alter-ego
+        if save_alter_ego(mission['archetype'], ego_data):
+            print_success(f"✅ Updated {ego_data['name']} stats")
+            
+            # Record history
+            history_entry = {
+                'history_index': get_next_history_index(),
+                'alter-ego': mission['archetype'],
+                'mission_associated': mission_file.stem,
+                'state': 'completed',
+                'delta_changed': delta_applied,
+                'state_after_delta_applied': {
+                    'level': ego_data['level'],
+                    'title': ego_data['title'],
+                    'xp': ego_data['xp_details']['current_xp'],
+                    'health': ego_data['health_details']['current_health'],
+                    'energy': ego_data['energy_details']['current_energy'],
+                    'abilities': ego_data['abilities'].copy()
+                },
+                'date': mission["completion_date"]
+            }
+            
+            if unlocked_rewards:
+                history_entry['reward_unlocked'] = unlocked_rewards
+            
+            record_history(history_entry)
+            print_success(f"📝 History recorded (entry #{history_entry['history_index']})")
     
     # Move to completed folder
     new_file = MISSIONS_COMPLETED / mission_file.name
@@ -559,6 +793,8 @@ def mark_mission_completed():
         # Show rewards
         on_complete = mission["archetype_stat_change"]["on_complete"]
         print(f"\n{Colors.OKGREEN}REWARDS EARNED:{Colors.ENDC}")
+        if 'xp' in on_complete:
+            print(f"  XP: {on_complete['xp']:+d}")
         print(f"  Health: {on_complete['health']:+d}")
         print(f"  Energy: {on_complete['energy']:+d}")
         
@@ -587,6 +823,52 @@ def mark_mission_failed():
     
     # Keep rewards locked (failed mission doesn't unlock rewards)
     
+    # Apply stat penalties to alter-ego
+    xp_rules = load_xp_rules()
+    ego_data = load_alter_ego(mission['archetype'])
+    
+    if ego_data and xp_rules:
+        # Get stat changes from mission
+        on_failure = mission["archetype_stat_change"]["on_failure"]
+        
+        # Store state before changes
+        state_before = {
+            'level': ego_data['level'],
+            'title': ego_data['title'],
+            'xp': ego_data['xp_details']['current_xp'],
+            'health': ego_data['health_details']['current_health'],
+            'energy': ego_data['energy_details']['current_energy'],
+            'abilities': ego_data['abilities'].copy()
+        }
+        
+        # Apply changes (penalties)
+        delta_applied = apply_stat_changes(ego_data, on_failure, xp_rules)
+        
+        # Save updated alter-ego
+        if save_alter_ego(mission['archetype'], ego_data):
+            print_warning(f"⚠️  Updated {ego_data['name']} stats (penalties applied)")
+            
+            # Record history
+            history_entry = {
+                'history_index': get_next_history_index(),
+                'alter-ego': mission['archetype'],
+                'mission_associated': mission_file.stem,
+                'state': 'failed',
+                'delta_changed': delta_applied,
+                'state_after_delta_applied': {
+                    'level': ego_data['level'],
+                    'title': ego_data['title'],
+                    'xp': ego_data['xp_details']['current_xp'],
+                    'health': ego_data['health_details']['current_health'],
+                    'energy': ego_data['energy_details']['current_energy'],
+                    'abilities': ego_data['abilities'].copy()
+                },
+                'date': mission["completion_date"]
+            }
+            
+            record_history(history_entry)
+            print_success(f"📝 History recorded (entry #{history_entry['history_index']})")
+    
     # Move to completed folder (with failed status)
     new_file = MISSIONS_COMPLETED / mission_file.name
     if save_json(new_file, mission):
@@ -598,6 +880,8 @@ def mark_mission_failed():
         # Show penalties
         on_failure = mission["archetype_stat_change"]["on_failure"]
         print(f"\n{Colors.FAIL}PENALTIES APPLIED:{Colors.ENDC}")
+        if 'xp' in on_failure:
+            print(f"  XP: {on_failure['xp']:+d}")
         print(f"  Health: {on_failure['health']:+d}")
         print(f"  Energy: {on_failure['energy']:+d}")
         
@@ -607,6 +891,7 @@ def mark_mission_failed():
                 print(f"    • {ability.capitalize()}: {value:+d}")
     else:
         print_error("Failed to mark mission as failed")
+
 
 def delete_mission():
     """Delete a mission."""

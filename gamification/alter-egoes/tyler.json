@@ -1,30 +1,35 @@
 {
-    "name": "Tyler Durden",
-    "nickname": "Ty",
-    "profile_url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/gamification/assets/images/banner/tyler-durden.png",
-    "tag_line": "The Untamed Wolf",
-    "creed_text": "You wanna/ make an omelet,/ you gotta/ break some eggs./",
-    "level": 1,
-    "xp_details": {
-        "current_xp": 15,
-        "xp_to_next_level": 100
-    },
-    "health_details": {
-        "current_health": 0.5,
-        "max_health": 100
-    },
-    "energy_details": {
-        "current_energy": 2,
-        "max_energy": 100
-    },
-    "abilities": {
-        "strength": 15,
-        "discipline": 10,
-        "agression": 5,
-        "confidence": 10,
-        "dominance": 10,
-        "pain tolerance": 10,
-        "honor": 15,
-        "determination": 20
-    }
+  "name": "Tyler Durden",
+  "nickname": "Ty",
+  "profile_url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/gamification/assets/images/banner/tyler-durden.png",
+  "tag_line": "The Untamed Wolf",
+  "creed_text": "You wanna/ make an omelet,/ you gotta/ break some eggs./",
+  "level": 1,
+  "title": "Awakened",
+  "status": {
+    "current_status": "active",
+    "note": ""
+  },
+  "xp_details": {
+    "current_xp": 25,
+    "xp_to_next_level": 100
+  },
+  "health_details": {
+    "current_health": 5.5,
+    "max_health": 100
+  },
+  "energy_details": {
+    "current_energy": 4,
+    "max_energy": 100
+  },
+  "abilities": {
+    "strength": 15,
+    "discipline": 35,
+    "agression": 10,
+    "confidence": 35,
+    "dominance": 15,
+    "pain tolerance": 10,
+    "honor": 20,
+    "determination": 45
+  }
 }

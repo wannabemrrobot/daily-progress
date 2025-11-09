@@ -5,6 +5,11 @@
     "tag_line": "The Monk Of Still Waters",
     "creed_text": "In the silence/ of the mind,/ wars are won/ before they begin./",
     "level": 1,
+    "title": "Awakened",
+    "status": {
+        "current_status": "active",
+        "note": ""
+    },
     "xp_details": {
         "current_xp": 0,
         "xp_to_next_level": 100
