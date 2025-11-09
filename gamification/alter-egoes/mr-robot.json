@@ -1,35 +1,35 @@
 {
-    "name": "Mr.Robot",
-    "nickname": "Mastermind",
-    "profile_url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/gamification/assets/images/banner/mrrobot.webp",
-    "tag_line": "The Architect",
-    "creed_text": "Control/ is an/ illusion",
-    "level": 1,
-    "title": "Awakened",
-    "status": {
-        "current_status": "active",
-        "note": ""
-    },
-    "xp_details": {
-        "current_xp": 15,
-        "xp_to_next_level": 100
-    },
-    "health_details": {
-        "current_health": 10,
-        "max_health": 100
-    },
-    "energy_details": {
-        "current_energy": 10,
-        "max_energy": 100
-    },
-    "abilities": {
-        "intelligence": 15,
-        "logic": 10,
-        "adaptability": 20,
-        "innovation": 10,
-        "focus": 15,
-        "systemization": 10,
-        "precision": 5,
-        "speed": 15
-    }
+  "name": "Mr.Robot",
+  "nickname": "Mastermind",
+  "profile_url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/gamification/assets/images/banner/mrrobot.webp",
+  "tag_line": "The Architect",
+  "creed_text": "Control/ is an/ illusion",
+  "level": 1,
+  "title": "Awakened",
+  "status": {
+    "current_status": "active",
+    "note": ""
+  },
+  "xp_details": {
+    "current_xp": 17,
+    "xp_to_next_level": 100
+  },
+  "health_details": {
+    "current_health": 10,
+    "max_health": 100
+  },
+  "energy_details": {
+    "current_energy": 10,
+    "max_energy": 100
+  },
+  "abilities": {
+    "intelligence": 15,
+    "logic": 10,
+    "adaptability": 20,
+    "innovation": 10,
+    "focus": 15,
+    "systemization": 10,
+    "precision": 5,
+    "speed": 15
+  }
 }

@@ -1,0 +1,66 @@
+{
+    "missed_checkin_penalty": {
+        "description": "Penalties applied when daily check-in streak is broken for 3+ consecutive days",
+        "threshold_days": 3,
+        "penalties": {
+            "xp": -5,
+            "health": -3,
+            "energy": -3,
+            "abilities_percent": -2,
+            "comment": "abilities_percent: reduce each ability by 2% of its current value (minimum -1)"
+        }
+    },
+    "habit_success_reward": {
+        "description": "XP rewards for maintaining habit streaks (applied to all alter-egos)",
+        "habits": {
+            "no-sugar": {
+                "xp_per_success": 2
+            },
+            "workout": {
+                "xp_per_success": 3
+            },
+            "meditation": {
+                "xp_per_success": 3
+            },
+            "reading": {
+                "xp_per_success": 2
+            },
+            "coding": {
+                "xp_per_success": 3
+            },
+            "no-fap": {
+                "xp_per_success": 2
+            },
+            "no-junk-food": {
+                "xp_per_success": 2
+            }
+        },
+        "comment": "XP is added to each alter-ego upon successful habit completion"
+    },
+    "streak_milestone_bonus": {
+        "description": "Bonus XP for reaching streak milestones",
+        "milestones": {
+            "7": {
+                "xp_bonus": 10,
+                "description": "1 week streak"
+            },
+            "14": {
+                "xp_bonus": 20,
+                "description": "2 week streak"
+            },
+            "30": {
+                "xp_bonus": 50,
+                "description": "1 month streak"
+            },
+            "50": {
+                "xp_bonus": 100,
+                "description": "50 day streak"
+            },
+            "100": {
+                "xp_bonus": 250,
+                "description": "100 day streak"
+            }
+        },
+        "comment": "One-time bonus when milestone is reached for any habit"
+    }
+}

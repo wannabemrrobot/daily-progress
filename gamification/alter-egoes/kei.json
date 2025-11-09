@@ -1,35 +1,35 @@
 {
-    "name": "Kei",
-    "nickname": "Kei",
-    "profile_url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/gamification/assets/images/banner/kei.png",
-    "tag_line": "The Monk Of Still Waters",
-    "creed_text": "In the silence/ of the mind,/ wars are won/ before they begin./",
-    "level": 1,
-    "title": "Awakened",
-    "status": {
-        "current_status": "active",
-        "note": ""
-    },
-    "xp_details": {
-        "current_xp": 0,
-        "xp_to_next_level": 100
-    },
-    "health_details": {
-        "current_health": 10,
-        "max_health": 100
-    },
-    "energy_details": {
-        "current_energy": 5,
-        "max_energy": 100
-    },
-    "abilities": {
-        "self-control": 10,
-        "peace": 15,
-        "wisdom": 10,
-        "focus": 10,
-        "resilience": 10,
-        "harmony": 0,
-        "mindfulness": 0,
-        "intuition": 20
-    }
+  "name": "Kei",
+  "nickname": "Kei",
+  "profile_url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/gamification/assets/images/banner/kei.png",
+  "tag_line": "The Monk Of Still Waters",
+  "creed_text": "In the silence/ of the mind,/ wars are won/ before they begin./",
+  "level": 1,
+  "title": "Awakened",
+  "status": {
+    "current_status": "active",
+    "note": ""
+  },
+  "xp_details": {
+    "current_xp": 2,
+    "xp_to_next_level": 100
+  },
+  "health_details": {
+    "current_health": 10,
+    "max_health": 100
+  },
+  "energy_details": {
+    "current_energy": 5,
+    "max_energy": 100
+  },
+  "abilities": {
+    "self-control": 10,
+    "peace": 15,
+    "wisdom": 10,
+    "focus": 10,
+    "resilience": 10,
+    "harmony": 0,
+    "mindfulness": 0,
+    "intuition": 20
+  }
 }

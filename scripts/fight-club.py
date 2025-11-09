@@ -37,13 +37,16 @@ MISSIONS_DIR = REPO_ROOT / "gamification" / "missions"
 MISSIONS_NOT_COMPLETED = MISSIONS_DIR / "not-completed"
 MISSIONS_COMPLETED = MISSIONS_DIR / "completed"
 ALTER_EGOS_DIR = REPO_ROOT / "gamification" / "alter-egoes"
-DAILY_PROGRESS_DIR = REPO_ROOT / "cron@daily"
+DAILY_PROGRESS_DIR = REPO_ROOT / "gamification" / "daily-progress"
 REWARDS_DIR = REPO_ROOT / "gamification" / "rewards"
 REWARDS_LOCKED = REWARDS_DIR / "locked"
 REWARDS_UNLOCKED = REWARDS_DIR / "unlocked"
 CONFIGS_DIR = REPO_ROOT / "gamification" / "configs"
 XP_RULES_FILE = CONFIGS_DIR / "xp-rules.json"
+SYNERGY_RULES_FILE = CONFIGS_DIR / "synergy-rules.json"
+DAILY_PROGRESS_RULES_FILE = CONFIGS_DIR / "daily-progress-rules.json"
 HISTORY_FILE = REPO_ROOT / "gamification" / "history.json"
+SYNERGY_FILE = REPO_ROOT / "gamification" / "synergy.json"
 
 # Ensure directories exist
 MISSIONS_NOT_COMPLETED.mkdir(parents=True, exist_ok=True)
@@ -51,6 +54,13 @@ MISSIONS_COMPLETED.mkdir(parents=True, exist_ok=True)
 REWARDS_LOCKED.mkdir(parents=True, exist_ok=True)
 REWARDS_UNLOCKED.mkdir(parents=True, exist_ok=True)
 CONFIGS_DIR.mkdir(parents=True, exist_ok=True)
+
+# Synergy mapping: archetype -> synergy category
+SYNERGY_MAPPING = {
+    "tyler": "body",
+    "mr-robot": "mind",
+    "kei": "soul"
+}
 
 # Alter ego configurations with abilities
 ALTER_EGOS = {
@@ -405,6 +415,833 @@ def record_history(event_data: Dict):
         print(f"{Colors.FAIL}Error saving history: {e}{Colors.ENDC}")
 
 
+def load_synergy() -> Optional[Dict]:
+    """Load synergy.json data."""
+    try:
+        with open(SYNERGY_FILE, 'r') as f:
+            return json.load(f)
+    except FileNotFoundError:
+        print(f"{Colors.FAIL}Error: Synergy file not found: {SYNERGY_FILE}{Colors.ENDC}")
+        return None
+    except json.JSONDecodeError:
+        print(f"{Colors.FAIL}Error: Invalid JSON in synergy file{Colors.ENDC}")
+        return None
+
+
+def save_synergy(data: Dict) -> bool:
+    """Save updated synergy.json data."""
+    try:
+        with open(SYNERGY_FILE, 'w') as f:
+            json.dump(data, f, indent=2)
+        return True
+    except Exception as e:
+        print(f"{Colors.FAIL}Error saving synergy: {e}{Colors.ENDC}")
+        return False
+
+
+def calculate_synergy_xp() -> int:
+    """
+    Calculate total synergy XP from all alter-egos.
+    Sum of all alter-ego XP values.
+    """
+    total_xp = 0
+    for archetype in ["tyler", "mr-robot", "kei"]:
+        ego_data = load_alter_ego(archetype)
+        if ego_data:
+            total_xp += ego_data.get('xp_details', {}).get('current_xp', 0)
+    return total_xp
+
+
+def calculate_synergy_stats() -> Dict[str, float]:
+    """
+    Calculate synergy stats (mind, body, soul) from all alter-egos.
+    Calculate average of all abilities for each alter-ego mapped to their synergy category.
+    - mind = average of mr-robot abilities
+    - body = average of tyler abilities
+    - soul = average of kei abilities
+    """
+    synergy_stats = {"mind": 0.0, "body": 0.0, "soul": 0.0}
+    
+    for archetype, synergy_type in SYNERGY_MAPPING.items():
+        ego_data = load_alter_ego(archetype)
+        if ego_data:
+            abilities = ego_data.get('abilities', {})
+            if abilities:
+                # Calculate average of all ability values for this alter-ego
+                ability_values = list(abilities.values())
+                average = sum(ability_values) / len(ability_values)
+                synergy_stats[synergy_type] = round(average, 2)
+    
+    return synergy_stats
+
+
+def count_missions() -> Dict[str, int]:
+    """Count missions by status."""
+    counts = {
+        "total": 0,
+        "completed": 0,
+        "failed": 0,
+        "not-started": 0,
+        "in-progress": 0
+    }
+    
+    # Count not-completed missions
+    for mission_file in MISSIONS_NOT_COMPLETED.glob("*.json"):
+        mission_data = load_json(mission_file)
+        if mission_data:
+            counts["total"] += 1
+            status = mission_data.get("status", "not-started")
+            if status in counts:
+                counts[status] += 1
+    
+    # Count completed missions
+    for mission_file in MISSIONS_COMPLETED.glob("*.json"):
+        mission_data = load_json(mission_file)
+        if mission_data:
+            counts["total"] += 1
+            status = mission_data.get("status", "completed")
+            if status == "completed":
+                counts["completed"] += 1
+            elif status == "failed":
+                counts["failed"] += 1
+    
+    return counts
+
+
+def count_rewards() -> Dict[str, int]:
+    """Count rewards by lock status."""
+    counts = {
+        "total": 0,
+        "unlocked": 0,
+        "locked": 0
+    }
+    
+    # Count locked rewards
+    for reward_file in REWARDS_LOCKED.glob("*.json"):
+        counts["total"] += 1
+        counts["locked"] += 1
+    
+    # Count unlocked rewards
+    for reward_file in REWARDS_UNLOCKED.glob("*.json"):
+        counts["total"] += 1
+        counts["unlocked"] += 1
+    
+    return counts
+
+
+def update_synergy():
+    """
+    Update synergy.json with current stats from all alter-egos and mission/reward counts.
+    Calculates XP, synergy stats (mind/body/soul), and total synergy automatically.
+    Uses synergy-rules.json for level progression and chapter details.
+    """
+    synergy_data = load_synergy()
+    if not synergy_data:
+        return False
+    
+    # Calculate synergy XP from all alter-egos
+    total_xp = calculate_synergy_xp()
+    synergy_data["fight_club"]["xp_details"]["current_xp"] = total_xp
+    
+    # Handle level-up for synergy using synergy-rules.json
+    try:
+        with open(SYNERGY_RULES_FILE, 'r') as f:
+            synergy_rules = json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        print(f"{Colors.WARNING}Warning: Could not load synergy rules{Colors.ENDC}")
+        synergy_rules = None
+    
+    if synergy_rules:
+        current_level = synergy_data["fight_club"]["level"]
+        level_data = synergy_rules.get('levels', {}).get(str(current_level), {})
+        xp_to_next = level_data.get('xp_to_next_level')
+        
+        # Level up if needed
+        while xp_to_next and total_xp >= xp_to_next:
+            total_xp -= xp_to_next
+            current_level += 1
+            
+            new_level_data = synergy_rules.get('levels', {}).get(str(current_level), {})
+            synergy_data["fight_club"]["level"] = current_level
+            synergy_data["fight_club"]["chapter"] = new_level_data.get('chapter', 'UNKNOWN')
+            synergy_data["fight_club"]["description"] = new_level_data.get('description', '')
+            synergy_data["fight_club"]["xp_details"]["xp_to_next_level"] = new_level_data.get('xp_to_next_level')
+            synergy_data["fight_club"]["xp_details"]["current_xp"] = total_xp
+            
+            print(f"{Colors.OKGREEN}🎉 SYNERGY LEVEL UP! Now at Level {current_level} - {new_level_data.get('chapter', '')}!{Colors.ENDC}")
+            
+            xp_to_next = new_level_data.get('xp_to_next_level')
+    
+    # Calculate synergy stats (mind, body, soul)
+    synergy_stats = calculate_synergy_stats()
+    synergy_data["fight_club"]["synergy"] = synergy_stats
+    synergy_data["fight_club"]["total_synergy"] = round(sum(synergy_stats.values()), 2)
+    
+    # Update mission counts
+    mission_counts = count_missions()
+    synergy_data["fight_club"]["missions"] = mission_counts
+    
+    # Update reward counts
+    reward_counts = count_rewards()
+    synergy_data["fight_club"]["rewards"] = reward_counts
+    
+    # Save updated synergy
+    if save_synergy(synergy_data):
+        return True
+    return False
+
+
+def get_all_daily_progress_files() -> List[Tuple[Path, datetime.date]]:
+    """Get all daily progress JSON files sorted by date."""
+    files_with_dates = []
+    
+    if not DAILY_PROGRESS_DIR.exists():
+        return files_with_dates
+    
+    for year_dir in DAILY_PROGRESS_DIR.glob("*"):
+        if not year_dir.is_dir():
+            continue
+        for month_dir in year_dir.glob("*"):
+            if not month_dir.is_dir():
+                continue
+            for progress_file in month_dir.glob("*.json"):
+                try:
+                    # Extract date from filename: DD-month-YYYY.json
+                    filename = progress_file.stem
+                    # Parse date from filename
+                    date_obj = datetime.datetime.strptime(filename, "%d-%B-%Y").date()
+                    files_with_dates.append((progress_file, date_obj))
+                except (ValueError, AttributeError):
+                    continue
+    
+    # Sort by date
+    files_with_dates.sort(key=lambda x: x[1])
+    return files_with_dates
+
+
+def get_latest_daily_progress() -> Optional[Tuple[Path, Dict, datetime.date]]:
+    """Get the most recent daily progress file."""
+    files = get_all_daily_progress_files()
+    if not files:
+        return None
+    
+    latest_file, latest_date = files[-1]
+    data = load_json(latest_file)
+    if data:
+        return (latest_file, data, latest_date)
+    return None
+
+
+def calculate_days_since_last_checkin() -> int:
+    """Calculate number of days since last check-in."""
+    latest = get_latest_daily_progress()
+    if not latest:
+        return 999  # No check-ins yet
+    
+    _, _, latest_date = latest
+    today = datetime.date.today()
+    days_diff = (today - latest_date).days
+    return days_diff
+
+
+def load_daily_progress_rules() -> Optional[Dict]:
+    """Load daily progress rules from daily-progress-rules.json."""
+    try:
+        with open(DAILY_PROGRESS_RULES_FILE, 'r') as f:
+            return json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        print(f"{Colors.FAIL}Error: Could not load daily progress rules{Colors.ENDC}")
+        return None
+
+
+def apply_missed_checkin_penalty():
+    """Apply penalties to all alter-egos when check-in streak is broken for 3+ days."""
+    days_missed = calculate_days_since_last_checkin()
+    rules = load_daily_progress_rules()
+    
+    if not rules:
+        return False
+    
+    penalty_config = rules.get('missed_checkin_penalty', {})
+    threshold = penalty_config.get('threshold_days', 3)
+    
+    if days_missed < threshold:
+        print_info(f"Days since last check-in: {days_missed} (threshold: {threshold})")
+        return False
+    
+    print(f"{Colors.FAIL}⚠️  MISSED CHECK-IN PENALTY!{Colors.ENDC}")
+    print(f"{Colors.FAIL}   Last check-in was {days_missed} days ago (threshold: {threshold} days){Colors.ENDC}\n")
+    
+    penalties = penalty_config.get('penalties', {})
+    xp_penalty = penalties.get('xp', -5)
+    health_penalty = penalties.get('health', -3)
+    energy_penalty = penalties.get('energy', -3)
+    abilities_percent = penalties.get('abilities_percent', -2)
+    
+    # Apply penalties to all alter-egos and record history
+    for archetype in ["tyler", "mr-robot", "kei"]:
+        ego_data = load_alter_ego(archetype)
+        if not ego_data:
+            continue
+        
+        # Store state before penalty
+        state_before = {
+            'level': ego_data['level'],
+            'title': ego_data['title'],
+            'xp': ego_data['xp_details']['current_xp'],
+            'health': ego_data['health_details']['current_health'],
+            'energy': ego_data['energy_details']['current_energy'],
+            'abilities': ego_data['abilities'].copy()
+        }
+        
+        # Apply XP penalty
+        ego_data['xp_details']['current_xp'] = max(0, ego_data['xp_details']['current_xp'] + xp_penalty)
+        
+        # Apply health penalty
+        ego_data['health_details']['current_health'] = max(0, ego_data['health_details']['current_health'] + health_penalty)
+        
+        # Apply energy penalty
+        ego_data['energy_details']['current_energy'] = max(0, ego_data['energy_details']['current_energy'] + energy_penalty)
+        
+        # Apply abilities penalty (percentage reduction)
+        abilities_delta = {}
+        for ability in ego_data['abilities']:
+            current_value = ego_data['abilities'][ability]
+            reduction = max(1, int(current_value * abs(abilities_percent) / 100))
+            ego_data['abilities'][ability] = max(0, current_value - reduction)
+            abilities_delta[ability] = -reduction
+        
+        save_alter_ego(archetype, ego_data)
+        print(f"{Colors.FAIL}   {ego_data['name']}: {xp_penalty} XP, {health_penalty} health, {energy_penalty} energy, ~{abs(abilities_percent)}% abilities{Colors.ENDC}")
+        
+        # Record history for this penalty
+        history_entry = {
+            'history_index': get_next_history_index(),
+            'alter-ego': archetype,
+            'event_type': 'missed_checkin_penalty',
+            'days_missed': days_missed,
+            'delta_changed': {
+                'xp': xp_penalty,
+                'health': health_penalty,
+                'energy': energy_penalty,
+                'abilities': abilities_delta
+            },
+            'state_after_delta_applied': {
+                'level': ego_data['level'],
+                'title': ego_data['title'],
+                'xp': ego_data['xp_details']['current_xp'],
+                'health': ego_data['health_details']['current_health'],
+                'energy': ego_data['energy_details']['current_energy'],
+                'abilities': ego_data['abilities'].copy()
+            },
+            'date': datetime.date.today().isoformat()
+        }
+        
+        record_history(history_entry)
+    
+    # Update synergy
+    update_synergy()
+    
+    print(f"\n{Colors.WARNING}Penalties applied to all alter-egos. Get back on track!{Colors.ENDC}\n")
+    return True
+
+
+def update_habit_streak_in_synergy(habit_name: str, success: bool) -> bool:
+    """Update habit streak in synergy.json and return whether milestone was reached."""
+    synergy_data = load_synergy()
+    if not synergy_data:
+        return False
+    
+    habit_data = synergy_data["fight_club"]["daily_progress"]["habits"].get(habit_name)
+    if not habit_data:
+        return False
+    
+    milestone_reached = False
+    
+    if success:
+        # Increment streak and totals
+        habit_data["streak"] += 1
+        habit_data["total_success"] += 1
+        
+        # Update best streak
+        if habit_data["streak"] > habit_data["best_streak"]:
+            habit_data["best_streak"] = habit_data["streak"]
+        
+        # Check for milestone (will be handled by caller)
+        milestone_reached = True
+    else:
+        # Reset streak on failure
+        habit_data["streak"] = 0
+        habit_data["total_failures"] += 1
+    
+    save_synergy(synergy_data)
+    return milestone_reached and success
+
+
+def apply_habit_rewards(habit_results: Dict[str, str]):
+    """
+    Apply XP rewards to all alter-egos based on successful habits.
+    Updates synergy habits tracking.
+    """
+    rules = load_daily_progress_rules()
+    if not rules:
+        return False
+    
+    habit_rewards = rules.get('habit_success_reward', {}).get('habits', {})
+    milestones = rules.get('streak_milestone_bonus', {}).get('milestones', {})
+    
+    total_xp_earned = 0
+    milestone_bonuses = []
+    
+    print(f"\n{Colors.OKGREEN}📊 HABIT ANALYSIS:{Colors.ENDC}\n")
+    
+    for habit_name, result in habit_results.items():
+        success = (result.lower() == "success")
+        
+        # Update streak in synergy
+        update_habit_streak_in_synergy(habit_name, success)
+        
+        if success:
+            xp_reward = habit_rewards.get(habit_name, {}).get('xp_per_success', 0)
+            total_xp_earned += xp_reward
+            
+            # Get current streak to check for milestone
+            synergy_data = load_synergy()
+            if synergy_data:
+                current_streak = synergy_data["fight_club"]["daily_progress"]["habits"][habit_name]["streak"]
+                
+                # Check if milestone reached
+                if str(current_streak) in milestones:
+                    milestone_bonus = milestones[str(current_streak)].get('xp_bonus', 0)
+                    milestone_bonuses.append((habit_name, current_streak, milestone_bonus))
+                    total_xp_earned += milestone_bonus
+                
+                print(f"{Colors.OKGREEN}   ✓ {habit_name}: +{xp_reward} XP (streak: {current_streak}){Colors.ENDC}")
+        else:
+            print(f"{Colors.FAIL}   ✗ {habit_name}: streak reset{Colors.ENDC}")
+    
+    # Show milestone bonuses
+    if milestone_bonuses:
+        print(f"\n{Colors.OKCYAN}🎉 STREAK MILESTONES:{Colors.ENDC}")
+        for habit, streak, bonus in milestone_bonuses:
+            print(f"{Colors.OKCYAN}   {habit}: {streak} day streak! +{bonus} XP bonus{Colors.ENDC}")
+    
+    # Apply total XP to all alter-egos
+    if total_xp_earned > 0:
+        print(f"\n{Colors.OKGREEN}Total XP earned: {total_xp_earned}{Colors.ENDC}")
+        print(f"{Colors.OKGREEN}Applying to all alter-egos...{Colors.ENDC}\n")
+        
+        for archetype in ["tyler", "mr-robot", "kei"]:
+            ego_data = load_alter_ego(archetype)
+            if ego_data:
+                ego_data['xp_details']['current_xp'] += total_xp_earned
+                
+                # Handle level-up
+                xp_rules = load_xp_rules()
+                if xp_rules:
+                    current_level = ego_data['level']
+                    level_data = xp_rules.get('levels', {}).get(str(current_level), {})
+                    xp_to_next = level_data.get('xp_to_next_level')
+                    
+                    while xp_to_next and ego_data['xp_details']['current_xp'] >= xp_to_next:
+                        ego_data['xp_details']['current_xp'] -= xp_to_next
+                        ego_data['level'] += 1
+                        
+                        new_level_data = xp_rules.get('levels', {}).get(str(ego_data['level']), {})
+                        ego_data['title'] = new_level_data.get('title', ego_data['title'])
+                        ego_data['xp_details']['xp_to_next_level'] = new_level_data.get('xp_to_next_level')
+                        
+                        print(f"{Colors.OKGREEN}🎉 {ego_data['name']} LEVEL UP! Now Level {ego_data['level']} - {ego_data['title']}!{Colors.ENDC}")
+                        
+                        xp_to_next = ego_data['xp_details']['xp_to_next_level']
+                
+                save_alter_ego(archetype, ego_data)
+                print(f"{Colors.OKGREEN}   {ego_data['name']}: +{total_xp_earned} XP{Colors.ENDC}")
+        
+        # Record milestone bonuses in history (one entry per milestone per alter-ego)
+        if milestone_bonuses:
+            for habit, streak, bonus in milestone_bonuses:
+                for archetype in ["tyler", "mr-robot", "kei"]:
+                    ego_data = load_alter_ego(archetype)
+                    if ego_data:
+                        history_entry = {
+                            'history_index': get_next_history_index(),
+                            'alter-ego': archetype,
+                            'event_type': 'streak_milestone',
+                            'habit_name': habit,
+                            'streak_days': streak,
+                            'delta_changed': {
+                                'xp': bonus
+                            },
+                            'state_after_delta_applied': {
+                                'level': ego_data['level'],
+                                'title': ego_data['title'],
+                                'xp': ego_data['xp_details']['current_xp'],
+                                'health': ego_data['health_details']['current_health'],
+                                'energy': ego_data['energy_details']['current_energy'],
+                                'abilities': ego_data['abilities'].copy()
+                            },
+                            'date': datetime.date.today().isoformat()
+                        }
+                        record_history(history_entry)
+        
+        # Update synergy
+        update_synergy()
+        print(f"\n{Colors.OKGREEN}✅ Synergy updated{Colors.ENDC}\n")
+    
+    return True
+
+
+def process_daily_progress_file(filepath: Path):
+    """Process a daily progress file and apply rewards/penalties."""
+    data = load_json(filepath)
+    if not data:
+        return False
+    
+    # Extract habit results
+    habit_results = data.get('alter-ego-stats', {})
+    if not habit_results:
+        print_warning("No habit data found in daily progress file")
+        return False
+    
+    # Apply habit rewards
+    apply_habit_rewards(habit_results)
+    
+    # Update daily check-in streak in synergy
+    synergy_data = load_synergy()
+    if synergy_data:
+        synergy_data["fight_club"]["daily_progress"]["daily_progress_streak"] += 1
+        synergy_data["fight_club"]["daily_progress"]["days_checked_in"] += 1
+        save_synergy(synergy_data)
+    
+    return True
+
+
+def process_latest_daily_progress():
+    """Process the most recent daily progress file."""
+    print_header("PROCESS DAILY PROGRESS")
+    
+    latest = get_latest_daily_progress()
+    if not latest:
+        print_error("No daily progress files found!")
+        return
+    
+    filepath, data, date = latest
+    
+    print_info(f"Latest check-in: {date.strftime('%d %B %Y')}")
+    print_info(f"File: {filepath.name}\n")
+    
+    # Show habit results
+    habit_results = data.get('alter-ego-stats', {})
+    if habit_results:
+        print(f"{Colors.BOLD}Habits for {date.strftime('%d %B %Y')}:{Colors.ENDC}\n")
+        for habit, result in habit_results.items():
+            status_icon = "✓" if result.lower() == "success" else "✗"
+            status_color = Colors.OKGREEN if result.lower() == "success" else Colors.FAIL
+            print(f"{status_color}   {status_icon} {habit}: {result}{Colors.ENDC}")
+        
+        print()
+        confirm = get_input("Process this daily progress? (yes/no)", "yes")
+        
+        if confirm.lower() in ["yes", "y"]:
+            if process_daily_progress_file(filepath):
+                print_success("✅ Daily progress processed successfully!")
+            else:
+                print_error("Failed to process daily progress")
+        else:
+            print_info("Processing cancelled")
+    else:
+        print_error("No habit data found in the file")
+
+
+def add_daily_progress():
+    """Create a new daily progress entry."""
+    print_header("ADD DAILY PROGRESS ENTRY")
+    
+    # Get date
+    date_input = get_input("Date (YYYY-MM-DD)", datetime.date.today().isoformat())
+    try:
+        entry_date = datetime.datetime.strptime(date_input, "%Y-%m-%d").date()
+    except ValueError:
+        print_error("Invalid date format! Use YYYY-MM-DD")
+        return
+    
+    # Check if entry already exists
+    year = entry_date.year
+    month = entry_date.strftime("%m-%B").lower()
+    day_filename = entry_date.strftime("%d-%B-%Y").lower() + ".json"
+    
+    target_dir = DAILY_PROGRESS_DIR / str(year) / month
+    target_file = target_dir / day_filename
+    
+    if target_file.exists():
+        print_error(f"Daily progress entry for {entry_date} already exists!")
+        print_info(f"Use 'Modify Daily Progress' to update it.")
+        return
+    
+    # Mood tracker
+    print(f"\n{Colors.BOLD}MOOD TRACKER:{Colors.ENDC}")
+    print(f"{Colors.OKCYAN}   Energy options: Energized, Motivated, Calm, Okay, Distracted, Drained, Irritated, Low, Numb, Exhausted{Colors.ENDC}")
+    energy = get_input("Energy level", "Okay")
+    print(f"{Colors.OKCYAN}   Emotion options: Ecstatic, Happy, Content, Neutral, Tired, Stressed, Sad, Angry, Anxious, Empty{Colors.ENDC}")
+    emotion = get_input("Emotion", "Neutral")
+    mood_notes = get_input("Mood notes (optional)", "")
+    
+    # Sleep tracker
+    print(f"\n{Colors.BOLD}SLEEP TRACKER:{Colors.ENDC}")
+    hours_slept = get_input("Hours slept", "7")
+    sleep_quality = get_input("Sleep quality (excellent/good/fair/poor)", "good")
+    sleep_notes = get_input("Sleep notes (optional)", "")
+    
+    # Habit tracking
+    print(f"\n{Colors.BOLD}HABIT TRACKING:{Colors.ENDC}")
+    print_info("Mark each habit as 'success' or 'failed'\n")
+    
+    habits = ["no-sugar", "workout", "meditation", "reading", "coding", "no-fap", "no-junk-food"]
+    habit_results = {}
+    
+    for habit in habits:
+        result = get_input(f"{habit}", "failed")
+        habit_results[habit] = result.lower()
+    
+    # Create daily progress object
+    daily_progress = {
+        "date": entry_date.isoformat(),
+        "mood-tracker": {
+            "energy": energy,
+            "emotion": emotion,
+            "notes": mood_notes
+        },
+        "sleep-tracker": {
+            "hours_slept": int(hours_slept) if hours_slept.isdigit() else 7,
+            "sleep_quality": sleep_quality,
+            "notes": sleep_notes
+        },
+        "alter-ego-stats": habit_results
+    }
+    
+    # Create directory structure
+    target_dir.mkdir(parents=True, exist_ok=True)
+    
+    # Save file
+    if save_json(target_file, daily_progress):
+        print_success(f"Daily progress entry created for {entry_date.strftime('%d %B %Y')}")
+        print_info(f"File: {target_file}")
+        
+        # Ask if user wants to process it now
+        print()
+        process_now = get_input("Process this entry now (apply rewards/penalties)? (yes/no)", "yes")
+        
+        if process_now.lower() in ["yes", "y"]:
+            # Check for missed check-in penalty first
+            days_missed = calculate_days_since_last_checkin()
+            if days_missed >= 3:
+                print_warning(f"\n⚠️  Last check-in was {days_missed} days ago!")
+                apply_penalty = get_input("Apply missed check-in penalty? (yes/no)", "yes")
+                if apply_penalty.lower() in ["yes", "y"]:
+                    apply_missed_checkin_penalty()
+            
+            # Process the new entry
+            if process_daily_progress_file(target_file):
+                print_success("\n✅ Daily progress processed successfully!")
+        else:
+            print_info("Entry saved. You can process it later from the menu.")
+    else:
+        print_error("Failed to create daily progress entry")
+
+
+def view_daily_progress():
+    """View existing daily progress entries."""
+    print_header("VIEW DAILY PROGRESS ENTRIES")
+    
+    files = get_all_daily_progress_files()
+    if not files:
+        print_error("No daily progress entries found!")
+        return
+    
+    # Show recent entries (last 10)
+    recent_files = files[-10:]
+    
+    print(f"{Colors.BOLD}Recent Daily Progress Entries:{Colors.ENDC}\n")
+    for i, (filepath, date) in enumerate(recent_files, 1):
+        data = load_json(filepath)
+        if data:
+            habit_results = data.get('alter-ego-stats', {})
+            success_count = sum(1 for result in habit_results.values() if result.lower() == "success")
+            total_habits = len(habit_results)
+            
+            print(f"{Colors.OKCYAN}[{i}]{Colors.ENDC} {date.strftime('%d %B %Y')} - {success_count}/{total_habits} habits successful")
+    
+    print()
+    choice = get_input(f"View details (1-{len(recent_files)}) or 'q' to quit", "q")
+    
+    if choice.lower() == 'q':
+        return
+    
+    try:
+        idx = int(choice) - 1
+        if 0 <= idx < len(recent_files):
+            filepath, date = recent_files[idx]
+            data = load_json(filepath)
+            if data:
+                print(f"\n{Colors.HEADER}═══ {date.strftime('%d %B %Y')} ═══{Colors.ENDC}\n")
+                
+                # Mood
+                mood = data.get('mood-tracker', {})
+                print(f"{Colors.BOLD}Mood:{Colors.ENDC}")
+                print(f"  Energy: {mood.get('energy', 'N/A')}")
+                print(f"  Emotion: {mood.get('emotion', 'N/A')}")
+                if mood.get('notes'):
+                    print(f"  Notes: {mood.get('notes')}")
+                
+                # Sleep
+                sleep = data.get('sleep-tracker', {})
+                print(f"\n{Colors.BOLD}Sleep:{Colors.ENDC}")
+                print(f"  Hours: {sleep.get('hours_slept', 'N/A')}")
+                print(f"  Quality: {sleep.get('sleep_quality', 'N/A')}")
+                if sleep.get('notes'):
+                    print(f"  Notes: {sleep.get('notes')}")
+                
+                # Habits
+                habits = data.get('alter-ego-stats', {})
+                print(f"\n{Colors.BOLD}Habits:{Colors.ENDC}")
+                for habit, result in habits.items():
+                    status_icon = "✓" if result.lower() == "success" else "✗"
+                    status_color = Colors.OKGREEN if result.lower() == "success" else Colors.FAIL
+                    print(f"{status_color}  {status_icon} {habit}: {result}{Colors.ENDC}")
+    except ValueError:
+        print_error("Invalid choice")
+
+
+def modify_daily_progress():
+    """Modify an existing daily progress entry."""
+    print_header("MODIFY DAILY PROGRESS ENTRY")
+    
+    files = get_all_daily_progress_files()
+    if not files:
+        print_error("No daily progress entries found!")
+        return
+    
+    # Show recent entries (last 10)
+    recent_files = files[-10:]
+    
+    print(f"{Colors.BOLD}Recent Daily Progress Entries:{Colors.ENDC}\n")
+    for i, (filepath, date) in enumerate(recent_files, 1):
+        print(f"{Colors.OKCYAN}[{i}]{Colors.ENDC} {date.strftime('%d %B %Y')}")
+    
+    print()
+    choice = get_input(f"Select entry to modify (1-{len(recent_files)})", "1")
+    
+    try:
+        idx = int(choice) - 1
+        if 0 <= idx < len(recent_files):
+            filepath, date = recent_files[idx]
+            data = load_json(filepath)
+            if not data:
+                print_error("Failed to load entry")
+                return
+            
+            print(f"\n{Colors.BOLD}Modifying: {date.strftime('%d %B %Y')}{Colors.ENDC}")
+            print_info("Press Enter to keep current value\n")
+            
+            # Modify mood
+            print(f"{Colors.BOLD}MOOD TRACKER:{Colors.ENDC}")
+            mood = data.get('mood-tracker', {})
+            new_energy = get_input("Energy level", mood.get('energy', ''))
+            if new_energy:
+                mood['energy'] = new_energy
+            
+            new_emotion = get_input("Emotion", mood.get('emotion', ''))
+            if new_emotion:
+                mood['emotion'] = new_emotion
+            
+            new_mood_notes = get_input("Mood notes", mood.get('notes', ''))
+            if new_mood_notes:
+                mood['notes'] = new_mood_notes
+            
+            # Modify sleep
+            print(f"\n{Colors.BOLD}SLEEP TRACKER:{Colors.ENDC}")
+            sleep = data.get('sleep-tracker', {})
+            new_hours = get_input("Hours slept", str(sleep.get('hours_slept', '')))
+            if new_hours and new_hours.isdigit():
+                sleep['hours_slept'] = int(new_hours)
+            
+            new_quality = get_input("Sleep quality", sleep.get('sleep_quality', ''))
+            if new_quality:
+                sleep['sleep_quality'] = new_quality
+            
+            new_sleep_notes = get_input("Sleep notes", sleep.get('notes', ''))
+            if new_sleep_notes:
+                sleep['notes'] = new_sleep_notes
+            
+            # Modify habits
+            print(f"\n{Colors.BOLD}HABIT TRACKING:{Colors.ENDC}")
+            print_info("Update habits (success/failed) or press Enter to keep current\n")
+            
+            habits = data.get('alter-ego-stats', {})
+            for habit in habits:
+                current = habits[habit]
+                new_status = get_input(f"{habit} (current: {current})", "")
+                if new_status:
+                    habits[habit] = new_status.lower()
+            
+            # Save changes
+            if save_json(filepath, data):
+                print_success(f"\nDaily progress entry updated for {date.strftime('%d %B %Y')}")
+                
+                # Ask if user wants to reprocess
+                print()
+                reprocess = get_input("Reprocess this entry (recalculate rewards)? (yes/no)", "no")
+                
+                if reprocess.lower() in ["yes", "y"]:
+                    # Reset synergy habits first (optional - for clean recalculation)
+                    if process_daily_progress_file(filepath):
+                        print_success("✅ Entry reprocessed successfully!")
+                    else:
+                        print_error("Failed to reprocess entry")
+            else:
+                print_error("Failed to update entry")
+    except ValueError:
+        print_error("Invalid choice")
+
+
+def delete_daily_progress():
+    """Delete a daily progress entry."""
+    print_header("DELETE DAILY PROGRESS ENTRY")
+    
+    files = get_all_daily_progress_files()
+    if not files:
+        print_error("No daily progress entries found!")
+        return
+    
+    # Show recent entries (last 10)
+    recent_files = files[-10:]
+    
+    print(f"{Colors.BOLD}Recent Daily Progress Entries:{Colors.ENDC}\n")
+    for i, (filepath, date) in enumerate(recent_files, 1):
+        print(f"{Colors.OKCYAN}[{i}]{Colors.ENDC} {date.strftime('%d %B %Y')}")
+    
+    print()
+    choice = get_input(f"Select entry to delete (1-{len(recent_files)})", "1")
+    
+    try:
+        idx = int(choice) - 1
+        if 0 <= idx < len(recent_files):
+            filepath, date = recent_files[idx]
+            
+            confirm = get_input(f"Are you sure you want to delete the entry for {date.strftime('%d %B %Y')}? (yes/no)", "no")
+            
+            if confirm.lower() in ["yes", "y"]:
+                filepath.unlink()
+                print_success(f"Daily progress entry deleted for {date.strftime('%d %B %Y')}")
+                print_warning("Note: Synergy stats and alter-ego rewards are NOT reversed.")
+                print_info("You may need to manually adjust stats if needed.")
+            else:
+                print_info("Deletion cancelled")
+    except ValueError:
+        print_error("Invalid choice")
+
+
 def get_reward_files(folder: Path) -> List[Path]:
     """Get all reward JSON files in a folder."""
     if not folder.exists():
@@ -454,7 +1291,8 @@ def create_reward(mission_code: str = None) -> Optional[Dict]:
     description = get_input("Reward description")
     
     # Reward type
-    print_info("\nReward Type:")
+    print(f"\n{Colors.OKCYAN}   Reward type options: street, vanguard, legendary, apex, mythic{Colors.ENDC}")
+    print_info("Reward Type:")
     type_choice = get_choice(["Street", "Vanguard", "Legendary", "Apex", "Mythic"], "Type")
     reward_type = ["street", "vanguard", "legendary", "apex", "mythic"][type_choice - 1]
     
@@ -487,6 +1325,11 @@ def create_reward(mission_code: str = None) -> Optional[Dict]:
         print_success(f"Reward created: {title}")
         print_info(f"Reward ID: {reward_id}")
         print_info(f"File: {filename}")
+        
+        # Update synergy
+        if update_synergy():
+            print_success("🔗 Synergy updated")
+        
         return {
             "reward_type": reward_type,
             "title": title,
@@ -519,6 +1362,7 @@ def add_new_mission():
     description = get_input("Mission description")
     
     # Difficulty
+    print(f"{Colors.OKCYAN}   Difficulty options: easy, medium, hard{Colors.ENDC}")
     difficulty_choice = get_choice(["easy", "medium", "hard"], "Difficulty")
     difficulty = ["easy", "medium", "hard"][difficulty_choice - 1]
     
@@ -640,6 +1484,10 @@ def add_new_mission():
         
         if reward_list:
             print_info(f"Rewards: {', '.join([r['title'] for r in reward_list])}")
+        
+        # Update synergy
+        if update_synergy():
+            print_success("🔗 Synergy updated")
     else:
         print_error("Failed to create mission")
 
@@ -790,6 +1638,10 @@ def mark_mission_completed():
         print_success(f"Mission completed: {mission['title']}")
         print_info(f"Moved to: {MISSIONS_COMPLETED}")
         
+        # Update synergy
+        if update_synergy():
+            print_success("🔗 Synergy updated")
+        
         # Show rewards
         on_complete = mission["archetype_stat_change"]["on_complete"]
         print(f"\n{Colors.OKGREEN}REWARDS EARNED:{Colors.ENDC}")
@@ -877,6 +1729,10 @@ def mark_mission_failed():
         print_warning(f"Mission failed: {mission['title']}")
         print_info(f"Moved to: {MISSIONS_COMPLETED}")
         
+        # Update synergy
+        if update_synergy():
+            print_success("🔗 Synergy updated")
+        
         # Show penalties
         on_failure = mission["archetype_stat_change"]["on_failure"]
         print(f"\n{Colors.FAIL}PENALTIES APPLIED:{Colors.ENDC}")
@@ -915,6 +1771,10 @@ def delete_mission():
     if confirm.lower() in ["yes", "y"]:
         mission_file.unlink()
         print_success(f"Mission deleted: {mission['title']}")
+        
+        # Update synergy
+        if update_synergy():
+            print_success("🔗 Synergy updated")
     else:
         print_info("Deletion cancelled")
 
@@ -953,9 +1813,15 @@ def modify_mission():
     if new_desc:
         mission["description"] = new_desc
     
-    new_diff = get_input("Difficulty (easy/medium/hard)", mission.get("difficulty", "medium"))
+    print(f"{Colors.OKCYAN}   Difficulty options: easy, medium, hard{Colors.ENDC}")
+    new_diff = get_input("Difficulty", mission.get("difficulty", "medium"))
     if new_diff:
         mission["difficulty"] = new_diff
+    
+    print(f"{Colors.OKCYAN}   Status options: not-started, in-progress, completed, failed{Colors.ENDC}")
+    new_status = get_input("Status", mission.get("status", "not-started"))
+    if new_status:
+        mission["status"] = new_status
     
     # Modify progress
     current_progress = mission.get("progress", {}).get("current", 0)
@@ -1136,6 +2002,10 @@ def modify_mission():
         # Save to same file
         if save_json(mission_file, mission):
             print_success(f"Mission updated: {mission['title']}")
+            
+            # Update synergy (missions stats might have changed)
+            if update_synergy():
+                print_success("🔗 Synergy updated")
         else:
             print_error("Failed to update mission")
 
@@ -1249,7 +2119,8 @@ def modify_reward():
     
     # Reward type
     current_type = reward.get("reward_type", "common")
-    print_info(f"\nCurrent type: {current_type}")
+    print(f"\n{Colors.OKCYAN}   Reward type options: street, vanguard, legendary, apex, mythic{Colors.ENDC}")
+    print_info(f"Current type: {current_type}")
     change_type = get_input("Change reward type? (yes/no)", "no")
     
     if change_type.lower() in ["yes", "y"]:
@@ -1306,9 +2177,17 @@ def modify_reward():
                 reward_file.unlink()
             print_success(f"Reward updated: {reward['title']}")
             print_info(f"File renamed to: {new_filename}")
+            
+            # Update synergy
+            if update_synergy():
+                print_success("🔗 Synergy updated")
     else:
         if save_json(reward_file, reward):
             print_success(f"Reward updated: {reward['title']}")
+            
+            # Update synergy
+            if update_synergy():
+                print_success("🔗 Synergy updated")
         else:
             print_error("Failed to update reward")
 
@@ -1358,15 +2237,13 @@ def delete_reward():
         # Delete reward file
         reward_file.unlink()
         print_success(f"Reward deleted: {reward['title']}")
+        
+        # Update synergy
+        if update_synergy():
+            print_success("🔗 Synergy updated")
     else:
         print_info("Deletion cancelled")
 
-
-def add_daily_progress():
-    """Add a daily progress entry."""
-    print_header("ADD DAILY PROGRESS ENTRY")
-    print_warning("Feature coming soon!")
-    print_info("This will create entries in cron@daily/YYYY/MM-month/ folder")
 
 def main_menu():
     """Display main menu and handle user choice."""
@@ -1374,7 +2251,10 @@ def main_menu():
         print_header("FIGHT CLUB - ALTER EGO MANAGEMENT")
         
         options = [
-            "📝 Add Daily Progress Entry (Coming Soon)",
+            "📝 Add Daily Progress Entry",
+            "👁️  View Daily Progress Entries",
+            "✏️  Modify Daily Progress Entry",
+            "🗑️  Delete Daily Progress Entry",
             "🎯 Create New Mission",
             "✅ Mark Mission as Completed",
             "❌ Mark Mission as Failed",
@@ -1391,24 +2271,30 @@ def main_menu():
         if choice == 1:
             add_daily_progress()
         elif choice == 2:
-            add_new_mission()
+            view_daily_progress()
         elif choice == 3:
-            mark_mission_completed()
+            modify_daily_progress()
         elif choice == 4:
-            mark_mission_failed()
+            delete_daily_progress()
         elif choice == 5:
-            update_mission_progress()
+            add_new_mission()
         elif choice == 6:
-            modify_mission()
+            mark_mission_completed()
         elif choice == 7:
-            delete_mission()
+            mark_mission_failed()
         elif choice == 8:
+            update_mission_progress()
+        elif choice == 9:
+            modify_mission()
+        elif choice == 10:
+            delete_mission()
+        elif choice == 11:
             print_header("ALL MISSIONS")
             list_missions(MISSIONS_NOT_COMPLETED, "not-completed")
             list_missions(MISSIONS_COMPLETED, "completed")
-        elif choice == 9:
+        elif choice == 12:
             manage_rewards()
-        elif choice == 10:
+        elif choice == 13:
             print(f"\n{Colors.FAIL}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━{Colors.ENDC}")
             print(f"{Colors.FAIL}  First rule of Fight Club:{Colors.ENDC}")
             print(f"{Colors.FAIL}    You do not talk about Fight Club.{Colors.ENDC}")
@@ -1418,6 +2304,7 @@ def main_menu():
             print_info("Stay strong! 💪")
             sys.exit(0)
         
+        input(f"\n{Colors.OKCYAN}Press Enter to continue...{Colors.ENDC}")
         input(f"\n{Colors.OKCYAN}Press Enter to continue...{Colors.ENDC}")
 
 if __name__ == "__main__":
