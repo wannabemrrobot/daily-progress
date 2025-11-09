@@ -1,0 +1,77 @@
+{
+  "fight_club": {
+    "level": 1,
+    "chapter": "THE AWAKENING",
+    "description": "The first spark \u2014 chaos, calm, and code are born.",
+    "xp_details": {
+      "current_xp": 46,
+      "xp_to_next_level": 500
+    },
+    "synergy": {
+      "mind": 12.5,
+      "body": 23.12,
+      "soul": 9.38
+    },
+    "total_synergy": 45.0,
+    "missions": {
+      "total": 5,
+      "completed": 1,
+      "failed": 0,
+      "not-started": 1,
+      "in-progress": 3
+    },
+    "rewards": {
+      "total": 1,
+      "unlocked": 0,
+      "locked": 1
+    },
+    "daily_progress": {
+      "daily_progress_streak": 1,
+      "days_checked_in": 1,
+      "habits": {
+        "no-sugar": {
+          "streak": 0,
+          "best_streak": 0,
+          "total_success": 0,
+          "total_failures": 1
+        },
+        "workout": {
+          "streak": 0,
+          "best_streak": 0,
+          "total_success": 0,
+          "total_failures": 1
+        },
+        "meditation": {
+          "streak": 0,
+          "best_streak": 0,
+          "total_success": 0,
+          "total_failures": 1
+        },
+        "reading": {
+          "streak": 0,
+          "best_streak": 0,
+          "total_success": 0,
+          "total_failures": 1
+        },
+        "coding": {
+          "streak": 0,
+          "best_streak": 0,
+          "total_success": 0,
+          "total_failures": 1
+        },
+        "no-fap": {
+          "streak": 1,
+          "best_streak": 1,
+          "total_success": 1,
+          "total_failures": 0
+        },
+        "no-junk-food": {
+          "streak": 0,
+          "best_streak": 0,
+          "total_success": 0,
+          "total_failures": 1
+        }
+      }
+    }
+  }
+}

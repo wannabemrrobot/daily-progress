@@ -3,20 +3,20 @@
     "mood-tracker": {
         "energy": "calm",
         "emotion": "neutral",
-        "notes": "Felt focused and accomplished throughout the day."
+        "notes": "Feeling sleepy"
     },
     "sleep-tracker": {
-        "hours_slept": 7,
-        "sleep_quality": "good",
-        "notes": "Woke up feeling refreshed."
+        "hours_slept": 8,
+        "sleep_quality": "fair",
+        "notes": ""
     },
     "alter-ego-stats": {
-        "no-sugar": "success",
-        "workout": "success",
-        "meditation": "success",
-        "reading": "success",
-        "coding": "success",
+        "no-sugar": "failed",
+        "workout": "failed",
+        "meditation": "failed",
+        "reading": "failed",
+        "coding": "failed",
         "no-fap": "success",
-        "no-junk-food": "success"
+        "no-junk-food": "failed"
     }
 }
