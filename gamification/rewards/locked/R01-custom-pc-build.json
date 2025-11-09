@@ -1,0 +1,9 @@
+{
+    "reward_id": "R01",
+    "title": "Custom PC Build",
+    "description": "Build a custom PC tailored to your needs and preferences.",
+    "associated_mission_ids": ["M01"],
+    "reward_type": "apex",
+    "is_locked": true,
+    "badge_icon": "assets/rewards/custom-pc-build.png"
+}
