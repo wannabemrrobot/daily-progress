@@ -1,0 +1,47 @@
+{
+    "archetype": "tyler",
+    "mission_code": "T02",
+    "title": "Quit Smoking for 75 Days",
+    "description": "Complete the challenge of not smoking for 75 consecutive days.",
+    "difficulty": "easy",
+    "status": "in-progress",
+    "progress": {
+        "current": 28,
+        "total": 75
+    },
+    "archetype_stat_change": {
+        "on_complete": {
+            "health": 15,
+            "energy": 10,
+            "abilities": {
+                "strength": 10,
+                "discipline": 75,
+                "agression": 15,
+                "confidence": 30,
+                "dominance": 10,
+                "pain tolerance": 0,
+                "honor": 30,
+                "determination": 75
+            }
+        },
+        "on_failure": {
+            "health": -30,
+            "energy": -10,
+            "abilities": {
+                "strength": -10,
+                "discipline": -75,
+                "agression": -15,
+                "confidence": -50,
+                "dominance": -20,
+                "pain tolerance": 0,
+                "honor": -30,
+                "determination": -75
+            }
+        }
+    },
+    "reward": [],
+    "mission_icon": "assets/badges/smoke-free-champion.png",
+    "due_date": "2025-11-25",
+    "start_date": "2025-10-10",
+    "completion_date": null
+}

@@ -1,0 +1,53 @@
+{
+    "archetype": "mr-robot",
+    "mission_code": "M01",
+    "title": "Company Switch",
+    "description": "Switch to a new company and adapt to the new work environment.",
+    "difficulty": "medium",
+    "status": "in-progress",
+    "progress": {
+        "current": 0,
+        "total": 1
+    },
+    "archetype_stat_change": {
+        "on_complete": {
+            "health": 0,
+            "energy": 10,
+            "abilities": {
+                "intelligence": 50,
+                "logic": 50,
+                "adaptability": 50,
+                "innovation": 50,
+                "focus": 50,
+                "systemization": 50,
+                "precision": 50,
+                "speed": 50
+            }
+        },
+        "on_failure": {
+            "health": 0,
+            "energy": -10,
+            "abilities": {
+                "intelligence": -50,
+                "logic": -50,
+                "adaptability": -50,
+                "innovation": -50,
+                "focus": -50,
+                "systemization": -50,
+                "precision": -50,
+                "speed": -50
+            }
+        }
+    },
+    "reward": [
+        {
+            "reward_type": "apex",
+            "title": "Custom PC Build",
+            "reward_id": "R01"
+        }
+    ],
+    "mission_icon": "assets/badges/company-switch.png",
+    "due_date": "2026-03-31",
+    "start_date": "2025-10-03",
+    "completion_date": null
+}

@@ -1,0 +1,47 @@
+{
+    "archetype": "kei",
+    "mission_code": "K01",
+    "title": "Meditate daily for 10 days straight",
+    "description": "Cultivate mindfulness and enhance your focus by meditating for at least 10 minutes every day for 10 consecutive days.",
+    "difficulty": "easy",
+    "status": "not-started",
+    "progress": {
+        "current": 0,
+        "total": 10
+    },
+    "archetype_stat_change": {
+        "on_complete": {
+            "health": 0,
+            "energy": 10,
+            "abilities": {
+                "self-control": 10,
+                "peace": 15,
+                "wisdom": 10,
+                "focus": 10,
+                "resilience": 10,
+                "harmony": 0,
+                "mindfulness": 0,
+                "intuition": 20
+            }
+        },
+        "on_failure": {
+            "health": 0,
+            "energy": 0,
+            "abilities": {
+                "self-control": 0,
+                "peace": -5,
+                "wisdom": 0,
+                "focus": 0,
+                "resilience": 0,
+                "harmony": 0,
+                "mindfulness": 0,
+                "intuition": 0
+            }
+        }
+    },
+    "reward": [],
+    "mission_icon": "assets/badges/meditate-daily.png",
+    "due_date": "2025-12-04",
+    "start_date": "2025-11-24",
+    "completion_date": null
+}
