@@ -1,0 +1,44 @@
+{
+    "levels": {
+        "1": {
+            "chapter": "THE AWAKENING",
+            "description": "The first spark — chaos, calm, and code are born."
+        },
+        "2": {
+            "chapter": "THE RIFT",
+            "description": "Egos fracture. Unity breaks. War within begins."
+        },
+        "3": {
+            "chapter": "THE TRIAL",
+            "description": "Each self fights to prove it deserves to exist."
+        },
+        "4": {
+            "chapter": "THE FORGE",
+            "description": "Pain reshapes the fragments into tempered strength."
+        },
+        "5": {
+            "chapter": "THE ECHO",
+            "description": "Voices align — conflict becomes conversation."
+        }, 
+        "6": {
+            "chapter": "THE CONVERGENCE",
+            "description": "Boundaries blur; purpose starts to merge."
+        },
+        "7": {
+            "chapter": "THE CODE",
+            "description": "Logic binds chaos — order emerges from fire."
+        },
+        "8": {
+            "chapter": "THE BALANCE",
+            "description": "Silence, flame, and reason stand in perfect tension."
+        },
+        "9": {
+            "chapter": "THE SHADOW",
+            "description": "He faces the darkness that made him whole."
+        },
+        "10": {
+            "chapter": "THE BECOMING",
+            "description": "No divisions. No names. Only the self, complete."
+        }
+    }
+}

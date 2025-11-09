@@ -1,0 +1,39 @@
+[
+  {
+    "history_index": 1,
+    "alter-ego": "tyler",
+    "mission_associated": "T03-quit-smoking-25",
+    "state": "completed",
+    "delta_changed": {
+      "xp": 10,
+      "health": 5,
+      "energy": 2,
+      "abilities": {
+        "discipline": 25,
+        "agression": 5,
+        "confidence": 25,
+        "dominance": 5,
+        "honor": 5,
+        "determination": 25
+      }
+    },
+    "state_after_delta_applied": {
+      "level": 1,
+      "title": "Awakened",
+      "xp": 25,
+      "health": 5.5,
+      "energy": 4,
+      "abilities": {
+        "strength": 15,
+        "discipline": 35,
+        "agression": 10,
+        "confidence": 35,
+        "dominance": 15,
+        "pain tolerance": 10,
+        "honor": 20,
+        "determination": 45
+      }
+    },
+    "date": "2025-11-10"
+  }
+]

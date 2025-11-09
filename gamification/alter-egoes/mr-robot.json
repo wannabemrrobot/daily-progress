@@ -5,6 +5,11 @@
     "tag_line": "The Architect",
     "creed_text": "Control/ is an/ illusion",
     "level": 1,
+    "title": "Awakened",
+    "status": {
+        "current_status": "active",
+        "note": ""
+    },
     "xp_details": {
         "current_xp": 15,
         "xp_to_next_level": 100
