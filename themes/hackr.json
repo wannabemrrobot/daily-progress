@@ -5,6 +5,7 @@
     "--accent-primary-rgb": "159, 239, 0",
 
     "--text-primary": "#fff",
+    "--text-btn": "#141d2b",
     "--text-secondary": "#a4b1cd",
     "--home-heading": "#fff",
     "--heading-primary": "#fff",
