@@ -1,0 +1,22 @@
+{
+    "date": "2025-11-18",
+    "mood-tracker": {
+        "energy": "Calm",
+        "emotion": "Neutral",
+        "notes": ""
+    },
+    "sleep-tracker": {
+        "hours_slept": 7,
+        "sleep_quality": "good",
+        "notes": ""
+    },
+    "alter-ego-stats": {
+        "no-sugar": "failed",
+        "workout": "failed",
+        "meditation": "failed",
+        "reading": "failed",
+        "coding": "failed",
+        "no-fap": "failed",
+        "no-junk-food": "failed"
+    }
+}
