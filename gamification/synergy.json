@@ -26,50 +26,50 @@
       "locked": 1
     },
     "daily_progress": {
-      "daily_progress_streak": 1,
-      "days_checked_in": 1,
+      "daily_progress_streak": 2,
+      "days_checked_in": 2,
       "habits": {
         "no-sugar": {
           "streak": 0,
           "best_streak": 0,
           "total_success": 0,
-          "total_failures": 1
+          "total_failures": 2
         },
         "workout": {
           "streak": 0,
           "best_streak": 0,
           "total_success": 0,
-          "total_failures": 1
+          "total_failures": 2
         },
         "meditation": {
           "streak": 0,
           "best_streak": 0,
           "total_success": 0,
-          "total_failures": 1
+          "total_failures": 2
         },
         "reading": {
           "streak": 0,
           "best_streak": 0,
           "total_success": 0,
-          "total_failures": 1
+          "total_failures": 2
         },
         "coding": {
           "streak": 0,
           "best_streak": 0,
           "total_success": 0,
-          "total_failures": 1
+          "total_failures": 2
         },
         "no-fap": {
-          "streak": 1,
+          "streak": 0,
           "best_streak": 1,
           "total_success": 1,
-          "total_failures": 0
+          "total_failures": 1
         },
         "no-junk-food": {
           "streak": 0,
           "best_streak": 0,
           "total_success": 0,
-          "total_failures": 1
+          "total_failures": 2
         }
       }
     }
