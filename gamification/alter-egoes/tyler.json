@@ -11,25 +11,25 @@
     "note": ""
   },
   "xp_details": {
-    "current_xp": 27,
+    "current_xp": -8,
     "xp_to_next_level": 100
   },
   "health_details": {
-    "current_health": 5.5,
+    "current_health": -44.5,
     "max_health": 100
   },
   "energy_details": {
-    "current_energy": 4,
+    "current_energy": -16,
     "max_energy": 100
   },
   "abilities": {
-    "strength": 15,
-    "discipline": 35,
-    "agression": 10,
-    "confidence": 35,
-    "dominance": 15,
+    "strength": 0,
+    "discipline": -90,
+    "agression": -20,
+    "confidence": -45,
+    "dominance": -15,
     "pain tolerance": 10,
-    "honor": 20,
-    "determination": 45
+    "honor": -40,
+    "determination": -80
   }
 }

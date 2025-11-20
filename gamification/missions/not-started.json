@@ -48,8 +48,55 @@
             "due_date": "2025-12-04",
             "start_date": "2025-11-24",
             "completion_date": null
+        },
+        {
+            "archetype": "tyler",
+            "mission_code": "T04",
+            "title": "Quit Smoking 50 days",
+            "description": "Quit Smoking 50 days",
+            "difficulty": "easy",
+            "status": "not-started",
+            "progress": {
+                "current": 0,
+                "total": 50
+            },
+            "archetype_stat_change": {
+                "on_complete": {
+                    "health": 15,
+                    "energy": 15,
+                    "abilities": {
+                        "strength": 10,
+                        "discipline": 50,
+                        "agression": 10,
+                        "confidence": 50,
+                        "dominance": 10,
+                        "pain tolerance": 0,
+                        "honor": 50,
+                        "determination": 50
+                    }
+                },
+                "on_failure": {
+                    "health": -20,
+                    "energy": -20,
+                    "abilities": {
+                        "strength": -10,
+                        "discipline": -50,
+                        "agression": -10,
+                        "confidence": -60,
+                        "dominance": -20,
+                        "pain tolerance": 0,
+                        "honor": -60,
+                        "determination": -60
+                    }
+                }
+            },
+            "reward": [],
+            "mission_icon": "assets/badges/default.png",
+            "due_date": "2026-01-09",
+            "start_date": "2025-11-21",
+            "completion_date": null
         }
     ],
-    "count": 1,
-    "last_updated": "2025-11-21T02:13:13.077292"
+    "count": 2,
+    "last_updated": "2025-11-21T02:38:12.106072"
 }
