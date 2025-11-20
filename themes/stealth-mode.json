@@ -1,0 +1,28 @@
+{
+    "$theme": "Stealth Mode",
+
+    "--accent-primary": "#9ca3af",
+    "--accent-primary-rgb": "156, 163, 175",
+
+    "--text-primary": "#e5e7eb",
+    "--text-btn": "#000000",
+    "--text-secondary": "#9ca3af",
+    "--home-heading": "#d1d5db",
+    "--heading-primary": "#e5e7eb",
+    "--heading-secondary": "#888c94",
+    "--animation-text": "#b8bcc4",
+    "--badge-text": "#000000",
+    "--tags": "#9ca3af",
+    "--tag-text": "#b8bcc4",
+    "--tagcount-bg": "#1a1a1a",
+    "--tagbg-hover": "#9ca3af1a",
+    "--tagbg-opaq": "#0f0f0f",
+
+    "--background": "#000000",
+    "--header-bg": "#0a0a0a",
+    "--subheader-bg": "#050505",
+    "--border": "#2a2a2a",
+    "--icons-social": "#9ca3af",
+    "--drop-shadow": "#00000080",
+    "--orb-hue": 220
+}

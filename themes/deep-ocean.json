@@ -1,0 +1,28 @@
+{
+    "$theme": "Deep Ocean",
+
+    "--accent-primary": "#14b8a6",
+    "--accent-primary-rgb": "20, 184, 166",
+
+    "--text-primary": "#ccfbf1",
+    "--text-btn": "#0a1a1a",
+    "--text-secondary": "#99d9d0",
+    "--home-heading": "#99f6e4",
+    "--heading-primary": "#ccfbf1",
+    "--heading-secondary": "#88c4bb",
+    "--animation-text": "#a8e8dd",
+    "--badge-text": "#0a1a1a",
+    "--tags": "#99d9d0",
+    "--tag-text": "#a8e8dd",
+    "--tagcount-bg": "#15292a",
+    "--tagbg-hover": "#14b8a61a",
+    "--tagbg-opaq": "#0f1f1f",
+
+    "--background": "#050f0f",
+    "--header-bg": "#0a1a1a",
+    "--subheader-bg": "#081515",
+    "--border": "#1f3d3d",
+    "--icons-social": "#99d9d0",
+    "--drop-shadow": "#00000080",
+    "--orb-hue": 175
+}
