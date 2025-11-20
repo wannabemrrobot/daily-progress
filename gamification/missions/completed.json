@@ -48,8 +48,55 @@
             "due_date": "2025-11-05",
             "start_date": "2025-10-11",
             "completion_date": "2025-11-10"
+        },
+        {
+            "archetype": "mr-robot",
+            "mission_code": "M02",
+            "title": "Fight Club Dashboard",
+            "description": "Create a Fight Club Dashboard to track the progress",
+            "difficulty": "easy",
+            "status": "completed",
+            "progress": {
+                "current": 25,
+                "total": 25
+            },
+            "archetype_stat_change": {
+                "on_complete": {
+                    "health": 5,
+                    "energy": 5,
+                    "abilities": {
+                        "intelligence": 0,
+                        "logic": 0,
+                        "adaptability": 5,
+                        "innovation": 20,
+                        "focus": 0,
+                        "systemization": 10,
+                        "precision": 0,
+                        "speed": 0
+                    }
+                },
+                "on_failure": {
+                    "health": -5,
+                    "energy": -5,
+                    "abilities": {
+                        "intelligence": 0,
+                        "logic": 0,
+                        "adaptability": -10,
+                        "innovation": -20,
+                        "focus": 0,
+                        "systemization": -20,
+                        "precision": 0,
+                        "speed": 0
+                    }
+                }
+            },
+            "reward": [],
+            "mission_icon": "assets/badges/default.png",
+            "due_date": "",
+            "start_date": "2025-11-01",
+            "completion_date": "2025-11-21"
         }
     ],
-    "count": 1,
-    "last_updated": "2025-11-21T02:38:12.106072"
+    "count": 2,
+    "last_updated": "2025-11-21T02:55:55.981212"
 }
