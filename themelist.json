@@ -14,5 +14,29 @@
     {
         "theme": "Royal Luxury",
         "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/themes/luxury.json"
+    },
+    {
+        "theme": "Soft Cream",
+        "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/themes/soft-cream.json"
+    },
+    {
+        "theme": "Arctic Blue",
+        "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/themes/arctic-blue.json"
+    },
+    {
+        "theme": "Mint Fresh",
+        "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/themes/mint-fresh.json"
+    },
+    {
+        "theme": "Lavender Dream",
+        "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/themes/lavender-dream.json"
+    },
+    {
+        "theme": "Peach Blossom",
+        "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/themes/peach-blossom.json"
+    },
+    {
+        "theme": "Sky Canvas",
+        "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/themes/sky-canvas.json"
     }
 ]

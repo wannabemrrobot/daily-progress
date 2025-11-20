@@ -1,0 +1,28 @@
+{
+    "$theme": "Lavender Dream",
+
+    "--accent-primary": "#8b5fbf",
+    "--accent-primary-rgb": "139, 95, 191",
+
+    "--text-primary": "#2d1f3a",
+    "--text-btn": "#ffffff",
+    "--text-secondary": "#5a4569",
+    "--home-heading": "#3d2f4a",
+    "--heading-primary": "#2d1f3a",
+    "--heading-secondary": "#7a5f8f",
+    "--animation-text": "#8a6f9f",
+    "--badge-text": "#ffffff",
+    "--tags": "#7a5f8f",
+    "--tag-text": "#8a6f9f",
+    "--tagcount-bg": "#f2ebf7",
+    "--tagbg-hover": "#8b5fbf1a",
+    "--tagbg-opaq": "#f9f5fb",
+
+    "--background": "#faf7fc",
+    "--header-bg": "#f3eef8",
+    "--subheader-bg": "#faf7fc",
+    "--border": "#d9cbea",
+    "--icons-social": "#7a5f8f",
+    "--drop-shadow": "#2d1f3a40",
+    "--orb-hue": 280
+}

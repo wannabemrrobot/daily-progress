@@ -1,0 +1,28 @@
+{
+    "$theme": "Sky Canvas",
+
+    "--accent-primary": "#4a90e2",
+    "--accent-primary-rgb": "74, 144, 226",
+
+    "--text-primary": "#2a3f52",
+    "--text-btn": "#ffffff",
+    "--text-secondary": "#576b7f",
+    "--home-heading": "#3a4f62",
+    "--heading-primary": "#2a3f52",
+    "--heading-secondary": "#6a8199",
+    "--animation-text": "#7a91a9",
+    "--badge-text": "#ffffff",
+    "--tags": "#6a8199",
+    "--tag-text": "#7a91a9",
+    "--tagcount-bg": "#e8f2fb",
+    "--tagbg-hover": "#4a90e21a",
+    "--tagbg-opaq": "#f5f9fc",
+
+    "--background": "#f7fbfd",
+    "--header-bg": "#eff6fb",
+    "--subheader-bg": "#f7fbfd",
+    "--border": "#d0e1ed",
+    "--icons-social": "#6a8199",
+    "--drop-shadow": "#2a3f5240",
+    "--orb-hue": 210
+}
