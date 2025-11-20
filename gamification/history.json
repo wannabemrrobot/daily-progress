@@ -112,5 +112,71 @@
       }
     },
     "date": "2025-11-21"
+  },
+  {
+    "history_index": 4,
+    "alter-ego": "mr-robot",
+    "mission_associated": "M02-fight-club-dashboard",
+    "state": "completed",
+    "delta_changed": {
+      "xp": 0,
+      "health": 5,
+      "energy": 5,
+      "abilities": {
+        "adaptability": 5,
+        "innovation": 20,
+        "systemization": 10
+      }
+    },
+    "state_after_delta_applied": {
+      "level": 1,
+      "title": "Awakened",
+      "xp": 17,
+      "health": 15,
+      "energy": 15,
+      "abilities": {
+        "intelligence": 15,
+        "logic": 10,
+        "adaptability": 25,
+        "innovation": 30,
+        "focus": 15,
+        "systemization": 20,
+        "precision": 5,
+        "speed": 15
+      }
+    },
+    "date": "2025-11-21",
+    "unlocked_rewards": []
+  },
+  {
+    "history_index": 5,
+    "alter-ego": "tyler",
+    "mission_associated": "T04-quit-smoking-50-days",
+    "state": "in-progress",
+    "event_type": "mission_progress_update",
+    "mission_progress": {
+      "current": 0,
+      "total": 50
+    },
+    "delta_changed": {},
+    "state_after_delta_applied": {
+      "level": 1,
+      "title": "Awakened",
+      "xp": -8,
+      "health": -44.5,
+      "energy": -16,
+      "abilities": {
+        "strength": 0,
+        "discipline": -90,
+        "agression": -20,
+        "confidence": -45,
+        "dominance": -15,
+        "pain tolerance": 10,
+        "honor": -40,
+        "determination": -80
+      }
+    },
+    "date": "2025-11-21",
+    "unlocked_rewards": []
   }
 ]

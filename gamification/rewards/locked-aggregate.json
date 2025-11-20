@@ -10,8 +10,17 @@
             "reward_type": "apex",
             "is_locked": true,
             "badge_icon": "assets/rewards/custom-pc-build.png"
+        },
+        {
+            "reward_id": "R02",
+            "title": "Portable Monitor for RPI",
+            "description": "Monitor for Alter Ego Dashboard",
+            "associated_mission_ids": [],
+            "reward_type": "street",
+            "is_locked": true,
+            "badge_icon": "assets/rewards/default.png"
         }
     ],
-    "count": 1,
-    "last_updated": "2025-11-21T02:38:12.107499"
+    "count": 2,
+    "last_updated": "2025-11-21T02:55:55.983359"
 }

@@ -15,20 +15,20 @@
     "xp_to_next_level": 100
   },
   "health_details": {
-    "current_health": 10,
+    "current_health": 15,
     "max_health": 100
   },
   "energy_details": {
-    "current_energy": 10,
+    "current_energy": 15,
     "max_energy": 100
   },
   "abilities": {
     "intelligence": 15,
     "logic": 10,
-    "adaptability": 20,
-    "innovation": 10,
+    "adaptability": 25,
+    "innovation": 30,
     "focus": 15,
-    "systemization": 10,
+    "systemization": 20,
     "precision": 5,
     "speed": 15
   }
