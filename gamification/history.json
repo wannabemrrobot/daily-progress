@@ -178,5 +178,110 @@
     },
     "date": "2025-11-21",
     "unlocked_rewards": []
+  },
+  {
+    "history_index": 6,
+    "alter-ego": "kei",
+    "mission_associated": "K02-semen-retention",
+    "state": "in-progress",
+    "event_type": "mission_started",
+    "status_change": {
+      "from": "not-started",
+      "to": "in-progress"
+    },
+    "mission_progress": {
+      "current": 0,
+      "total": 50
+    },
+    "delta_changed": {},
+    "state_after_delta_applied": {
+      "level": 1,
+      "title": "Awakened",
+      "xp": 2,
+      "health": 10,
+      "energy": 5,
+      "abilities": {
+        "self-control": 10,
+        "peace": 15,
+        "wisdom": 10,
+        "focus": 10,
+        "resilience": 10,
+        "harmony": 0,
+        "mindfulness": 0,
+        "intuition": 20
+      }
+    },
+    "date": "2025-11-21",
+    "unlocked_rewards": []
+  },
+  {
+    "history_index": 7,
+    "alter-ego": "mr-robot",
+    "mission_associated": "M03-leetcode-grind-100",
+    "state": "in-progress",
+    "event_type": "mission_started",
+    "status_change": {
+      "from": "not-started",
+      "to": "in-progress"
+    },
+    "mission_progress": {
+      "current": 0,
+      "total": 40
+    },
+    "delta_changed": {},
+    "state_after_delta_applied": {
+      "level": 1,
+      "title": "Awakened",
+      "xp": 17,
+      "health": 15,
+      "energy": 15,
+      "abilities": {
+        "intelligence": 15,
+        "logic": 10,
+        "adaptability": 25,
+        "innovation": 30,
+        "focus": 15,
+        "systemization": 20,
+        "precision": 5,
+        "speed": 15
+      }
+    },
+    "date": "2025-11-21",
+    "unlocked_rewards": []
+  },
+  {
+    "history_index": 8,
+    "alter-ego": "tyler",
+    "mission_associated": "T05-gym-streak-30",
+    "state": "in-progress",
+    "event_type": "mission_started",
+    "status_change": {
+      "from": "not-started",
+      "to": "in-progress"
+    },
+    "mission_progress": {
+      "current": 0,
+      "total": 30
+    },
+    "delta_changed": {},
+    "state_after_delta_applied": {
+      "level": 1,
+      "title": "Awakened",
+      "xp": -8,
+      "health": -44.5,
+      "energy": -16,
+      "abilities": {
+        "strength": 0,
+        "discipline": -90,
+        "agression": -20,
+        "confidence": -45,
+        "dominance": -15,
+        "pain tolerance": 10,
+        "honor": -40,
+        "determination": -80
+      }
+    },
+    "date": "2025-11-21",
+    "unlocked_rewards": []
   }
 ]
