@@ -1,0 +1,16 @@
+{
+  "reward_id": "R03",
+  "title": "Open Source Hero",
+  "description": "Contributed to 3 open source projects - made your mark on the community",
+  "reward_icon": "assets/rewards/oss-hero.png",
+  "reward_type": "apex",
+  "associated_mission": "M04",
+  "unlock_date": "2025-11-19",
+  "status": "unlocked",
+  "rewards": {
+    "xp": 65,
+    "special_ability": "Collaboration Boost: +12% technical-mastery and problem-solving for 60 days",
+    "badge": "Community Champion",
+    "bonus": "Unlock GitHub stats dashboard"
+  }
+}

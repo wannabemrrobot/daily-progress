@@ -1,0 +1,40 @@
+{
+  "archetype": "tyler",
+  "mission_code": "T07",
+  "title": "Cold Showers 30 Days",
+  "description": "Take cold showers every morning for 30 consecutive days",
+  "difficulty": "medium",
+  "status": "not-started",
+  "progress": {
+    "current": 0,
+    "total": 30
+  },
+  "archetype_stat_change": {
+    "on_complete": {
+      "xp": 20,
+      "health": 12,
+      "energy": 15,
+      "abilities": {
+        "discipline": 40,
+        "pain tolerance": 35,
+        "determination": 30,
+        "confidence": 20
+      }
+    },
+    "on_failure": {
+      "xp": -15,
+      "health": -8,
+      "energy": -10,
+      "abilities": {
+        "discipline": -30,
+        "pain tolerance": -25,
+        "determination": -20
+      }
+    }
+  },
+  "reward": [],
+  "mission_icon": "assets/badges/ice-warrior.png",
+  "due_date": "2026-01-15",
+  "start_date": null,
+  "completion_date": null
+}

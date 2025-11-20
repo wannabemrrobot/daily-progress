@@ -1,0 +1,42 @@
+{
+  "archetype": "tyler",
+  "mission_code": "T05",
+  "title": "Gym Streak 30 Days",
+  "description": "Go to the gym for 30 consecutive days without missing a single day",
+  "difficulty": "medium",
+  "status": "completed",
+  "progress": {
+    "current": 30,
+    "total": 30
+  },
+  "archetype_stat_change": {
+    "on_complete": {
+      "xp": 25,
+      "health": 15,
+      "energy": 8,
+      "abilities": {
+        "strength": 40,
+        "discipline": 35,
+        "pain tolerance": 30,
+        "determination": 40,
+        "confidence": 20
+      }
+    },
+    "on_failure": {
+      "xp": -25,
+      "health": -20,
+      "energy": -10,
+      "abilities": {
+        "strength": -30,
+        "discipline": -40,
+        "confidence": -25,
+        "determination": -35
+      }
+    }
+  },
+  "reward": ["R02"],
+  "mission_icon": "assets/badges/gym-warrior.png",
+  "due_date": "2025-11-15",
+  "start_date": "2025-10-15",
+  "completion_date": "2025-11-15"
+}

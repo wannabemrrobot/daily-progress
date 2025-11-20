@@ -1,0 +1,16 @@
+{
+  "reward_id": "R06",
+  "title": "The Creator",
+  "description": "Built and launched a complete side project - became a true maker",
+  "reward_icon": "assets/rewards/creator.png",
+  "reward_type": "apex",
+  "associated_mission": "M07",
+  "unlock_date": null,
+  "status": "locked",
+  "rewards": {
+    "xp": 100,
+    "special_ability": "Builder's Flow: +25% technical-mastery and problem-solving permanently",
+    "badge": "Legendary Creator",
+    "bonus": "Unlock secret project showcase feature"
+  }
+}

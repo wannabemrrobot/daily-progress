@@ -1,0 +1,15 @@
+{
+  "reward_id": "R12",
+  "title": "The Resilient",
+  "description": "Failed 3 missions but kept going - true resilience",
+  "reward_icon": "assets/rewards/resilient.png",
+  "reward_type": "achievement",
+  "associated_mission": null,
+  "unlock_date": "2025-11-19",
+  "status": "unlocked",
+  "rewards": {
+    "xp": 20,
+    "special_ability": "Phoenix Rising: Reduced penalties on next failure by 50%",
+    "badge": "Never Give Up"
+  }
+}

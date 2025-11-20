@@ -1,0 +1,41 @@
+{
+  "archetype": "tyler",
+  "mission_code": "T06",
+  "title": "Reading Habit 1 Book/Week",
+  "description": "Read 1 book per week for 8 consecutive weeks",
+  "difficulty": "medium",
+  "status": "failed",
+  "progress": {
+    "current": 5,
+    "total": 8
+  },
+  "archetype_stat_change": {
+    "on_complete": {
+      "xp": 22,
+      "health": 8,
+      "energy": 10,
+      "abilities": {
+        "discipline": 40,
+        "confidence": 25,
+        "honor": 30,
+        "determination": 35,
+        "wisdom": 45
+      }
+    },
+    "on_failure": {
+      "xp": -15,
+      "health": -5,
+      "energy": -8,
+      "abilities": {
+        "discipline": -30,
+        "determination": -25,
+        "honor": -20
+      }
+    }
+  },
+  "reward": [],
+  "mission_icon": "assets/badges/bibliophile.png",
+  "due_date": "2025-11-18",
+  "start_date": "2025-09-20",
+  "completion_date": "2025-11-18"
+}

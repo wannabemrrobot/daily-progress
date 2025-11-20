@@ -1,0 +1,16 @@
+{
+  "reward_id": "R09",
+  "title": "The Meditator",
+  "description": "Completed 10-day meditation streak - found inner peace",
+  "reward_icon": "assets/rewards/meditator.png",
+  "reward_type": "milestone",
+  "associated_mission": "K01",
+  "unlock_date": "2025-11-12",
+  "status": "unlocked",
+  "rewards": {
+    "xp": 30,
+    "energy": 15,
+    "special_ability": "Inner Peace: +8% mindfulness and resilience for 30 days",
+    "badge": "Zen Initiate"
+  }
+}

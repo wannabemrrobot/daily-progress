@@ -1,0 +1,43 @@
+{
+  "archetype": "kei",
+  "mission_code": "K06",
+  "title": "Digital Detox 30 Days",
+  "description": "Complete 30 days without social media, streaming, or gaming",
+  "difficulty": "hard",
+  "status": "not-started",
+  "progress": {
+    "current": 0,
+    "total": 30
+  },
+  "archetype_stat_change": {
+    "on_complete": {
+      "xp": 30,
+      "health": 15,
+      "energy": 20,
+      "abilities": {
+        "intuition": 40,
+        "self-control": 50,
+        "peace": 45,
+        "mindfulness": 55,
+        "resilience": 40,
+        "wisdom": 35
+      }
+    },
+    "on_failure": {
+      "xp": -25,
+      "health": -12,
+      "energy": -15,
+      "abilities": {
+        "self-control": -45,
+        "peace": -40,
+        "mindfulness": -50,
+        "resilience": -35
+      }
+    }
+  },
+  "reward": ["R05"],
+  "mission_icon": "assets/badges/digital-monk.png",
+  "due_date": "2026-01-20",
+  "start_date": null,
+  "completion_date": null
+}
