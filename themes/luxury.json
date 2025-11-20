@@ -1,0 +1,28 @@
+{
+    "$theme": "Royal Luxury",
+
+    "--accent-primary": "#d4af37",
+    "--accent-primary-rgb": "212, 175, 55",
+
+    "--text-primary": "#f5f5f0",
+    "--text-btn": "#1a1410",
+    "--text-secondary": "#c9b896",
+    "--home-heading": "#e8dcc4",
+    "--heading-primary": "#f5ead6",
+    "--heading-secondary": "#b89968",
+    "--animation-text": "#d4c5a9",
+    "--badge-text": "#1a1410",
+    "--tags": "#c9b896",
+    "--tag-text": "#d4c5a9",
+    "--tagcount-bg": "#2d2520",
+    "--tagbg-hover": "#d4af371a",
+    "--tagbg-opaq": "#1f1815",
+
+    "--background": "#0f0c09",
+    "--header-bg": "#1a1410",
+    "--subheader-bg": "#15110d",
+    "--border": "#3d3329",
+    "--icons-social": "#c9b896",
+    "--drop-shadow": "#00000080",
+    "--orb-hue": 45
+}
