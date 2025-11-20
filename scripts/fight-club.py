@@ -36,6 +36,7 @@ REPO_ROOT = Path(__file__).parent.parent
 MISSIONS_DIR = REPO_ROOT / "gamification" / "missions"
 MISSIONS_NOT_COMPLETED = MISSIONS_DIR / "not-completed"
 MISSIONS_COMPLETED = MISSIONS_DIR / "completed"
+MISSIONS_FAILED = MISSIONS_DIR / "failed"
 ALTER_EGOS_DIR = REPO_ROOT / "gamification" / "alter-egoes"
 DAILY_PROGRESS_DIR = REPO_ROOT / "gamification" / "daily-progress"
 REWARDS_DIR = REPO_ROOT / "gamification" / "rewards"
@@ -59,6 +60,7 @@ REWARDS_UNLOCKED_FILE = REWARDS_DIR / "unlocked-aggregate.json"
 # Ensure directories exist
 MISSIONS_NOT_COMPLETED.mkdir(parents=True, exist_ok=True)
 MISSIONS_COMPLETED.mkdir(parents=True, exist_ok=True)
+MISSIONS_FAILED.mkdir(parents=True, exist_ok=True)
 REWARDS_LOCKED.mkdir(parents=True, exist_ok=True)
 REWARDS_UNLOCKED.mkdir(parents=True, exist_ok=True)
 CONFIGS_DIR.mkdir(parents=True, exist_ok=True)
@@ -565,7 +567,15 @@ def generate_missions_aggregates() -> bool:
             mission_data = load_json(mission_file)
             if mission_data:
                 status = mission_data.get('status', 'completed')
-                if status in ['completed', 'failed']:
+                if status == 'completed':
+                    missions_by_status[status].append(mission_data)
+        
+        # Load missions from failed folder
+        for mission_file in MISSIONS_FAILED.glob("*.json"):
+            mission_data = load_json(mission_file)
+            if mission_data:
+                status = mission_data.get('status', 'failed')
+                if status == 'failed':
                     missions_by_status[status].append(mission_data)
         
         # Sort missions by due date (if available) and mission code
@@ -1916,13 +1926,13 @@ def mark_mission_failed():
             record_history(history_entry)
             print_success(f"📝 History recorded (entry #{history_entry['history_index']})")
     
-    # Move to completed folder (with failed status)
-    new_file = MISSIONS_COMPLETED / mission_file.name
+    # Move to failed folder
+    new_file = MISSIONS_FAILED / mission_file.name
     if save_json(new_file, mission):
         mission_file.unlink()  # Delete from not-completed
         
         print_warning(f"Mission failed: {mission['title']}")
-        print_info(f"Moved to: {MISSIONS_COMPLETED}")
+        print_info(f"Moved to: {MISSIONS_FAILED}")
         
         # Update synergy
         if update_synergy():

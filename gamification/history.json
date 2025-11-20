@@ -1,0 +1,116 @@
+[
+  {
+    "history_index": 1,
+    "alter-ego": "tyler",
+    "mission_associated": "T03-quit-smoking-25",
+    "state": "completed",
+    "delta_changed": {
+      "xp": 10,
+      "health": 5,
+      "energy": 2,
+      "abilities": {
+        "discipline": 25,
+        "agression": 5,
+        "confidence": 25,
+        "dominance": 5,
+        "honor": 5,
+        "determination": 25
+      }
+    },
+    "state_after_delta_applied": {
+      "level": 1,
+      "title": "Awakened",
+      "xp": 25,
+      "health": 5.5,
+      "energy": 4,
+      "abilities": {
+        "strength": 15,
+        "discipline": 35,
+        "agression": 10,
+        "confidence": 35,
+        "dominance": 15,
+        "pain tolerance": 10,
+        "honor": 20,
+        "determination": 45
+      }
+    },
+    "date": "2025-11-10",
+    "unlocked_rewards": []
+  },
+  {
+    "history_index": 2,
+    "alter-ego": "tyler",
+    "mission_associated": "T01-quit-smoking-50",
+    "state": "failed",
+    "delta_changed": {
+      "xp": -15,
+      "health": -20,
+      "energy": -10,
+      "abilities": {
+        "strength": -5,
+        "discipline": -50,
+        "agression": -15,
+        "confidence": -30,
+        "dominance": -10,
+        "honor": -30,
+        "determination": -50
+      }
+    },
+    "state_after_delta_applied": {
+      "level": 1,
+      "title": "Awakened",
+      "xp": 12,
+      "health": -14.5,
+      "energy": -6,
+      "abilities": {
+        "strength": 10,
+        "discipline": -15,
+        "agression": -5,
+        "confidence": 5,
+        "dominance": 5,
+        "pain tolerance": 10,
+        "honor": -10,
+        "determination": -5
+      }
+    },
+    "date": "2025-11-21"
+  },
+  {
+    "history_index": 3,
+    "alter-ego": "tyler",
+    "mission_associated": "T02-quit-smoking-75",
+    "state": "failed",
+    "delta_changed": {
+      "xp": -20,
+      "health": -30,
+      "energy": -10,
+      "abilities": {
+        "strength": -10,
+        "discipline": -75,
+        "agression": -15,
+        "confidence": -50,
+        "dominance": -20,
+        "honor": -30,
+        "determination": -75
+      }
+    },
+    "state_after_delta_applied": {
+      "level": 1,
+      "title": "Awakened",
+      "xp": -8,
+      "health": -44.5,
+      "energy": -16,
+      "abilities": {
+        "strength": 0,
+        "discipline": -90,
+        "agression": -20,
+        "confidence": -45,
+        "dominance": -15,
+        "pain tolerance": 10,
+        "honor": -40,
+        "determination": -80
+      }
+    },
+    "date": "2025-11-21"
+  }
+]
