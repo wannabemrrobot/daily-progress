@@ -1625,7 +1625,9 @@ def mark_mission_completed():
             }
             
             if unlocked_rewards:
-                history_entry['reward_unlocked'] = unlocked_rewards
+                history_entry['unlocked_rewards'] = unlocked_rewards
+            else:
+                history_entry['unlocked_rewards'] = []
             
             record_history(history_entry)
             print_success(f"📝 History recorded (entry #{history_entry['history_index']})")
@@ -1964,6 +1966,68 @@ def modify_mission():
         old_status = mission.get("status", "not-started")
         mission["status"] = new_status
         
+        # Record history entry for status change to in-progress
+        if old_status == "not-started" and new_status == "in-progress":
+            ego_data = load_alter_ego(mission['archetype'])
+            if ego_data:
+                history_entry = {
+                    'history_index': get_next_history_index(),
+                    'alter-ego': mission['archetype'],
+                    'mission_associated': mission_file.stem,
+                    'state': 'in-progress',
+                    'event_type': 'mission_started',
+                    'status_change': {
+                        'from': old_status,
+                        'to': new_status
+                    },
+                    'mission_progress': {
+                        'current': mission['progress']['current'],
+                        'total': mission['progress']['total']
+                    },
+                    'delta_changed': {},
+                    'state_after_delta_applied': {
+                        'level': ego_data['level'],
+                        'title': ego_data['title'],
+                        'xp': ego_data['xp_details']['current_xp'],
+                        'health': ego_data['health_details']['current_health'],
+                        'energy': ego_data['energy_details']['current_energy'],
+                        'abilities': ego_data['abilities'].copy()
+                    },
+                    'date': datetime.date.today().isoformat(),
+                    'unlocked_rewards': []
+                }
+                record_history(history_entry)
+                print_success(f"📝 History recorded: Mission started (entry #{history_entry['history_index']})")
+        
+        # Record history entry for progress updates on in-progress missions
+        elif old_status == "in-progress" and new_status == "in-progress":
+            ego_data = load_alter_ego(mission['archetype'])
+            if ego_data:
+                history_entry = {
+                    'history_index': get_next_history_index(),
+                    'alter-ego': mission['archetype'],
+                    'mission_associated': mission_file.stem,
+                    'state': 'in-progress',
+                    'event_type': 'mission_progress_update',
+                    'mission_progress': {
+                        'current': mission['progress']['current'],
+                        'total': mission['progress']['total']
+                    },
+                    'delta_changed': {},
+                    'state_after_delta_applied': {
+                        'level': ego_data['level'],
+                        'title': ego_data['title'],
+                        'xp': ego_data['xp_details']['current_xp'],
+                        'health': ego_data['health_details']['current_health'],
+                        'energy': ego_data['energy_details']['current_energy'],
+                        'abilities': ego_data['abilities'].copy()
+                    },
+                    'date': datetime.date.today().isoformat(),
+                    'unlocked_rewards': []
+                }
+                record_history(history_entry)
+                print_success(f"📝 History recorded: Progress updated (entry #{history_entry['history_index']})")
+        
         # If status changed to completed/failed, set completion date
         if new_status in ["completed", "failed"] and not mission.get("completion_date"):
             mission["completion_date"] = datetime.date.today().isoformat()
@@ -2030,9 +2094,11 @@ def update_mission_progress():
     if new_progress:
         new_val = int(new_progress)
         if 0 <= new_val <= total:
+            old_progress = mission["progress"]["current"]
             mission["progress"]["current"] = new_val
             
             # Update status based on progress
+            old_status = mission.get("status", "not-started")
             if new_val == 0:
                 mission["status"] = "not-started"
             elif new_val < total:
@@ -2040,6 +2106,41 @@ def update_mission_progress():
             elif new_val == total:
                 print_warning("Progress complete! Use 'Mark Mission as Completed' to officially complete.")
                 mission["status"] = "in-progress"
+            
+            # Record history entry for progress update
+            if old_progress != new_val:
+                ego_data = load_alter_ego(mission['archetype'])
+                if ego_data:
+                    # Determine event type based on status change
+                    event_type = 'mission_progress_update'
+                    if old_status == "not-started" and mission["status"] == "in-progress":
+                        event_type = 'mission_started'
+                    
+                    history_entry = {
+                        'history_index': get_next_history_index(),
+                        'alter-ego': mission['archetype'],
+                        'mission_associated': mission_file.stem,
+                        'state': mission['status'],
+                        'event_type': event_type,
+                        'mission_progress': {
+                            'previous': old_progress,
+                            'current': new_val,
+                            'total': total
+                        },
+                        'delta_changed': {},
+                        'state_after_delta_applied': {
+                            'level': ego_data['level'],
+                            'title': ego_data['title'],
+                            'xp': ego_data['xp_details']['current_xp'],
+                            'health': ego_data['health_details']['current_health'],
+                            'energy': ego_data['energy_details']['current_energy'],
+                            'abilities': ego_data['abilities'].copy()
+                        },
+                        'date': datetime.date.today().isoformat(),
+                        'unlocked_rewards': []
+                    }
+                    record_history(history_entry)
+                    print_success(f"📝 History recorded (entry #{history_entry['history_index']})")
             
             if save_json(mission_file, mission):
                 print_success(f"Progress updated: {new_val}/{total} ({new_val/total*100:.0f}%)")

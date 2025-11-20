@@ -1,0 +1,9 @@
+{
+  "reward_id": "R15",
+  "title": "Early Bird Master",
+  "description": "Mastered the art of waking up at 5 AM for 30 consecutive days",
+  "associated_mission_ids": ["T09"],
+  "reward_type": "milestone",
+  "is_locked": true,
+  "badge_icon": "assets/rewards/early-bird.png"
+}

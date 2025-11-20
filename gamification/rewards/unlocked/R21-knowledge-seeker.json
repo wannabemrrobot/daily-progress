@@ -1,0 +1,16 @@
+{
+  "reward_id": "R21",
+  "title": "Knowledge Seeker",
+  "description": "Read 2 philosophy books - expanding consciousness",
+  "associated_mission_ids": ["K08"],
+  "reward_type": "achievement",
+  "is_locked": false,
+  "badge_icon": "assets/rewards/knowledge-seeker.png",
+  "unlock_date": "2025-11-17",
+  "status": "unlocked",
+  "rewards": {
+    "xp": 25,
+    "special_ability": "Deep Thinking: +5% wisdom for 30 days",
+    "badge": "Intellectual"
+  }
+}

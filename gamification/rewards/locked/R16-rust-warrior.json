@@ -1,0 +1,9 @@
+{
+  "reward_id": "R16",
+  "title": "Rust Warrior",
+  "description": "Conquered Rust programming and built 3 impressive projects",
+  "associated_mission_ids": ["M08"],
+  "reward_type": "apex",
+  "is_locked": true,
+  "badge_icon": "assets/rewards/rust-master.png"
+}

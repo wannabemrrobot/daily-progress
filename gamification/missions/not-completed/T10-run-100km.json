@@ -1,0 +1,49 @@
+{
+  "archetype": "tyler",
+  "mission_code": "T10",
+  "title": "Run 100km This Month",
+  "description": "Complete a total of 100 kilometers running in 30 days",
+  "difficulty": "hard",
+  "status": "in-progress",
+  "progress": {
+    "current": 43,
+    "total": 100
+  },
+  "archetype_stat_change": {
+    "on_complete": {
+      "xp": 35,
+      "health": 20,
+      "energy": 18,
+      "abilities": {
+        "strength": 35,
+        "discipline": 40,
+        "agression": 10,
+        "confidence": 35,
+        "dominance": 15,
+        "pain tolerance": 50,
+        "honor": 20,
+        "determination": 55
+      }
+    },
+    "on_failure": {
+      "xp": -25,
+      "health": -15,
+      "energy": -12,
+      "abilities": {
+        "strength": -25,
+        "discipline": -30,
+        "agression": 0,
+        "confidence": -25,
+        "dominance": 0,
+        "pain tolerance": -35,
+        "honor": 0,
+        "determination": -40
+      }
+    }
+  },
+  "reward": ["R17"],
+  "mission_icon": "assets/badges/marathon-runner.png",
+  "due_date": "2025-12-20",
+  "start_date": "2025-11-20",
+  "completion_date": null
+}
