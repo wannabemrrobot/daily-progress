@@ -1,0 +1,14 @@
+{
+  "reward_id": "R14",
+  "title": "Week Warrior",
+  "description": "Completed daily check-ins for 7 consecutive days",
+  "reward_icon": "assets/rewards/week-warrior.png",
+  "reward_type": "achievement",
+  "associated_mission": null,
+  "unlock_date": "2025-11-07",
+  "status": "unlocked",
+  "rewards": {
+    "xp": 15,
+    "badge": "Consistent Player"
+  }
+}

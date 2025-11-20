@@ -36,5 +36,318 @@
     },
     "date": "2025-11-10",
     "unlocked_rewards": []
+  },
+  {
+    "history_index": 2,
+    "alter-ego": "kei",
+    "mission_associated": "K01-meditate-10",
+    "state": "completed",
+    "delta_changed": {
+      "xp": 15,
+      "health": 8,
+      "energy": 10,
+      "abilities": {
+        "intuition": 30,
+        "self-control": 25,
+        "peace": 40,
+        "mindfulness": 35,
+        "resilience": 20,
+        "wisdom": 25
+      }
+    },
+    "state_after_delta_applied": {
+      "level": 1,
+      "title": "Monk of Still Waters",
+      "xp": 50,
+      "health": 18,
+      "energy": 25,
+      "abilities": {
+        "intuition": 45,
+        "self-control": 40,
+        "peace": 60,
+        "mindfulness": 50,
+        "resilience": 35,
+        "wisdom": 40
+      }
+    },
+    "date": "2025-11-12",
+    "unlocked_rewards": []
+  },
+  {
+    "history_index": 3,
+    "alter-ego": "mr.robot",
+    "mission_associated": "M02-leetcode-grind",
+    "state": "failed",
+    "delta_changed": {
+      "xp": -20,
+      "health": -10,
+      "energy": -15,
+      "abilities": {
+        "logic": -30,
+        "focus": -25,
+        "persistence": -40,
+        "problem-solving": -35,
+        "technical-mastery": -30
+      }
+    },
+    "state_after_delta_applied": {
+      "level": 1,
+      "title": "Novice Hacker",
+      "xp": 5,
+      "health": 15,
+      "energy": 10,
+      "abilities": {
+        "logic": 20,
+        "focus": 25,
+        "persistence": 10,
+        "problem-solving": 15,
+        "technical-mastery": 20,
+        "anonymity": 30
+      }
+    },
+    "date": "2025-11-14",
+    "unlocked_rewards": []
+  },
+  {
+    "history_index": 4,
+    "alter-ego": "tyler",
+    "mission_associated": "T05-gym-streak-30",
+    "state": "completed",
+    "delta_changed": {
+      "xp": 25,
+      "health": 15,
+      "energy": 8,
+      "abilities": {
+        "strength": 40,
+        "discipline": 35,
+        "pain tolerance": 30,
+        "determination": 40,
+        "confidence": 20
+      }
+    },
+    "state_after_delta_applied": {
+      "level": 2,
+      "title": "Rebel",
+      "xp": 150,
+      "health": 65,
+      "energy": 45,
+      "abilities": {
+        "strength": 70,
+        "discipline": 85,
+        "agression": 30,
+        "confidence": 70,
+        "dominance": 35,
+        "pain tolerance": 55,
+        "honor": 45,
+        "determination": 100
+      }
+    },
+    "date": "2025-11-15",
+    "unlocked_rewards": ["R02"]
+  },
+  {
+    "history_index": 5,
+    "alter-ego": "kei",
+    "mission_associated": "K03-yoga-21",
+    "state": "completed",
+    "delta_changed": {
+      "xp": 18,
+      "health": 12,
+      "energy": 15,
+      "abilities": {
+        "intuition": 20,
+        "self-control": 30,
+        "peace": 35,
+        "mindfulness": 25,
+        "resilience": 30
+      }
+    },
+    "state_after_delta_applied": {
+      "level": 1,
+      "title": "Monk of Still Waters",
+      "xp": 68,
+      "health": 30,
+      "energy": 40,
+      "abilities": {
+        "intuition": 65,
+        "self-control": 70,
+        "peace": 95,
+        "mindfulness": 75,
+        "resilience": 65,
+        "wisdom": 40
+      }
+    },
+    "date": "2025-11-16",
+    "unlocked_rewards": []
+  },
+  {
+    "history_index": 6,
+    "alter-ego": "mr.robot",
+    "mission_associated": "M01-company-switch",
+    "state": "in-progress",
+    "delta_changed": {
+      "xp": 5,
+      "health": 2,
+      "energy": 3
+    },
+    "state_after_delta_applied": {
+      "level": 1,
+      "title": "Novice Hacker",
+      "xp": 30,
+      "health": 27,
+      "energy": 23,
+      "abilities": {
+        "logic": 20,
+        "focus": 25,
+        "persistence": 10,
+        "problem-solving": 15,
+        "technical-mastery": 20,
+        "anonymity": 30
+      }
+    },
+    "date": "2025-11-17",
+    "unlocked_rewards": []
+  },
+  {
+    "history_index": 7,
+    "alter-ego": "tyler",
+    "mission_associated": "T06-reading-habit",
+    "state": "failed",
+    "delta_changed": {
+      "xp": -15,
+      "health": -5,
+      "energy": -8,
+      "abilities": {
+        "discipline": -30,
+        "determination": -25,
+        "honor": -20
+      }
+    },
+    "state_after_delta_applied": {
+      "level": 2,
+      "title": "Rebel",
+      "xp": 135,
+      "health": 60,
+      "energy": 37,
+      "abilities": {
+        "strength": 70,
+        "discipline": 55,
+        "agression": 30,
+        "confidence": 70,
+        "dominance": 35,
+        "pain tolerance": 55,
+        "honor": 25,
+        "determination": 75
+      }
+    },
+    "date": "2025-11-18",
+    "unlocked_rewards": []
+  },
+  {
+    "history_index": 8,
+    "alter-ego": "mr.robot",
+    "mission_associated": "M04-open-source-contrib",
+    "state": "completed",
+    "delta_changed": {
+      "xp": 30,
+      "health": 5,
+      "energy": 10,
+      "abilities": {
+        "logic": 35,
+        "focus": 30,
+        "persistence": 40,
+        "problem-solving": 45,
+        "technical-mastery": 50,
+        "anonymity": 10
+      }
+    },
+    "state_after_delta_applied": {
+      "level": 2,
+      "title": "Code Warrior",
+      "xp": 165,
+      "health": 37,
+      "energy": 43,
+      "abilities": {
+        "logic": 75,
+        "focus": 70,
+        "persistence": 65,
+        "problem-solving": 80,
+        "technical-mastery": 90,
+        "anonymity": 50
+      }
+    },
+    "date": "2025-11-19",
+    "unlocked_rewards": ["R03"]
+  },
+  {
+    "history_index": 9,
+    "alter-ego": "kei",
+    "mission_associated": "K05-no-social-media",
+    "state": "failed",
+    "delta_changed": {
+      "xp": -12,
+      "health": -8,
+      "energy": -10,
+      "abilities": {
+        "self-control": -35,
+        "peace": -30,
+        "mindfulness": -25,
+        "resilience": -20
+      }
+    },
+    "state_after_delta_applied": {
+      "level": 1,
+      "title": "Monk of Still Waters",
+      "xp": 56,
+      "health": 22,
+      "energy": 30,
+      "abilities": {
+        "intuition": 65,
+        "self-control": 35,
+        "peace": 65,
+        "mindfulness": 50,
+        "resilience": 45,
+        "wisdom": 40
+      }
+    },
+    "date": "2025-11-19",
+    "unlocked_rewards": []
+  },
+  {
+    "history_index": 10,
+    "alter-ego": "tyler",
+    "mission_associated": "T08-cold-showers-14",
+    "state": "completed",
+    "delta_changed": {
+      "xp": 12,
+      "health": 8,
+      "energy": 10,
+      "abilities": {
+        "strength": 15,
+        "discipline": 30,
+        "pain tolerance": 40,
+        "determination": 25,
+        "resilience": 20
+      }
+    },
+    "state_after_delta_applied": {
+      "level": 2,
+      "title": "Rebel",
+      "xp": 147,
+      "health": 68,
+      "energy": 47,
+      "abilities": {
+        "strength": 85,
+        "discipline": 85,
+        "agression": 30,
+        "confidence": 70,
+        "dominance": 35,
+        "pain tolerance": 95,
+        "honor": 25,
+        "determination": 100
+      }
+    },
+    "date": "2025-11-20",
+    "unlocked_rewards": []
   }
 ]

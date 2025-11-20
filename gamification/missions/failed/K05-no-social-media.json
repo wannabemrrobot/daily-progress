@@ -1,0 +1,41 @@
+{
+  "archetype": "kei",
+  "mission_code": "K05",
+  "title": "No Social Media 14 Days",
+  "description": "Stay away from all social media platforms for 14 consecutive days",
+  "difficulty": "medium",
+  "status": "failed",
+  "progress": {
+    "current": 9,
+    "total": 14
+  },
+  "archetype_stat_change": {
+    "on_complete": {
+      "xp": 20,
+      "health": 10,
+      "energy": 12,
+      "abilities": {
+        "self-control": 40,
+        "peace": 35,
+        "mindfulness": 30,
+        "resilience": 25
+      }
+    },
+    "on_failure": {
+      "xp": -12,
+      "health": -8,
+      "energy": -10,
+      "abilities": {
+        "self-control": -35,
+        "peace": -30,
+        "mindfulness": -25,
+        "resilience": -20
+      }
+    }
+  },
+  "reward": [],
+  "mission_icon": "assets/badges/social-detox.png",
+  "due_date": "2025-11-19",
+  "start_date": "2025-11-05",
+  "completion_date": "2025-11-19"
+}

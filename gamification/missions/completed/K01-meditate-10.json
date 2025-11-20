@@ -1,0 +1,43 @@
+{
+  "archetype": "kei",
+  "mission_code": "K01",
+  "title": "Meditate for 10 Days",
+  "description": "Complete 10 consecutive days of meditation practice, at least 15 minutes each session",
+  "difficulty": "easy",
+  "status": "completed",
+  "progress": {
+    "current": 10,
+    "total": 10
+  },
+  "archetype_stat_change": {
+    "on_complete": {
+      "xp": 15,
+      "health": 8,
+      "energy": 10,
+      "abilities": {
+        "intuition": 30,
+        "self-control": 25,
+        "peace": 40,
+        "mindfulness": 35,
+        "resilience": 20,
+        "wisdom": 25
+      }
+    },
+    "on_failure": {
+      "xp": -10,
+      "health": -5,
+      "energy": -8,
+      "abilities": {
+        "self-control": -20,
+        "peace": -30,
+        "mindfulness": -25,
+        "resilience": -15
+      }
+    }
+  },
+  "reward": [],
+  "mission_icon": "assets/badges/zen-master.png",
+  "due_date": "2025-11-12",
+  "start_date": "2025-11-01",
+  "completion_date": "2025-11-12"
+}
