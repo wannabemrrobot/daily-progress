@@ -1,9 +1,0 @@
-{
-  "reward_id": "R18",
-  "title": "Security Specialist",
-  "description": "Earned cybersecurity certification - protecting the digital realm",
-  "associated_mission_ids": ["M09"],
-  "reward_type": "apex",
-  "is_locked": true,
-  "badge_icon": "assets/rewards/security-expert.png"
-}
