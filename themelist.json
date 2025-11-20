@@ -38,5 +38,45 @@
     {
         "theme": "Sky Canvas",
         "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/themes/sky-canvas.json"
+    },
+    {
+        "theme": "Neon Cyberpunk",
+        "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/themes/neon-cyberpunk.json"
+    },
+    {
+        "theme": "Midnight Purple",
+        "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/themes/midnight-purple.json"
+    },
+    {
+        "theme": "Blood Moon",
+        "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/themes/blood-moon.json"
+    },
+    {
+        "theme": "Forest Night",
+        "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/themes/forest-night.json"
+    },
+    {
+        "theme": "Deep Ocean",
+        "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/themes/deep-ocean.json"
+    },
+    {
+        "theme": "Amber Glow",
+        "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/themes/amber-glow.json"
+    },
+    {
+        "theme": "Stealth Mode",
+        "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/themes/stealth-mode.json"
+    },
+    {
+        "theme": "Electric Violet",
+        "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/themes/electric-violet.json"
+    },
+    {
+        "theme": "Carbon Fiber",
+        "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/themes/carbon-fiber.json"
+    },
+    {
+        "theme": "Sunset Noir",
+        "url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/themes/sunset-noir.json"
     }
 ]

@@ -1,0 +1,28 @@
+{
+    "$theme": "Forest Night",
+
+    "--accent-primary": "#10b981",
+    "--accent-primary-rgb": "16, 185, 129",
+
+    "--text-primary": "#d1fae5",
+    "--text-btn": "#0a1a0f",
+    "--text-secondary": "#99d9bb",
+    "--home-heading": "#a7f3d0",
+    "--heading-primary": "#d1fae5",
+    "--heading-secondary": "#88c4a4",
+    "--animation-text": "#a8e8c8",
+    "--badge-text": "#0a1a0f",
+    "--tags": "#99d9bb",
+    "--tag-text": "#a8e8c8",
+    "--tagcount-bg": "#152a1e",
+    "--tagbg-hover": "#10b9811a",
+    "--tagbg-opaq": "#0f1f15",
+
+    "--background": "#050f0a",
+    "--header-bg": "#0a1a0f",
+    "--subheader-bg": "#08150d",
+    "--border": "#1f3d2a",
+    "--icons-social": "#99d9bb",
+    "--drop-shadow": "#00000080",
+    "--orb-hue": 160
+}

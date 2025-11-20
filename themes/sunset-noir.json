@@ -1,0 +1,28 @@
+{
+    "$theme": "Sunset Noir",
+
+    "--accent-primary": "#ea580c",
+    "--accent-primary-rgb": "234, 88, 12",
+
+    "--text-primary": "#fed7aa",
+    "--text-btn": "#1a0f05",
+    "--text-secondary": "#d9a877",
+    "--home-heading": "#fdba74",
+    "--heading-primary": "#fed7aa",
+    "--heading-secondary": "#c49866",
+    "--animation-text": "#e8b888",
+    "--badge-text": "#1a0f05",
+    "--tags": "#d9a877",
+    "--tag-text": "#e8b888",
+    "--tagcount-bg": "#2a1a10",
+    "--tagbg-hover": "#ea580c1a",
+    "--tagbg-opaq": "#1f140a",
+
+    "--background": "#0a0503",
+    "--header-bg": "#1a0f05",
+    "--subheader-bg": "#120a04",
+    "--border": "#3d2515",
+    "--icons-social": "#d9a877",
+    "--drop-shadow": "#00000080",
+    "--orb-hue": 25
+}

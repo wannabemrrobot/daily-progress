@@ -1,0 +1,28 @@
+{
+    "$theme": "Blood Moon",
+
+    "--accent-primary": "#ef4444",
+    "--accent-primary-rgb": "239, 68, 68",
+
+    "--text-primary": "#fecaca",
+    "--text-btn": "#1a0a0a",
+    "--text-secondary": "#d99999",
+    "--home-heading": "#fca5a5",
+    "--heading-primary": "#fecaca",
+    "--heading-secondary": "#c48888",
+    "--animation-text": "#e8a8a8",
+    "--badge-text": "#1a0a0a",
+    "--tags": "#d99999",
+    "--tag-text": "#e8a8a8",
+    "--tagcount-bg": "#2a1515",
+    "--tagbg-hover": "#ef44441a",
+    "--tagbg-opaq": "#1f0f0f",
+
+    "--background": "#0f0505",
+    "--header-bg": "#1a0a0a",
+    "--subheader-bg": "#150808",
+    "--border": "#3d1f1f",
+    "--icons-social": "#d99999",
+    "--drop-shadow": "#00000080",
+    "--orb-hue": 0
+}
