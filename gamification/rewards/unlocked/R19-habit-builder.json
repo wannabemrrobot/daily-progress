@@ -1,0 +1,15 @@
+{
+  "reward_id": "R19",
+  "title": "Habit Builder",
+  "description": "Completed first 7-day habit streak - building momentum",
+  "associated_mission_ids": [],
+  "reward_type": "milestone",
+  "is_locked": false,
+  "badge_icon": "assets/rewards/habit-builder.png",
+  "unlock_date": "2025-11-07",
+  "status": "unlocked",
+  "rewards": {
+    "xp": 15,
+    "badge": "Consistent Warrior"
+  }
+}

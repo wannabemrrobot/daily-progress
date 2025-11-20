@@ -1,0 +1,9 @@
+{
+  "reward_id": "R17",
+  "title": "Marathon Legend",
+  "description": "Ran 100 kilometers in a month - unstoppable endurance",
+  "associated_mission_ids": ["T10"],
+  "reward_type": "apex",
+  "is_locked": true,
+  "badge_icon": "assets/rewards/marathon-legend.png"
+}

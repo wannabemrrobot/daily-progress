@@ -1,0 +1,49 @@
+{
+  "archetype": "mr.robot",
+  "mission_code": "M09",
+  "title": "Complete Security Course",
+  "description": "Finish a comprehensive cybersecurity course and earn certification",
+  "difficulty": "hard",
+  "status": "in-progress",
+  "progress": {
+    "current": 8,
+    "total": 15
+  },
+  "archetype_stat_change": {
+    "on_complete": {
+      "xp": 50,
+      "health": 5,
+      "energy": 12,
+      "abilities": {
+        "intelligence": 50,
+        "logic": 55,
+        "adaptability": 40,
+        "innovation": 45,
+        "focus": 50,
+        "systemization": 55,
+        "precision": 60,
+        "speed": 35
+      }
+    },
+    "on_failure": {
+      "xp": -35,
+      "health": -8,
+      "energy": -18,
+      "abilities": {
+        "intelligence": -40,
+        "logic": -45,
+        "adaptability": -30,
+        "innovation": -35,
+        "focus": -40,
+        "systemization": -45,
+        "precision": -50,
+        "speed": -25
+      }
+    }
+  },
+  "reward": ["R18"],
+  "mission_icon": "assets/badges/security-expert.png",
+  "due_date": "2026-03-15",
+  "start_date": "2025-10-15",
+  "completion_date": null
+}
