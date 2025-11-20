@@ -47,6 +47,14 @@ SYNERGY_RULES_FILE = CONFIGS_DIR / "synergy-rules.json"
 DAILY_PROGRESS_RULES_FILE = CONFIGS_DIR / "daily-progress-rules.json"
 HISTORY_FILE = REPO_ROOT / "gamification" / "history.json"
 SYNERGY_FILE = REPO_ROOT / "gamification" / "synergy.json"
+# Aggregate files for frontend performance
+MISSIONS_AGGREGATE_DIR = MISSIONS_DIR
+MISSIONS_ACTIVE_FILE = MISSIONS_AGGREGATE_DIR / "active.json"
+MISSIONS_COMPLETED_FILE = MISSIONS_AGGREGATE_DIR / "completed.json"
+MISSIONS_FAILED_FILE = MISSIONS_AGGREGATE_DIR / "failed.json"
+MISSIONS_NOT_STARTED_FILE = MISSIONS_AGGREGATE_DIR / "not-started.json"
+REWARDS_LOCKED_FILE = REWARDS_DIR / "locked-aggregate.json"
+REWARDS_UNLOCKED_FILE = REWARDS_DIR / "unlocked-aggregate.json"
 
 # Ensure directories exist
 MISSIONS_NOT_COMPLETED.mkdir(parents=True, exist_ok=True)
@@ -506,6 +514,179 @@ def count_missions() -> Dict[str, int]:
                 counts["failed"] += 1
     
     return counts
+
+
+def count_rewards() -> Dict[str, int]:
+    """Count rewards by lock status."""
+    counts = {
+        "total": 0,
+        "unlocked": 0,
+        "locked": 0
+    }
+    
+    # Count locked rewards
+    for reward_file in REWARDS_LOCKED.glob("*.json"):
+        counts["total"] += 1
+        counts["locked"] += 1
+    
+    # Count unlocked rewards
+    for reward_file in REWARDS_UNLOCKED.glob("*.json"):
+        counts["total"] += 1
+        counts["unlocked"] += 1
+    
+    return counts
+
+
+def generate_missions_aggregates() -> bool:
+    """
+    Generate aggregate JSON files for missions grouped by status.
+    Creates: active.json, completed.json, failed.json, not-started.json
+    Returns True if successful, False otherwise.
+    """
+    try:
+        # Categorize missions by status
+        missions_by_status = {
+            'in-progress': [],
+            'completed': [],
+            'failed': [],
+            'not-started': []
+        }
+        
+        # Load missions from not-completed folder
+        for mission_file in MISSIONS_NOT_COMPLETED.glob("*.json"):
+            mission_data = load_json(mission_file)
+            if mission_data:
+                status = mission_data.get('status', 'not-started')
+                if status in ['not-started', 'in-progress']:
+                    missions_by_status[status].append(mission_data)
+        
+        # Load missions from completed folder
+        for mission_file in MISSIONS_COMPLETED.glob("*.json"):
+            mission_data = load_json(mission_file)
+            if mission_data:
+                status = mission_data.get('status', 'completed')
+                if status in ['completed', 'failed']:
+                    missions_by_status[status].append(mission_data)
+        
+        # Sort missions by due date (if available) and mission code
+        for status in missions_by_status:
+            missions_by_status[status].sort(
+                key=lambda m: (m.get('due_date') or '9999-12-31', m.get('mission_code', ''))
+            )
+        
+        # Create aggregate files
+        timestamp = datetime.datetime.now().isoformat()
+        
+        # Active missions (in-progress)
+        active_aggregate = {
+            'missions': missions_by_status['in-progress'],
+            'count': len(missions_by_status['in-progress']),
+            'last_updated': timestamp
+        }
+        if not save_json(MISSIONS_ACTIVE_FILE, active_aggregate):
+            return False
+        
+        # Completed missions
+        completed_aggregate = {
+            'missions': missions_by_status['completed'],
+            'count': len(missions_by_status['completed']),
+            'last_updated': timestamp
+        }
+        if not save_json(MISSIONS_COMPLETED_FILE, completed_aggregate):
+            return False
+        
+        # Failed missions
+        failed_aggregate = {
+            'missions': missions_by_status['failed'],
+            'count': len(missions_by_status['failed']),
+            'last_updated': timestamp
+        }
+        if not save_json(MISSIONS_FAILED_FILE, failed_aggregate):
+            return False
+        
+        # Not-started missions
+        not_started_aggregate = {
+            'missions': missions_by_status['not-started'],
+            'count': len(missions_by_status['not-started']),
+            'last_updated': timestamp
+        }
+        if not save_json(MISSIONS_NOT_STARTED_FILE, not_started_aggregate):
+            return False
+        
+        print_success(f"Generated mission aggregates: {len(missions_by_status['in-progress'])} active, "
+                     f"{len(missions_by_status['completed'])} completed, "
+                     f"{len(missions_by_status['failed'])} failed, "
+                     f"{len(missions_by_status['not-started'])} not-started")
+        return True
+        
+    except Exception as e:
+        print_error(f"Failed to generate mission aggregates: {e}")
+        return False
+
+
+def generate_rewards_aggregates() -> bool:
+    """
+    Generate aggregate JSON files for rewards grouped by lock status.
+    Creates: locked-aggregate.json, unlocked-aggregate.json
+    Returns True if successful, False otherwise.
+    """
+    try:
+        locked_rewards = []
+        unlocked_rewards = []
+        
+        # Load locked rewards
+        for reward_file in REWARDS_LOCKED.glob("*.json"):
+            reward_data = load_json(reward_file)
+            if reward_data:
+                locked_rewards.append(reward_data)
+        
+        # Load unlocked rewards
+        for reward_file in REWARDS_UNLOCKED.glob("*.json"):
+            reward_data = load_json(reward_file)
+            if reward_data:
+                unlocked_rewards.append(reward_data)
+        
+        # Sort rewards by reward_id
+        locked_rewards.sort(key=lambda r: r.get('reward_id', ''))
+        unlocked_rewards.sort(key=lambda r: r.get('reward_id', ''))
+        
+        # Create aggregate files
+        timestamp = datetime.datetime.now().isoformat()
+        
+        # Locked rewards
+        locked_aggregate = {
+            'rewards': locked_rewards,
+            'count': len(locked_rewards),
+            'last_updated': timestamp
+        }
+        if not save_json(REWARDS_LOCKED_FILE, locked_aggregate):
+            return False
+        
+        # Unlocked rewards
+        unlocked_aggregate = {
+            'rewards': unlocked_rewards,
+            'count': len(unlocked_rewards),
+            'last_updated': timestamp
+        }
+        if not save_json(REWARDS_UNLOCKED_FILE, unlocked_aggregate):
+            return False
+        
+        print_success(f"Generated reward aggregates: {len(locked_rewards)} locked, {len(unlocked_rewards)} unlocked")
+        return True
+        
+    except Exception as e:
+        print_error(f"Failed to generate reward aggregates: {e}")
+        return False
+
+
+def regenerate_all_aggregates() -> bool:
+    """
+    Regenerate all aggregate files (missions and rewards).
+    Should be called after any mission or reward modification.
+    """
+    missions_success = generate_missions_aggregates()
+    rewards_success = generate_rewards_aggregates()
+    return missions_success and rewards_success
 
 
 def count_rewards() -> Dict[str, int]:
@@ -1330,6 +1511,10 @@ def create_reward(mission_code: str = None) -> Optional[Dict]:
         if update_synergy():
             print_success("🔗 Synergy updated")
         
+        # Regenerate aggregates
+        if regenerate_all_aggregates():
+            print_success("📦 Aggregates regenerated")
+        
         return {
             "reward_type": reward_type,
             "title": title,
@@ -1488,6 +1673,10 @@ def add_new_mission():
         # Update synergy
         if update_synergy():
             print_success("🔗 Synergy updated")
+        
+        # Regenerate aggregates
+        if regenerate_all_aggregates():
+            print_success("📦 Aggregates regenerated")
     else:
         print_error("Failed to create mission")
 
@@ -1644,6 +1833,10 @@ def mark_mission_completed():
         if update_synergy():
             print_success("🔗 Synergy updated")
         
+        # Regenerate aggregates
+        if regenerate_all_aggregates():
+            print_success("📦 Aggregates regenerated")
+        
         # Show rewards
         on_complete = mission["archetype_stat_change"]["on_complete"]
         print(f"\n{Colors.OKGREEN}REWARDS EARNED:{Colors.ENDC}")
@@ -1735,6 +1928,10 @@ def mark_mission_failed():
         if update_synergy():
             print_success("🔗 Synergy updated")
         
+        # Regenerate aggregates
+        if regenerate_all_aggregates():
+            print_success("📦 Aggregates regenerated")
+        
         # Show penalties
         on_failure = mission["archetype_stat_change"]["on_failure"]
         print(f"\n{Colors.FAIL}PENALTIES APPLIED:{Colors.ENDC}")
@@ -1777,6 +1974,10 @@ def delete_mission():
         # Update synergy
         if update_synergy():
             print_success("🔗 Synergy updated")
+        
+        # Regenerate aggregates
+        if regenerate_all_aggregates():
+            print_success("📦 Aggregates regenerated")
     else:
         print_info("Deletion cancelled")
 
@@ -2041,6 +2242,9 @@ def modify_mission():
             if save_json(new_file, mission):
                 mission_file.unlink()
                 print_success(f"Mission updated and moved to completed folder")
+                # Regenerate aggregates
+                if regenerate_all_aggregates():
+                    print_success("📦 Aggregates regenerated")
             return
         elif new_status in ["not-started", "in-progress"] and folder == MISSIONS_COMPLETED:
             # Move back to not-completed
@@ -2050,6 +2254,9 @@ def modify_mission():
             if save_json(new_file, mission):
                 mission_file.unlink()
                 print_success(f"Mission updated and moved to not-completed folder")
+                # Regenerate aggregates
+                if regenerate_all_aggregates():
+                    print_success("📦 Aggregates regenerated")
             return
     
     # Check if filename needs to be updated (title changed)
@@ -2062,6 +2269,11 @@ def modify_mission():
                 mission_file.unlink()  # Remove old file
             print_success(f"Mission updated: {mission['title']}")
             print_info(f"File renamed to: {new_filename}")
+            # Update synergy and regenerate aggregates
+            if update_synergy():
+                print_success("🔗 Synergy updated")
+            if regenerate_all_aggregates():
+                print_success("📦 Aggregates regenerated")
     else:
         # Save to same file
         if save_json(mission_file, mission):
@@ -2070,6 +2282,10 @@ def modify_mission():
             # Update synergy (missions stats might have changed)
             if update_synergy():
                 print_success("🔗 Synergy updated")
+            
+            # Regenerate aggregates
+            if regenerate_all_aggregates():
+                print_success("📦 Aggregates regenerated")
         else:
             print_error("Failed to update mission")
 
@@ -2144,6 +2360,8 @@ def update_mission_progress():
             
             if save_json(mission_file, mission):
                 print_success(f"Progress updated: {new_val}/{total} ({new_val/total*100:.0f}%)")
+                if regenerate_all_aggregates():
+                    print_success("📦 Aggregates regenerated")
             else:
                 print_error("Failed to update progress")
         else:
@@ -2282,6 +2500,9 @@ def modify_reward():
             # Update synergy
             if update_synergy():
                 print_success("🔗 Synergy updated")
+            
+            if regenerate_all_aggregates():
+                print_success("📦 Aggregates regenerated")
     else:
         if save_json(reward_file, reward):
             print_success(f"Reward updated: {reward['title']}")
@@ -2289,6 +2510,9 @@ def modify_reward():
             # Update synergy
             if update_synergy():
                 print_success("🔗 Synergy updated")
+            
+            if regenerate_all_aggregates():
+                print_success("📦 Aggregates regenerated")
         else:
             print_error("Failed to update reward")
 
@@ -2342,6 +2566,9 @@ def delete_reward():
         # Update synergy
         if update_synergy():
             print_success("🔗 Synergy updated")
+        
+        if regenerate_all_aggregates():
+            print_success("📦 Aggregates regenerated")
     else:
         print_info("Deletion cancelled")
 
@@ -2364,6 +2591,7 @@ def main_menu():
             "🗑️  Delete Mission",
             "📊 View All Missions",
             "🎁 Manage Rewards",
+            "📦 Regenerate Aggregates",
             "🚪 Exit"
         ]
         
@@ -2396,6 +2624,17 @@ def main_menu():
         elif choice == 12:
             manage_rewards()
         elif choice == 13:
+            print_header("REGENERATE AGGREGATES")
+            print_info("This will regenerate all aggregate JSON files from individual missions and rewards.")
+            confirm = get_input("Continue? (yes/no)", "yes")
+            if confirm.lower() in ["yes", "y"]:
+                if regenerate_all_aggregates():
+                    print_success("✅ All aggregates regenerated successfully!")
+                else:
+                    print_error("Failed to regenerate aggregates")
+            else:
+                print_info("Cancelled")
+        elif choice == 14:
             print(f"\n{Colors.FAIL}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━{Colors.ENDC}")
             print(f"{Colors.FAIL}  First rule of Fight Club:{Colors.ENDC}")
             print(f"{Colors.FAIL}    You do not talk about Fight Club.{Colors.ENDC}")
