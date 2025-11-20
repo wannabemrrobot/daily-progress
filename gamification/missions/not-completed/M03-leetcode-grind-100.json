@@ -1,0 +1,47 @@
+{
+    "archetype": "mr-robot",
+    "mission_code": "M03",
+    "title": "LeetCode Grind 100",
+    "description": "Complete 100 leetcode problems",
+    "difficulty": "medium",
+    "status": "in-progress",
+    "progress": {
+        "current": 0,
+        "total": 40
+    },
+    "archetype_stat_change": {
+        "on_complete": {
+            "health": 0,
+            "energy": 10,
+            "abilities": {
+                "intelligence": 30,
+                "logic": 30,
+                "adaptability": 20,
+                "innovation": 10,
+                "focus": 20,
+                "systemization": 10,
+                "precision": 20,
+                "speed": 10
+            }
+        },
+        "on_failure": {
+            "health": 0,
+            "energy": -20,
+            "abilities": {
+                "intelligence": -30,
+                "logic": -30,
+                "adaptability": -20,
+                "innovation": -10,
+                "focus": -20,
+                "systemization": -10,
+                "precision": -20,
+                "speed": -10
+            }
+        }
+    },
+    "reward": [],
+    "mission_icon": "assets/badges/default.png",
+    "due_date": "2026-01-01",
+    "start_date": "2025-11-21",
+    "completion_date": null
+}

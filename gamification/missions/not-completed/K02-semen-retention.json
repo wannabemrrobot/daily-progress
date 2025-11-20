@@ -1,0 +1,47 @@
+{
+    "archetype": "kei",
+    "mission_code": "K02",
+    "title": "Semen Retention",
+    "description": "Avoid adult content consumption",
+    "difficulty": "easy",
+    "status": "in-progress",
+    "progress": {
+        "current": 0,
+        "total": 50
+    },
+    "archetype_stat_change": {
+        "on_complete": {
+            "health": 10,
+            "energy": 20,
+            "abilities": {
+                "self-control": 15,
+                "peace": 15,
+                "wisdom": 10,
+                "focus": 20,
+                "resilience": 20,
+                "harmony": 10,
+                "mindfulness": 10,
+                "intuition": 10
+            }
+        },
+        "on_failure": {
+            "health": -15,
+            "energy": -15,
+            "abilities": {
+                "self-control": -10,
+                "peace": -20,
+                "wisdom": -20,
+                "focus": -10,
+                "resilience": -10,
+                "harmony": -10,
+                "mindfulness": -10,
+                "intuition": -10
+            }
+        }
+    },
+    "reward": [],
+    "mission_icon": "assets/badges/default.png",
+    "due_date": "2026-01-09",
+    "start_date": "2025-11-21",
+    "completion_date": null
+}
