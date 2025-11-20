@@ -1,0 +1,28 @@
+{
+    "$theme": "Mint Fresh",
+
+    "--accent-primary": "#00a878",
+    "--accent-primary-rgb": "0, 168, 120",
+
+    "--text-primary": "#1e3932",
+    "--text-btn": "#ffffff",
+    "--text-secondary": "#4a6b5e",
+    "--home-heading": "#2a4a3f",
+    "--heading-primary": "#1e3932",
+    "--heading-secondary": "#5a8a75",
+    "--animation-text": "#6a9a85",
+    "--badge-text": "#ffffff",
+    "--tags": "#5a8a75",
+    "--tag-text": "#6a9a85",
+    "--tagcount-bg": "#e5f7f0",
+    "--tagbg-hover": "#00a8781a",
+    "--tagbg-opaq": "#f3fbf7",
+
+    "--background": "#f5fdf9",
+    "--header-bg": "#ecf9f3",
+    "--subheader-bg": "#f5fdf9",
+    "--border": "#c2e3d5",
+    "--icons-social": "#5a8a75",
+    "--drop-shadow": "#1e393240",
+    "--orb-hue": 160
+}

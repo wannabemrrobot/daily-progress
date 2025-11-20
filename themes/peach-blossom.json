@@ -1,0 +1,28 @@
+{
+    "$theme": "Peach Blossom",
+
+    "--accent-primary": "#ff6b6b",
+    "--accent-primary-rgb": "255, 107, 107",
+
+    "--text-primary": "#3a2626",
+    "--text-btn": "#ffffff",
+    "--text-secondary": "#6b4a4a",
+    "--home-heading": "#4a3232",
+    "--heading-primary": "#3a2626",
+    "--heading-secondary": "#8b5a5a",
+    "--animation-text": "#9b6a6a",
+    "--badge-text": "#ffffff",
+    "--tags": "#8b5a5a",
+    "--tag-text": "#9b6a6a",
+    "--tagcount-bg": "#ffe8e8",
+    "--tagbg-hover": "#ff6b6b1a",
+    "--tagbg-opaq": "#fff5f5",
+
+    "--background": "#fff9f7",
+    "--header-bg": "#fff0ed",
+    "--subheader-bg": "#fff9f7",
+    "--border": "#f5d4d4",
+    "--icons-social": "#8b5a5a",
+    "--drop-shadow": "#3a262640",
+    "--orb-hue": 0
+}
