@@ -46,8 +46,10 @@ CONFIGS_DIR = REPO_ROOT / "gamification" / "configs"
 XP_RULES_FILE = CONFIGS_DIR / "xp-rules.json"
 SYNERGY_RULES_FILE = CONFIGS_DIR / "synergy-rules.json"
 DAILY_PROGRESS_RULES_FILE = CONFIGS_DIR / "daily-progress-rules.json"
+BADGES_CONFIG_FILE = CONFIGS_DIR / "badges.json"
 HISTORY_FILE = REPO_ROOT / "gamification" / "history.json"
 SYNERGY_FILE = REPO_ROOT / "gamification" / "synergy.json"
+BADGES_AGGREGATE_FILE = REPO_ROOT / "gamification" / "badges.json"
 # Aggregate files for frontend performance
 MISSIONS_AGGREGATE_DIR = MISSIONS_DIR
 MISSIONS_ACTIVE_FILE = MISSIONS_AGGREGATE_DIR / "active.json"
@@ -599,6 +601,187 @@ def deduct_soap_points(archetype: str, amount: int, reason: str = "") -> bool:
         print_warning(f"💎 {ego_data['name']}: -{amount} SOAP points{' (' + reason + ')' if reason else ''}")
         return True
     return False
+
+
+# ============================================================================
+# BADGE SYSTEM
+# ============================================================================
+
+def check_and_award_badges(archetype: str) -> List[Dict]:
+    """
+    Check all badge criteria for the given alter ego and award any newly earned badges.
+    Returns list of newly awarded badges.
+    """
+    # Load badges config
+    badges_config = load_json(BADGES_CONFIG_FILE)
+    if not badges_config:
+        return []
+    
+    # Load alter ego data
+    ego_data = load_alter_ego(archetype)
+    if not ego_data:
+        return []
+    
+    # Load synergy for total synergy checks
+    synergy_data = load_json(SYNERGY_FILE)
+    
+    # Get current streak from synergy
+    current_streak = synergy_data.get('fight_club', {}).get('current_streak', 0) if synergy_data else 0
+    
+    # Get total synergy
+    total_synergy = synergy_data.get('fight_club', {}).get('total_synergy', 0) if synergy_data else 0
+    
+    # Get already earned badges
+    earned_badges = ego_data.get('earned_badges', [])
+    earned_badge_ids = [b.get('badge_id') for b in earned_badges]
+    
+    # Track newly awarded badges
+    newly_awarded = []
+    
+    # Check each badge
+    for badge in badges_config.get('badges', []):
+        badge_id = badge.get('badge_id')
+        
+        # Skip if already earned
+        if badge_id in earned_badge_ids:
+            continue
+        
+        # Check criteria
+        criteria = badge.get('criteria', {})
+        criteria_type = criteria.get('type')
+        criteria_value = criteria.get('value')
+        
+        earned = False
+        
+        if criteria_type == 'level':
+            earned = ego_data.get('level', 0) >= criteria_value
+        
+        elif criteria_type == 'streak':
+            earned = current_streak >= criteria_value
+        
+        elif criteria_type == 'missions_completed':
+            earned = ego_data.get('stats', {}).get('missions_completed', 0) >= criteria_value
+        
+        elif criteria_type == 'hard_missions_completed':
+            earned = ego_data.get('stats', {}).get('hard_missions_completed', 0) >= criteria_value
+        
+        elif criteria_type == 'restarted_missions_completed':
+            earned = ego_data.get('stats', {}).get('restarted_missions_completed', 0) >= criteria_value
+        
+        elif criteria_type == 'rewards_unlocked':
+            earned = ego_data.get('stats', {}).get('rewards_unlocked', 0) >= criteria_value
+        
+        elif criteria_type == 'health':
+            earned = ego_data.get('health_details', {}).get('current_health', 0) >= criteria_value
+        
+        elif criteria_type == 'energy':
+            earned = ego_data.get('energy_details', {}).get('current_energy', 0) >= criteria_value
+        
+        elif criteria_type == 'soap_points':
+            earned = ego_data.get('soap_points', 0) >= criteria_value
+        
+        elif criteria_type == 'any_ability':
+            abilities = ego_data.get('abilities', {})
+            earned = any(val >= criteria_value for val in abilities.values())
+        
+        elif criteria_type == 'all_abilities':
+            abilities = ego_data.get('abilities', {})
+            earned = all(val >= criteria_value for val in abilities.values()) if abilities else False
+        
+        elif criteria_type == 'total_synergy':
+            earned = total_synergy >= criteria_value
+        
+        if earned:
+            # Award badge
+            badge_data = {
+                'badge_id': badge_id,
+                'name': badge.get('name'),
+                'description': badge.get('description'),
+                'rarity': badge.get('rarity'),
+                'category': badge.get('category'),
+                'earned_date': datetime.date.today().isoformat()
+            }
+            earned_badges.append(badge_data)
+            newly_awarded.append(badge_data)
+            
+            print_success(f"🏆 Badge Unlocked: {badge.get('name')} ({badge.get('rarity')})")
+            print_info(f"   {badge.get('description')}")
+    
+    # Save updated badges if any were awarded
+    if newly_awarded:
+        ego_data['earned_badges'] = earned_badges
+        save_alter_ego(archetype, ego_data)
+    
+    return newly_awarded
+
+
+def generate_badges_aggregate() -> bool:
+    """
+    Generate badges aggregate JSON showing all badges with locked/unlocked status.
+    Returns True if successful, False otherwise.
+    """
+    try:
+        # Load badges config
+        badges_config = load_json(BADGES_CONFIG_FILE)
+        if not badges_config:
+            return False
+        
+        # Load all alter egos
+        alter_egos_badges = {}
+        for archetype in ['tyler', 'mr-robot', 'kei']:
+            ego_data = load_alter_ego(archetype)
+            if ego_data:
+                alter_egos_badges[archetype] = ego_data.get('earned_badges', [])
+        
+        # Build aggregate
+        badges_aggregate = []
+        
+        for badge in badges_config.get('badges', []):
+            badge_id = badge.get('badge_id')
+            
+            # Check which alter egos have earned this badge
+            earned_by = []
+            for archetype, earned_badges in alter_egos_badges.items():
+                if any(b.get('badge_id') == badge_id for b in earned_badges):
+                    # Find the earned date
+                    earned_date = next(
+                        (b.get('earned_date') for b in earned_badges if b.get('badge_id') == badge_id),
+                        None
+                    )
+                    earned_by.append({
+                        'archetype': archetype,
+                        'earned_date': earned_date
+                    })
+            
+            badge_entry = {
+                'badge_id': badge_id,
+                'name': badge.get('name'),
+                'description': badge.get('description'),
+                'rarity': badge.get('rarity'),
+                'category': badge.get('category'),
+                'status': 'unlocked' if earned_by else 'locked',
+                'earned_by': earned_by,
+                'criteria': badge.get('criteria')
+            }
+            badges_aggregate.append(badge_entry)
+        
+        # Save aggregate
+        aggregate_data = {
+            'badges': badges_aggregate,
+            'last_updated': datetime.datetime.now().isoformat(),
+            'total_badges': len(badges_aggregate),
+            'unlocked_count': sum(1 for b in badges_aggregate if b['status'] == 'unlocked')
+        }
+        
+        if save_json(BADGES_AGGREGATE_FILE, aggregate_data):
+            print_success(f"📛 Generated badges aggregate: {aggregate_data['unlocked_count']}/{aggregate_data['total_badges']} unlocked")
+            return True
+        
+        return False
+        
+    except Exception as e:
+        print_error(f"Failed to generate badges aggregate: {e}")
+        return False
 
 
 def count_missions() -> Dict[str, int]:
@@ -1224,6 +1407,47 @@ def apply_habit_rewards(habit_results: Dict[str, str]):
         # Update synergy
         update_synergy()
         print(f"\n{Colors.OKGREEN}✅ Synergy updated{Colors.ENDC}\n")
+        
+        # Check and award badges for all alter-egos after daily progress
+        print(f"\n{Colors.OKCYAN}🏆 Checking badges...{Colors.ENDC}")
+        badges_awarded = False
+        for archetype in ["tyler", "mr-robot", "kei"]:
+            newly_awarded = check_and_award_badges(archetype)
+            if newly_awarded:
+                badges_awarded = True
+                # Record badge unlocks in history
+                for badge in newly_awarded:
+                    ego_data = load_alter_ego(archetype)
+                    if ego_data:
+                        synergy_snapshot = get_synergy_snapshot()
+                        history_entry = {
+                            'history_index': get_next_history_index(),
+                            'alter-ego': archetype,
+                            'event_type': 'badge_unlock',
+                            'badge_id': badge.get('badge_id'),
+                            'badge_name': badge.get('name'),
+                            'badge_category': badge.get('category'),
+                            'badge_rarity': badge.get('rarity'),
+                            'delta_changed': {},
+                            'state_after_delta_applied': {
+                                'level': ego_data['level'],
+                                'title': ego_data['title'],
+                                'xp': ego_data['xp_details']['current_xp'],
+                                'health': ego_data['health_details']['current_health'],
+                                'energy': ego_data['energy_details']['current_energy'],
+                                'abilities': ego_data['abilities'].copy()
+                            },
+                            'synergy_before': synergy_snapshot,
+                            'synergy_after': synergy_snapshot,
+                            'date': datetime.date.today().isoformat()
+                        }
+                        record_history(history_entry)
+        
+        # Generate badges aggregate if any were awarded
+        if badges_awarded:
+            generate_badges_aggregate()
+        
+        return True
     
     return True
 
@@ -1949,6 +2173,28 @@ def mark_mission_completed():
         # Apply changes
         delta_applied = apply_stat_changes(ego_data, on_complete, xp_rules)
         
+        # Update mission stats for badge tracking
+        if 'stats' not in ego_data:
+            ego_data['stats'] = {
+                'missions_completed': 0,
+                'hard_missions_completed': 0,
+                'restarted_missions_completed': 0,
+                'rewards_unlocked': 0
+            }
+        
+        ego_data['stats']['missions_completed'] += 1
+        
+        # Track hard mission completions
+        if mission.get('difficulty', '').lower() == 'hard':
+            ego_data['stats']['hard_missions_completed'] += 1
+        
+        # Track restarted mission completions
+        if mission.get('was_restarted', False):
+            ego_data['stats']['restarted_missions_completed'] += 1
+        
+        # Track rewards unlocked
+        ego_data['stats']['rewards_unlocked'] += len(unlocked_rewards)
+        
         # Save updated alter-ego
         if save_alter_ego(mission['archetype'], ego_data):
             print_success(f"✅ Updated {ego_data['name']} stats")
@@ -2016,6 +2262,39 @@ def mark_mission_completed():
         for ability, value in on_complete["abilities"].items():
             if value != 0:
                 print(f"    • {ability.capitalize()}: {value:+d}")
+        
+        # Check and award badges after mission completion
+        print(f"\n{Colors.OKCYAN}🏆 Checking badges...{Colors.ENDC}")
+        newly_awarded = check_and_award_badges(mission['archetype'])
+        if newly_awarded:
+            # Record badge unlocks in history
+            for badge in newly_awarded:
+                synergy_snapshot = get_synergy_snapshot()
+                history_entry = {
+                    'history_index': get_next_history_index(),
+                    'alter-ego': mission['archetype'],
+                    'event_type': 'badge_unlock',
+                    'badge_id': badge.get('badge_id'),
+                    'badge_name': badge.get('name'),
+                    'badge_category': badge.get('category'),
+                    'badge_rarity': badge.get('rarity'),
+                    'delta_changed': {},
+                    'state_after_delta_applied': {
+                        'level': ego_data['level'],
+                        'title': ego_data['title'],
+                        'xp': ego_data['xp_details']['current_xp'],
+                        'health': ego_data['health_details']['current_health'],
+                        'energy': ego_data['energy_details']['current_energy'],
+                        'abilities': ego_data['abilities'].copy()
+                    },
+                    'synergy_before': synergy_snapshot,
+                    'synergy_after': synergy_snapshot,
+                    'date': datetime.date.today().isoformat()
+                }
+                record_history(history_entry)
+            
+            # Generate badges aggregate
+            generate_badges_aggregate()
     else:
         print_error("Failed to mark mission as completed")
 
@@ -2169,6 +2448,7 @@ def restart_failed_mission():
     # Update mission status
     mission["status"] = "not-started"
     mission["progress"] = {"current": 0, "total": mission["progress"]["total"]}
+    mission["was_restarted"] = True  # Mark for badge tracking
     if "completion_date" in mission:
         del mission["completion_date"]
     
@@ -2850,6 +3130,295 @@ def delete_reward():
         print_info("Deletion cancelled")
 
 
+def create_new_badge():
+    """Create a new badge in the badge configuration."""
+    print_header("CREATE NEW BADGE")
+    
+    # Load badges config
+    badges_config = load_json(BADGES_CONFIG_FILE)
+    if not badges_config:
+        badges_config = {
+            "description": "Badge definitions and unlock criteria for alter egos",
+            "badges": [],
+            "rarity_hierarchy": ["common", "uncommon", "rare", "epic", "legendary"],
+            "comment": "Badges are checked after daily progress updates and mission completions. Each alter ego tracks their own earned badges."
+        }
+    
+    # Generate next badge ID
+    existing_badges = badges_config.get('badges', [])
+    if existing_badges:
+        last_id = max(int(b.get('badge_id', 'B000')[1:]) for b in existing_badges)
+        new_id = f"B{str(last_id + 1).zfill(3)}"
+    else:
+        new_id = "B001"
+    
+    print(f"{Colors.OKCYAN}Badge ID: {new_id}{Colors.ENDC}\n")
+    
+    # Get badge details
+    name = get_input("Badge name", "")
+    if not name:
+        print_error("Badge name is required")
+        return
+    
+    description = get_input("Description", "")
+    
+    print(f"\n{Colors.BOLD}Rarity levels:{Colors.ENDC} common, uncommon, rare, epic, legendary")
+    rarity = get_input("Rarity", "common").lower()
+    
+    print(f"\n{Colors.BOLD}Categories:{Colors.ENDC} progression, streaks, missions, stats, abilities, synergy, soap, redemption, rewards")
+    category = get_input("Category", "progression").lower()
+    
+    # Get criteria
+    print(f"\n{Colors.BOLD}BADGE CRITERIA{Colors.ENDC}")
+    print(f"{Colors.OKCYAN}Available criteria types:{Colors.ENDC}")
+    print("  • level - Alter ego level")
+    print("  • streak - Daily check-in streak")
+    print("  • missions_completed - Total missions completed")
+    print("  • hard_missions_completed - Hard difficulty missions")
+    print("  • restarted_missions_completed - Restarted missions completed")
+    print("  • rewards_unlocked - Total rewards unlocked")
+    print("  • health - Current health points")
+    print("  • energy - Current energy points")
+    print("  • soap_points - SOAP points balance")
+    print("  • any_ability - Any ability >= value")
+    print("  • all_abilities - All abilities >= value")
+    print("  • total_synergy - Total synergy score")
+    
+    criteria_type = get_input("\nCriteria type", "level")
+    criteria_value = get_input("Criteria value (number)", "10")
+    
+    try:
+        criteria_value = int(criteria_value)
+    except ValueError:
+        print_error("Invalid number")
+        return
+    
+    # Create badge object
+    new_badge = {
+        "badge_id": new_id,
+        "name": name,
+        "description": description,
+        "rarity": rarity,
+        "category": category,
+        "criteria": {
+            "type": criteria_type,
+            "value": criteria_value
+        }
+    }
+    
+    # Add to badges list
+    badges_config['badges'].append(new_badge)
+    
+    # Save config
+    if save_json(BADGES_CONFIG_FILE, badges_config):
+        print_success(f"✅ Badge created: {name} ({new_id})")
+        print_info(f"Rarity: {rarity} | Category: {category}")
+        print_info(f"Criteria: {criteria_type} >= {criteria_value}")
+        
+        # Regenerate aggregate
+        if generate_badges_aggregate():
+            print_success("📦 Badge aggregate regenerated")
+    else:
+        print_error("Failed to create badge")
+
+
+def modify_badge():
+    """Modify an existing badge in the configuration."""
+    print_header("MODIFY BADGE")
+    
+    # Load badges config
+    badges_config = load_json(BADGES_CONFIG_FILE)
+    if not badges_config or not badges_config.get('badges'):
+        print_error("No badges found in configuration")
+        return
+    
+    badges = badges_config.get('badges', [])
+    
+    # List badges
+    print(f"{Colors.BOLD}Available Badges:{Colors.ENDC}\n")
+    for idx, badge in enumerate(badges, 1):
+        print(f"{Colors.OKCYAN}[{idx}]{Colors.ENDC} {badge.get('name')} ({badge.get('badge_id')}) - {badge.get('rarity')}")
+        print(f"    {badge.get('description')}")
+        criteria = badge.get('criteria', {})
+        print(f"    Criteria: {criteria.get('type')} >= {criteria.get('value')}\n")
+    
+    choice = get_input(f"Select badge to modify (1-{len(badges)})", "1")
+    
+    try:
+        idx = int(choice) - 1
+        if not (0 <= idx < len(badges)):
+            print_error("Invalid choice")
+            return
+    except ValueError:
+        print_error("Invalid input")
+        return
+    
+    badge = badges[idx]
+    
+    print(f"\n{Colors.BOLD}Modifying: {badge.get('name')}{Colors.ENDC}")
+    print_info("Press Enter to keep current value\n")
+    
+    # Modify fields
+    new_name = get_input("Badge name", badge.get('name'))
+    if new_name:
+        badge['name'] = new_name
+    
+    new_description = get_input("Description", badge.get('description'))
+    if new_description:
+        badge['description'] = new_description
+    
+    print(f"\n{Colors.BOLD}Rarity levels:{Colors.ENDC} common, uncommon, rare, epic, legendary")
+    new_rarity = get_input("Rarity", badge.get('rarity'))
+    if new_rarity:
+        badge['rarity'] = new_rarity.lower()
+    
+    print(f"\n{Colors.BOLD}Categories:{Colors.ENDC} progression, streaks, missions, stats, abilities, synergy, soap, redemption, rewards")
+    new_category = get_input("Category", badge.get('category'))
+    if new_category:
+        badge['category'] = new_category.lower()
+    
+    # Modify criteria
+    criteria = badge.get('criteria', {})
+    print(f"\n{Colors.BOLD}Current criteria:{Colors.ENDC} {criteria.get('type')} >= {criteria.get('value')}")
+    print_info("Press Enter to skip criteria modification")
+    
+    new_criteria_type = get_input("Criteria type", "")
+    if new_criteria_type:
+        criteria['type'] = new_criteria_type
+        
+        new_criteria_value = get_input("Criteria value", str(criteria.get('value', 0)))
+        if new_criteria_value:
+            try:
+                criteria['value'] = int(new_criteria_value)
+            except ValueError:
+                print_warning("Invalid number, keeping current value")
+    
+    # Save config
+    if save_json(BADGES_CONFIG_FILE, badges_config):
+        print_success(f"✅ Badge updated: {badge.get('name')}")
+        
+        # Regenerate aggregate
+        if generate_badges_aggregate():
+            print_success("📦 Badge aggregate regenerated")
+    else:
+        print_error("Failed to update badge")
+
+
+def delete_badge():
+    """Delete a badge from the configuration."""
+    print_header("DELETE BADGE")
+    
+    # Load badges config
+    badges_config = load_json(BADGES_CONFIG_FILE)
+    if not badges_config or not badges_config.get('badges'):
+        print_error("No badges found in configuration")
+        return
+    
+    badges = badges_config.get('badges', [])
+    
+    # List badges
+    print(f"{Colors.BOLD}Available Badges:{Colors.ENDC}\n")
+    for idx, badge in enumerate(badges, 1):
+        print(f"{Colors.OKCYAN}[{idx}]{Colors.ENDC} {badge.get('name')} ({badge.get('badge_id')}) - {badge.get('rarity')}")
+        print(f"    {badge.get('description')}\n")
+    
+    choice = get_input(f"Select badge to delete (1-{len(badges)})", "1")
+    
+    try:
+        idx = int(choice) - 1
+        if not (0 <= idx < len(badges)):
+            print_error("Invalid choice")
+            return
+    except ValueError:
+        print_error("Invalid input")
+        return
+    
+    badge = badges[idx]
+    badge_id = badge.get('badge_id')
+    
+    print(f"\n{Colors.WARNING}⚠️  WARNING: This will delete badge: {badge.get('name')}{Colors.ENDC}")
+    print_warning("This badge will also be removed from all alter egos who earned it!")
+    
+    confirm = get_input("Are you sure? (yes/no)", "no")
+    if confirm.lower() not in ["yes", "y"]:
+        print_info("Deletion cancelled")
+        return
+    
+    # Remove badge from config
+    badges.pop(idx)
+    badges_config['badges'] = badges
+    
+    # Save config
+    if save_json(BADGES_CONFIG_FILE, badges_config):
+        print_success(f"✅ Badge deleted from configuration: {badge.get('name')}")
+        
+        # Remove badge from all alter egos
+        removed_count = 0
+        for archetype in ["tyler", "mr-robot", "kei"]:
+            ego_data = load_alter_ego(archetype)
+            if ego_data:
+                earned_badges = ego_data.get('earned_badges', [])
+                original_count = len(earned_badges)
+                
+                # Filter out the deleted badge
+                earned_badges = [b for b in earned_badges if b.get('badge_id') != badge_id]
+                
+                if len(earned_badges) < original_count:
+                    ego_data['earned_badges'] = earned_badges
+                    save_alter_ego(archetype, ego_data)
+                    removed_count += 1
+                    print_info(f"Removed from {ego_data['name']}")
+        
+        if removed_count > 0:
+            print_success(f"Badge removed from {removed_count} alter ego(s)")
+        
+        # Regenerate aggregate
+        if generate_badges_aggregate():
+            print_success("📦 Badge aggregate regenerated")
+    else:
+        print_error("Failed to delete badge")
+
+
+def manage_badges():
+    """Badge management submenu."""
+    while True:
+        print_header("BADGE MANAGEMENT")
+        
+        options = [
+            "🆕 Create New Badge",
+            "✏️  Modify Badge",
+            "🗑️  Delete Badge",
+            "📋 List All Badges",
+            "🔙 Back to Main Menu"
+        ]
+        
+        choice = get_choice(options, "What would you like to do?")
+        
+        if choice == 1:
+            create_new_badge()
+        elif choice == 2:
+            modify_badge()
+        elif choice == 3:
+            delete_badge()
+        elif choice == 4:
+            # List all badges
+            badges_config = load_json(BADGES_CONFIG_FILE)
+            if badges_config and badges_config.get('badges'):
+                print_header("ALL BADGES")
+                for badge in badges_config['badges']:
+                    print(f"{Colors.BOLD}{badge.get('name')}{Colors.ENDC} ({badge.get('badge_id')})")
+                    print(f"  {badge.get('description')}")
+                    print(f"  Rarity: {badge.get('rarity')} | Category: {badge.get('category')}")
+                    criteria = badge.get('criteria', {})
+                    print(f"  Criteria: {criteria.get('type')} >= {criteria.get('value')}\n")
+            else:
+                print_error("No badges found")
+        elif choice == 5:
+            break
+        
+        input(f"\n{Colors.OKCYAN}Press Enter to continue...{Colors.ENDC}")
+
+
 def main_menu():
     """Display main menu and handle user choice."""
     while True:
@@ -2869,6 +3438,7 @@ def main_menu():
             "🗑️  Delete Mission",
             "📊 View All Missions",
             "🎁 Manage Rewards",
+            "🏆 Manage Badges",
             "📦 Regenerate Aggregates",
             "🚪 Exit"
         ]
@@ -2904,6 +3474,8 @@ def main_menu():
         elif choice == 13:
             manage_rewards()
         elif choice == 14:
+            manage_badges()
+        elif choice == 15:
             print_header("REGENERATE AGGREGATES")
             print_info("This will regenerate all aggregate JSON files from individual missions and rewards.")
             confirm = get_input("Continue? (yes/no)", "yes")
@@ -2914,7 +3486,7 @@ def main_menu():
                     print_error("Failed to regenerate aggregates")
             else:
                 print_info("Cancelled")
-        elif choice == 15:
+        elif choice == 16:
             print(f"\n{Colors.FAIL}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━{Colors.ENDC}")
             print(f"{Colors.FAIL}  First rule of Fight Club:{Colors.ENDC}")
             print(f"{Colors.FAIL}    You do not talk about Fight Club.{Colors.ENDC}")

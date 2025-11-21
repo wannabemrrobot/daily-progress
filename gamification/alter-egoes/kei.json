@@ -11,6 +11,13 @@
     "note": ""
   },
   "soap_points": 0,
+  "earned_badges": [],
+  "stats": {
+    "missions_completed": 0,
+    "hard_missions_completed": 0,
+    "restarted_missions_completed": 0,
+    "rewards_unlocked": 0
+  },
   "xp_details": {
     "current_xp": 0,
     "xp_to_next_level": 100
