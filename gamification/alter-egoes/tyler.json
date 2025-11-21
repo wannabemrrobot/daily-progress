@@ -7,8 +7,8 @@
   "level": 1,
   "title": "Awakened",
   "status": {
-    "current_status": "disabled",
-    "note": "Disabled due to negative vital stats"
+    "current_status": "active",
+    "note": ""
   },
   "soap_points": 0,
   "xp_details": {
