@@ -14,9 +14,9 @@
     },
     "total_synergy": -8.74,
     "missions": {
-      "total": 8,
+      "total": 10,
       "completed": 2,
-      "failed": 0,
+      "failed": 2,
       "not-started": 1,
       "in-progress": 5
     },

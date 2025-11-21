@@ -39,7 +39,13 @@
             }
         }
     },
-    "reward": [],
+    "reward": [
+        {
+            "reward_type": "street",
+            "title": "Portable Monitor for RPI",
+            "reward_id": "R02"
+        }
+    ],
     "mission_icon": "assets/badges/default.png",
     "due_date": "2026-01-01",
     "start_date": "2025-11-21",
