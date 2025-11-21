@@ -10,26 +10,27 @@
     "current_status": "disabled",
     "note": "Disabled due to negative vital stats"
   },
+  "soap_points": 0,
   "xp_details": {
-    "current_xp": -8,
+    "current_xp": 0,
     "xp_to_next_level": 100
   },
   "health_details": {
-    "current_health": -44.5,
+    "current_health": 0,
     "max_health": 100
   },
   "energy_details": {
-    "current_energy": -16,
+    "current_energy": 0,
     "max_energy": 100
   },
   "abilities": {
     "strength": 0,
-    "discipline": -90,
-    "agression": -20,
-    "confidence": -45,
-    "dominance": -15,
-    "pain tolerance": 10,
-    "honor": -40,
-    "determination": -80
+    "discipline": 0,
+    "agression": 0,
+    "confidence": 0,
+    "dominance": 0,
+    "pain tolerance": 0,
+    "honor": 0,
+    "determination": 0
   }
 }

@@ -10,26 +10,27 @@
     "current_status": "active",
     "note": ""
   },
+  "soap_points": 0,
   "xp_details": {
-    "current_xp": 17,
+    "current_xp": 0,
     "xp_to_next_level": 100
   },
   "health_details": {
-    "current_health": 15,
+    "current_health": 0,
     "max_health": 100
   },
   "energy_details": {
-    "current_energy": 15,
+    "current_energy": 0,
     "max_energy": 100
   },
   "abilities": {
-    "intelligence": 15,
-    "logic": 10,
-    "adaptability": 25,
-    "innovation": 30,
-    "focus": 15,
-    "systemization": 20,
-    "precision": 5,
-    "speed": 15
+    "intelligence": 0,
+    "logic": 0,
+    "adaptability": 0,
+    "innovation": 0,
+    "focus": 0,
+    "systemization": 0,
+    "precision": 0,
+    "speed": 0
   }
 }

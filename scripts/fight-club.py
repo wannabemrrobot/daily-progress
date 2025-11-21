@@ -399,7 +399,37 @@ def apply_stat_changes(ego_data: Dict, changes: Dict, xp_rules: Dict) -> Dict:
                 else:
                     print(f"{Colors.WARNING}Warning: Unknown ability '{ability}' for {ego_data['name']}{Colors.ENDC}")
     
+    # Check and update alter ego status based on vital stats
+    update_alter_ego_status(ego_data)
+    
     return delta_applied
+
+
+def update_alter_ego_status(ego_data: Dict):
+    """
+    Update alter ego status to 'disabled' if any vital stat (XP, health, energy) is negative.
+    Sets back to 'active' when all vital stats are positive.
+    """
+    current_xp = ego_data.get('xp_details', {}).get('current_xp', 0)
+    current_health = ego_data.get('health_details', {}).get('current_health', 0)
+    current_energy = ego_data.get('energy_details', {}).get('current_energy', 0)
+    
+    # Check if any vital stat is negative
+    is_disabled = current_xp < 0 or current_health < 0 or current_energy < 0
+    
+    # Get current status
+    current_status = ego_data.get('status', {}).get('current_status', 'active')
+    
+    if is_disabled and current_status != 'disabled':
+        # Set to disabled
+        ego_data['status']['current_status'] = 'disabled'
+        ego_data['status']['note'] = 'Disabled due to negative vital stats'
+        print(f"{Colors.FAIL}⚠️  {ego_data['name']} is now DISABLED (negative vital stats){Colors.ENDC}")
+    elif not is_disabled and current_status == 'disabled':
+        # Reactivate
+        ego_data['status']['current_status'] = 'active'
+        ego_data['status']['note'] = ''
+        print(f"{Colors.OKGREEN}✅ {ego_data['name']} is now ACTIVE (all vital stats positive){Colors.ENDC}")
 
 
 def record_history(event_data: Dict):
@@ -483,6 +513,92 @@ def calculate_synergy_stats() -> Dict[str, float]:
                 synergy_stats[synergy_type] = round(average, 2)
     
     return synergy_stats
+
+
+def get_synergy_snapshot() -> Dict[str, float]:
+    """
+    Get current synergy snapshot for history tracking.
+    Returns mind, body, soul, and total synergy values.
+    """
+    synergy_data = load_synergy()
+    if not synergy_data:
+        return {"mind": 0.0, "body": 0.0, "soul": 0.0, "total": 0.0}
+    
+    synergy = synergy_data.get("fight_club", {}).get("synergy", {})
+    total = synergy_data.get("fight_club", {}).get("total_synergy", 0.0)
+    
+    return {
+        "mind": synergy.get("mind", 0.0),
+        "body": synergy.get("body", 0.0),
+        "soul": synergy.get("soul", 0.0),
+        "total": total
+    }
+
+
+def get_soap_reward_for_mission(mission_data: Dict) -> int:
+    """Calculate SOAP points reward for completing a mission based on difficulty."""
+    rules = load_daily_progress_rules()
+    if not rules:
+        return 0
+    
+    soap_config = rules.get("soap_points", {}).get("mission_completion_reward", {})
+    difficulty = mission_data.get("difficulty", "easy").lower()
+    return soap_config.get(difficulty, 0)
+
+
+def get_soap_reward_for_streak(streak_days: int) -> int:
+    """Get SOAP points reward for reaching a streak milestone."""
+    rules = load_daily_progress_rules()
+    if not rules:
+        return 0
+    
+    soap_config = rules.get("soap_points", {}).get("streak_milestone_reward", {})
+    return soap_config.get(str(streak_days), 0)
+
+
+def get_soap_cost_for_restart(mission_data: Dict) -> int:
+    """Calculate SOAP points cost to restart a failed mission based on difficulty."""
+    rules = load_daily_progress_rules()
+    if not rules:
+        return 0
+    
+    soap_config = rules.get("soap_points", {}).get("failed_mission_restart_cost", {})
+    difficulty = mission_data.get("difficulty", "easy").lower()
+    return soap_config.get(difficulty, 0)
+
+
+def award_soap_points(archetype: str, amount: int, reason: str = "") -> bool:
+    """Award SOAP points to an alter ego."""
+    ego_data = load_alter_ego(archetype)
+    if not ego_data:
+        return False
+    
+    current_soap = ego_data.get("soap_points", 0)
+    ego_data["soap_points"] = current_soap + amount
+    
+    if save_alter_ego(archetype, ego_data):
+        print_success(f"💎 {ego_data['name']}: +{amount} SOAP points{' (' + reason + ')' if reason else ''}")
+        return True
+    return False
+
+
+def deduct_soap_points(archetype: str, amount: int, reason: str = "") -> bool:
+    """Deduct SOAP points from an alter ego. Returns False if insufficient points."""
+    ego_data = load_alter_ego(archetype)
+    if not ego_data:
+        return False
+    
+    current_soap = ego_data.get("soap_points", 0)
+    if current_soap < amount:
+        print_error(f"Insufficient SOAP points. Need {amount}, have {current_soap}")
+        return False
+    
+    ego_data["soap_points"] = current_soap - amount
+    
+    if save_alter_ego(archetype, ego_data):
+        print_warning(f"💎 {ego_data['name']}: -{amount} SOAP points{' (' + reason + ')' if reason else ''}")
+        return True
+    return False
 
 
 def count_missions() -> Dict[str, int]:
@@ -909,8 +1025,17 @@ def apply_missed_checkin_penalty():
             ego_data['abilities'][ability] = max(0, current_value - reduction)
             abilities_delta[ability] = -reduction
         
+        # Capture synergy before saving
+        synergy_before = get_synergy_snapshot()
+        
         save_alter_ego(archetype, ego_data)
         print(f"{Colors.FAIL}   {ego_data['name']}: {xp_penalty} XP, {health_penalty} health, {energy_penalty} energy, ~{abs(abilities_percent)}% abilities{Colors.ENDC}")
+        
+        # Update synergy and get after snapshot
+        if update_synergy():
+            synergy_after = get_synergy_snapshot()
+        else:
+            synergy_after = synergy_before
         
         # Record history for this penalty
         history_entry = {
@@ -932,6 +1057,8 @@ def apply_missed_checkin_penalty():
                 'energy': ego_data['energy_details']['current_energy'],
                 'abilities': ego_data['abilities'].copy()
             },
+            'synergy_before': synergy_before,
+            'synergy_after': synergy_after,
             'date': datetime.date.today().isoformat()
         }
         
@@ -1023,6 +1150,12 @@ def apply_habit_rewards(habit_results: Dict[str, str]):
         print(f"\n{Colors.OKCYAN}🎉 STREAK MILESTONES:{Colors.ENDC}")
         for habit, streak, bonus in milestone_bonuses:
             print(f"{Colors.OKCYAN}   {habit}: {streak} day streak! +{bonus} XP bonus{Colors.ENDC}")
+            
+            # Award SOAP points for streak milestone to all alter-egos
+            soap_reward = get_soap_reward_for_streak(streak)
+            if soap_reward > 0:
+                for archetype in ["tyler", "mr-robot", "kei"]:
+                    award_soap_points(archetype, soap_reward, f"{habit} {streak}-day streak")
     
     # Apply total XP to all alter-egos
     if total_xp_earned > 0:
@@ -1058,6 +1191,9 @@ def apply_habit_rewards(habit_results: Dict[str, str]):
         
         # Record milestone bonuses in history (one entry per milestone per alter-ego)
         if milestone_bonuses:
+            # Capture synergy before applying bonuses
+            synergy_before = get_synergy_snapshot()
+            
             for habit, streak, bonus in milestone_bonuses:
                 for archetype in ["tyler", "mr-robot", "kei"]:
                     ego_data = load_alter_ego(archetype)
@@ -1079,6 +1215,8 @@ def apply_habit_rewards(habit_results: Dict[str, str]):
                                 'energy': ego_data['energy_details']['current_energy'],
                                 'abilities': ego_data['abilities'].copy()
                             },
+                            'synergy_before': synergy_before,
+                            'synergy_after': synergy_before,  # XP changes don't affect synergy stats
                             'date': datetime.date.today().isoformat()
                         }
                         record_history(history_entry)
@@ -1805,12 +1943,26 @@ def mark_mission_completed():
             'abilities': ego_data['abilities'].copy()
         }
         
+        # Capture synergy before stat changes
+        synergy_before = get_synergy_snapshot()
+        
         # Apply changes
         delta_applied = apply_stat_changes(ego_data, on_complete, xp_rules)
         
         # Save updated alter-ego
         if save_alter_ego(mission['archetype'], ego_data):
             print_success(f"✅ Updated {ego_data['name']} stats")
+            
+            # Award SOAP points for mission completion
+            soap_reward = get_soap_reward_for_mission(mission)
+            if soap_reward > 0:
+                award_soap_points(mission['archetype'], soap_reward, f"Mission completed: {mission['title']}")
+            
+            # Update synergy first (needed for after snapshot)
+            if update_synergy():
+                synergy_after = get_synergy_snapshot()
+            else:
+                synergy_after = synergy_before  # Fallback if update fails
             
             # Record history
             history_entry = {
@@ -1827,6 +1979,8 @@ def mark_mission_completed():
                     'energy': ego_data['energy_details']['current_energy'],
                     'abilities': ego_data['abilities'].copy()
                 },
+                'synergy_before': synergy_before,
+                'synergy_after': synergy_after,
                 'date': mission["completion_date"]
             }
             
@@ -1845,10 +1999,6 @@ def mark_mission_completed():
         
         print_success(f"Mission completed: {mission['title']}")
         print_info(f"Moved to: {MISSIONS_COMPLETED}")
-        
-        # Update synergy
-        if update_synergy():
-            print_success("🔗 Synergy updated")
         
         # Regenerate aggregates
         if regenerate_all_aggregates():
@@ -1905,12 +2055,21 @@ def mark_mission_failed():
             'abilities': ego_data['abilities'].copy()
         }
         
+        # Capture synergy before stat changes
+        synergy_before = get_synergy_snapshot()
+        
         # Apply changes (penalties)
         delta_applied = apply_stat_changes(ego_data, on_failure, xp_rules)
         
         # Save updated alter-ego
         if save_alter_ego(mission['archetype'], ego_data):
             print_warning(f"⚠️  Updated {ego_data['name']} stats (penalties applied)")
+            
+            # Update synergy first (needed for after snapshot)
+            if update_synergy():
+                synergy_after = get_synergy_snapshot()
+            else:
+                synergy_after = synergy_before  # Fallback if update fails
             
             # Record history
             history_entry = {
@@ -1927,6 +2086,8 @@ def mark_mission_failed():
                     'energy': ego_data['energy_details']['current_energy'],
                     'abilities': ego_data['abilities'].copy()
                 },
+                'synergy_before': synergy_before,
+                'synergy_after': synergy_after,
                 'date': mission["completion_date"]
             }
             
@@ -1940,10 +2101,6 @@ def mark_mission_failed():
         
         print_warning(f"Mission failed: {mission['title']}")
         print_info(f"Moved to: {MISSIONS_FAILED}")
-        
-        # Update synergy
-        if update_synergy():
-            print_success("🔗 Synergy updated")
         
         # Regenerate aggregates
         if regenerate_all_aggregates():
@@ -1963,6 +2120,100 @@ def mark_mission_failed():
                 print(f"    • {ability.capitalize()}: {value:+d}")
     else:
         print_error("Failed to mark mission as failed")
+
+
+def restart_failed_mission():
+    """Restart a failed mission by spending SOAP points."""
+    print_header("RESTART FAILED MISSION")
+    
+    # List failed missions
+    failed_missions = list_missions(MISSIONS_FAILED, "failed")
+    if not failed_missions:
+        return
+    
+    choice = get_choice([f"Mission {i}" for i in range(1, len(failed_missions) + 1)], "Select mission to restart")
+    mission_file, mission = failed_missions[choice - 1]
+    
+    # Get SOAP cost
+    soap_cost = get_soap_cost_for_restart(mission)
+    archetype = mission['archetype']
+    
+    # Check if alter ego has enough SOAP
+    ego_data = load_alter_ego(archetype)
+    if not ego_data:
+        print_error("Could not load alter ego data")
+        return
+    
+    current_soap = ego_data.get("soap_points", 0)
+    
+    print(f"\n{Colors.OKCYAN}Mission: {mission['title']}{Colors.ENDC}")
+    print(f"{Colors.OKCYAN}Archetype: {archetype}{Colors.ENDC}")
+    print(f"{Colors.OKCYAN}Difficulty: {mission.get('difficulty', 'easy')}{Colors.ENDC}")
+    print(f"\n{Colors.WARNING}SOAP Cost: {soap_cost} points{Colors.ENDC}")
+    print(f"{Colors.OKGREEN}Your SOAP: {current_soap} points{Colors.ENDC}")
+    
+    if current_soap < soap_cost:
+        print_error(f"\n❌ Insufficient SOAP points! Need {soap_cost - current_soap} more.")
+        return
+    
+    # Confirm restart
+    confirm = get_input(f"\nSpend {soap_cost} SOAP points to restart this mission? (yes/no)", "no")
+    if confirm.lower() not in ["yes", "y"]:
+        print_info("Restart cancelled")
+        return
+    
+    # Deduct SOAP points
+    if not deduct_soap_points(archetype, soap_cost, f"Restart mission: {mission['title']}"):
+        return
+    
+    # Update mission status
+    mission["status"] = "not-started"
+    mission["progress"] = {"current": 0, "total": mission["progress"]["total"]}
+    if "completion_date" in mission:
+        del mission["completion_date"]
+    
+    # Move mission back to not-completed folder
+    new_file = MISSIONS_NOT_COMPLETED / mission_file.name
+    if save_json(new_file, mission):
+        mission_file.unlink()  # Delete from failed folder
+        
+        print_success(f"\n✅ Mission restarted: {mission['title']}")
+        print_info(f"Moved to: {MISSIONS_NOT_COMPLETED}")
+        print_info(f"Remaining SOAP: {ego_data.get('soap_points', 0)} points")
+        
+        # Regenerate aggregates
+        if regenerate_all_aggregates():
+            print_success("📦 Aggregates regenerated")
+        
+        # Record in history
+        ego_data = load_alter_ego(archetype)
+        if ego_data:
+            synergy_snapshot = get_synergy_snapshot()
+            history_entry = {
+                'history_index': get_next_history_index(),
+                'alter-ego': archetype,
+                'mission_associated': mission_file.stem,
+                'state': 'restarted',
+                'event_type': 'mission_restart',
+                'soap_spent': soap_cost,
+                'delta_changed': {},
+                'state_after_delta_applied': {
+                    'level': ego_data['level'],
+                    'title': ego_data['title'],
+                    'xp': ego_data['xp_details']['current_xp'],
+                    'health': ego_data['health_details']['current_health'],
+                    'energy': ego_data['energy_details']['current_energy'],
+                    'abilities': ego_data['abilities'].copy()
+                },
+                'synergy_before': synergy_snapshot,
+                'synergy_after': synergy_snapshot,
+                'date': datetime.date.today().isoformat(),
+                'unlocked_rewards': []
+            }
+            record_history(history_entry)
+            print_success(f"📝 History recorded (entry #{history_entry['history_index']})")
+    else:
+        print_error("Failed to restart mission")
 
 
 def delete_mission():
@@ -2188,6 +2439,7 @@ def modify_mission():
         if old_status == "not-started" and new_status == "in-progress":
             ego_data = load_alter_ego(mission['archetype'])
             if ego_data:
+                synergy_snapshot = get_synergy_snapshot()
                 history_entry = {
                     'history_index': get_next_history_index(),
                     'alter-ego': mission['archetype'],
@@ -2211,6 +2463,8 @@ def modify_mission():
                         'energy': ego_data['energy_details']['current_energy'],
                         'abilities': ego_data['abilities'].copy()
                     },
+                    'synergy_before': synergy_snapshot,
+                    'synergy_after': synergy_snapshot,  # No stat changes
                     'date': datetime.date.today().isoformat(),
                     'unlocked_rewards': []
                 }
@@ -2221,6 +2475,7 @@ def modify_mission():
         elif old_status == "in-progress" and new_status == "in-progress":
             ego_data = load_alter_ego(mission['archetype'])
             if ego_data:
+                synergy_snapshot = get_synergy_snapshot()
                 history_entry = {
                     'history_index': get_next_history_index(),
                     'alter-ego': mission['archetype'],
@@ -2240,6 +2495,8 @@ def modify_mission():
                         'energy': ego_data['energy_details']['current_energy'],
                         'abilities': ego_data['abilities'].copy()
                     },
+                    'synergy_before': synergy_snapshot,
+                    'synergy_after': synergy_snapshot,  # No stat changes
                     'date': datetime.date.today().isoformat(),
                     'unlocked_rewards': []
                 }
@@ -2349,6 +2606,7 @@ def update_mission_progress():
                     if old_status == "not-started" and mission["status"] == "in-progress":
                         event_type = 'mission_started'
                     
+                    synergy_snapshot = get_synergy_snapshot()
                     history_entry = {
                         'history_index': get_next_history_index(),
                         'alter-ego': mission['archetype'],
@@ -2369,6 +2627,8 @@ def update_mission_progress():
                             'energy': ego_data['energy_details']['current_energy'],
                             'abilities': ego_data['abilities'].copy()
                         },
+                        'synergy_before': synergy_snapshot,
+                        'synergy_after': synergy_snapshot,  # No stat changes
                         'date': datetime.date.today().isoformat(),
                         'unlocked_rewards': []
                     }
@@ -2603,6 +2863,7 @@ def main_menu():
             "🎯 Create New Mission",
             "✅ Mark Mission as Completed",
             "❌ Mark Mission as Failed",
+            "💎 Restart Failed Mission (SOAP)",
             "📈 Update Mission Progress",
             "✏️  Modify Mission",
             "🗑️  Delete Mission",
@@ -2629,18 +2890,20 @@ def main_menu():
         elif choice == 7:
             mark_mission_failed()
         elif choice == 8:
-            update_mission_progress()
+            restart_failed_mission()
         elif choice == 9:
-            modify_mission()
+            update_mission_progress()
         elif choice == 10:
-            delete_mission()
+            modify_mission()
         elif choice == 11:
+            delete_mission()
+        elif choice == 12:
             print_header("ALL MISSIONS")
             list_missions(MISSIONS_NOT_COMPLETED, "not-completed")
             list_missions(MISSIONS_COMPLETED, "completed")
-        elif choice == 12:
-            manage_rewards()
         elif choice == 13:
+            manage_rewards()
+        elif choice == 14:
             print_header("REGENERATE AGGREGATES")
             print_info("This will regenerate all aggregate JSON files from individual missions and rewards.")
             confirm = get_input("Continue? (yes/no)", "yes")
@@ -2651,7 +2914,7 @@ def main_menu():
                     print_error("Failed to regenerate aggregates")
             else:
                 print_info("Cancelled")
-        elif choice == 14:
+        elif choice == 15:
             print(f"\n{Colors.FAIL}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━{Colors.ENDC}")
             print(f"{Colors.FAIL}  First rule of Fight Club:{Colors.ENDC}")
             print(f"{Colors.FAIL}    You do not talk about Fight Club.{Colors.ENDC}")

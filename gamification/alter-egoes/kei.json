@@ -10,26 +10,27 @@
     "current_status": "active",
     "note": ""
   },
+  "soap_points": 0,
   "xp_details": {
-    "current_xp": 2,
+    "current_xp": 0,
     "xp_to_next_level": 100
   },
   "health_details": {
-    "current_health": 10,
+    "current_health": 0,
     "max_health": 100
   },
   "energy_details": {
-    "current_energy": 5,
+    "current_energy": 0,
     "max_energy": 100
   },
   "abilities": {
-    "self-control": 10,
-    "peace": 15,
-    "wisdom": 10,
-    "focus": 10,
-    "resilience": 10,
+    "self-control": 0,
+    "peace": 0,
+    "wisdom": 0,
+    "focus": 0,
+    "resilience": 0,
     "harmony": 0,
     "mindfulness": 0,
-    "intuition": 20
+    "intuition": 0
   }
 }
