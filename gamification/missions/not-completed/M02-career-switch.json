@@ -1,0 +1,53 @@
+{
+    "archetype": "mr-robot",
+    "mission_code": "M02",
+    "title": "Career Switch",
+    "description": "Switch company as SDE3",
+    "difficulty": "medium",
+    "status": "in-progress",
+    "progress": {
+        "current": 0,
+        "total": 1
+    },
+    "archetype_stat_change": {
+        "on_complete": {
+            "health": 20,
+            "energy": 20,
+            "abilities": {
+                "intelligence": 20,
+                "logic": 20,
+                "adaptability": 10,
+                "innovation": 10,
+                "focus": 20,
+                "systemization": 30,
+                "precision": 30,
+                "speed": 20
+            }
+        },
+        "on_failure": {
+            "health": -20,
+            "energy": -20,
+            "abilities": {
+                "intelligence": -20,
+                "logic": -20,
+                "adaptability": -10,
+                "innovation": -10,
+                "focus": -20,
+                "systemization": -30,
+                "precision": -30,
+                "speed": -20
+            }
+        }
+    },
+    "reward": [
+        {
+            "reward_type": "legendary",
+            "title": "Custom PC Build",
+            "reward_id": "R01"
+        }
+    ],
+    "mission_icon": "assets/badges/default.png",
+    "due_date": "2026-03-31",
+    "start_date": "2025-10-10",
+    "completion_date": null
+}

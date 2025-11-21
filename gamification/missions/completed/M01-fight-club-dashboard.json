@@ -1,0 +1,47 @@
+{
+    "archetype": "mr-robot",
+    "mission_code": "M01",
+    "title": "Fight Club Dashboard",
+    "description": "Create a Gamification dashboard for alter egoes",
+    "difficulty": "easy",
+    "status": "completed",
+    "progress": {
+        "current": 21,
+        "total": 21
+    },
+    "archetype_stat_change": {
+        "on_complete": {
+            "health": 10,
+            "energy": 10,
+            "abilities": {
+                "intelligence": 0,
+                "logic": 0,
+                "adaptability": 0,
+                "innovation": 20,
+                "focus": 0,
+                "systemization": 20,
+                "precision": 0,
+                "speed": 0
+            }
+        },
+        "on_failure": {
+            "health": -10,
+            "energy": -10,
+            "abilities": {
+                "intelligence": 0,
+                "logic": 0,
+                "adaptability": 0,
+                "innovation": -20,
+                "focus": 0,
+                "systemization": -20,
+                "precision": 0,
+                "speed": 0
+            }
+        }
+    },
+    "reward": [],
+    "mission_icon": "assets/badges/default.png",
+    "due_date": "",
+    "start_date": "2025-11-01",
+    "completion_date": "2025-11-22"
+}

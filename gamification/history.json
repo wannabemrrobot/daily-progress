@@ -1,1 +1,142 @@
-[]
+[
+  {
+    "history_index": 1,
+    "alter-ego": "mr-robot",
+    "mission_associated": "M01-fight-club-dashboard",
+    "state": "completed",
+    "delta_changed": {
+      "xp": 0,
+      "health": 10,
+      "energy": 10,
+      "abilities": {
+        "innovation": 20,
+        "systemization": 20
+      }
+    },
+    "state_after_delta_applied": {
+      "level": 1,
+      "title": "Awakened",
+      "xp": 0,
+      "health": 10,
+      "energy": 10,
+      "abilities": {
+        "intelligence": 0,
+        "logic": 0,
+        "adaptability": 0,
+        "innovation": 20,
+        "focus": 0,
+        "systemization": 20,
+        "precision": 0,
+        "speed": 0
+      }
+    },
+    "synergy_before": {
+      "mind": 0.0,
+      "body": 0.0,
+      "soul": 0.0,
+      "total": 0.0
+    },
+    "synergy_after": {
+      "mind": 5.0,
+      "body": 0.0,
+      "soul": 0.0,
+      "total": 5.0
+    },
+    "date": "2025-11-22",
+    "unlocked_rewards": []
+  },
+  {
+    "history_index": 2,
+    "alter-ego": "tyler",
+    "mission_associated": "T01-quit-smoking-25-days",
+    "state": "completed",
+    "delta_changed": {
+      "xp": 0,
+      "health": 10,
+      "energy": 10,
+      "abilities": {
+        "strength": 5,
+        "discipline": 25,
+        "agression": 5,
+        "confidence": 25,
+        "dominance": 5,
+        "honor": 25,
+        "determination": 25
+      }
+    },
+    "state_after_delta_applied": {
+      "level": 1,
+      "title": "Awakened",
+      "xp": 0,
+      "health": 10,
+      "energy": 10,
+      "abilities": {
+        "strength": 5,
+        "discipline": 25,
+        "agression": 5,
+        "confidence": 25,
+        "dominance": 5,
+        "pain tolerance": 0,
+        "honor": 25,
+        "determination": 25
+      }
+    },
+    "synergy_before": {
+      "mind": 5.0,
+      "body": 0.0,
+      "soul": 0.0,
+      "total": 5.0
+    },
+    "synergy_after": {
+      "mind": 5.0,
+      "body": 14.38,
+      "soul": 0.0,
+      "total": 19.38
+    },
+    "date": "2025-11-22",
+    "unlocked_rewards": []
+  },
+  {
+    "history_index": 3,
+    "alter-ego": "mr-robot",
+    "mission_associated": "M02-career-switch",
+    "state": "in-progress",
+    "event_type": "mission_progress_update",
+    "mission_progress": {
+      "current": 0,
+      "total": 1
+    },
+    "delta_changed": {},
+    "state_after_delta_applied": {
+      "level": 1,
+      "title": "Awakened",
+      "xp": 0,
+      "health": 10,
+      "energy": 10,
+      "abilities": {
+        "intelligence": 0,
+        "logic": 0,
+        "adaptability": 0,
+        "innovation": 20,
+        "focus": 0,
+        "systemization": 20,
+        "precision": 0,
+        "speed": 0
+      }
+    },
+    "synergy_before": {
+      "mind": 5.0,
+      "body": 14.38,
+      "soul": 0.0,
+      "total": 19.38
+    },
+    "synergy_after": {
+      "mind": 5.0,
+      "body": 14.38,
+      "soul": 0.0,
+      "total": 19.38
+    },
+    "date": "2025-11-22",
+    "unlocked_rewards": []
+  }
+]

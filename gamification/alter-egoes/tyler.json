@@ -10,10 +10,10 @@
     "current_status": "active",
     "note": ""
   },
-  "soap_points": 0,
+  "soap_points": 5,
   "earned_badges": [],
   "stats": {
-    "missions_completed": 0,
+    "missions_completed": 1,
     "hard_missions_completed": 0,
     "restarted_missions_completed": 0,
     "rewards_unlocked": 0
@@ -23,21 +23,21 @@
     "xp_to_next_level": 100
   },
   "health_details": {
-    "current_health": 0,
+    "current_health": 10,
     "max_health": 100
   },
   "energy_details": {
-    "current_energy": 0,
+    "current_energy": 10,
     "max_energy": 100
   },
   "abilities": {
-    "strength": 0,
-    "discipline": 0,
-    "agression": 0,
-    "confidence": 0,
-    "dominance": 0,
+    "strength": 5,
+    "discipline": 25,
+    "agression": 5,
+    "confidence": 25,
+    "dominance": 5,
     "pain tolerance": 0,
-    "honor": 0,
-    "determination": 0
+    "honor": 25,
+    "determination": 25
   }
 }

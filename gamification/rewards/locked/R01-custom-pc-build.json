@@ -1,0 +1,11 @@
+{
+    "reward_id": "R01",
+    "title": "Custom PC Build",
+    "description": "Build a Gaming PC",
+    "associated_mission_ids": [
+        "M02"
+    ],
+    "reward_type": "legendary",
+    "is_locked": true,
+    "badge_icon": "assets/rewards/default.png"
+}
