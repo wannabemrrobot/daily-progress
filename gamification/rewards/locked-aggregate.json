@@ -1,29 +1,5 @@
 {
-    "rewards": [
-        {
-            "reward_id": "R01",
-            "title": "Custom PC Build",
-            "description": "Build a custom PC tailored to your needs and preferences.",
-            "associated_mission_ids": [
-                "M01"
-            ],
-            "reward_type": "apex",
-            "is_locked": true,
-            "badge_icon": "assets/rewards/custom-pc-build.png"
-        },
-        {
-            "reward_id": "R02",
-            "title": "Portable Monitor for RPI",
-            "description": "Monitor for Alter Ego Dashboard",
-            "associated_mission_ids": [
-                "T04",
-                "M03"
-            ],
-            "reward_type": "street",
-            "is_locked": true,
-            "badge_icon": "assets/rewards/default.png"
-        }
-    ],
-    "count": 2,
-    "last_updated": "2025-11-21T10:28:34.865519"
+    "rewards": [],
+    "count": 0,
+    "last_updated": "2025-11-21T23:42:31.460118"
 }
