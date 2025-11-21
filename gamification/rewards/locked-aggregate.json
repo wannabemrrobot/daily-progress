@@ -1,5 +1,17 @@
 {
-    "rewards": [],
-    "count": 0,
-    "last_updated": "2025-11-21T23:42:31.460118"
+    "rewards": [
+        {
+            "reward_id": "R01",
+            "title": "Custom PC Build",
+            "description": "Build a Gaming PC",
+            "associated_mission_ids": [
+                "M02"
+            ],
+            "reward_type": "legendary",
+            "is_locked": true,
+            "badge_icon": "assets/rewards/default.png"
+        }
+    ],
+    "count": 1,
+    "last_updated": "2025-11-22T01:01:13.393163"
 }

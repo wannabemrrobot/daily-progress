@@ -1,0 +1,47 @@
+{
+    "archetype": "tyler",
+    "mission_code": "T01",
+    "title": "Quit Smoking 25 days",
+    "description": "Quit Smoking for 25 days",
+    "difficulty": "easy",
+    "status": "completed",
+    "progress": {
+        "current": 25,
+        "total": 25
+    },
+    "archetype_stat_change": {
+        "on_complete": {
+            "health": 10,
+            "energy": 10,
+            "abilities": {
+                "strength": 5,
+                "discipline": 25,
+                "agression": 5,
+                "confidence": 25,
+                "dominance": 5,
+                "pain tolerance": 0,
+                "honor": 25,
+                "determination": 25
+            }
+        },
+        "on_failure": {
+            "health": -10,
+            "energy": -10,
+            "abilities": {
+                "strength": -5,
+                "discipline": -25,
+                "agression": -5,
+                "confidence": -25,
+                "dominance": -5,
+                "pain tolerance": 0,
+                "honor": -25,
+                "determination": -25
+            }
+        }
+    },
+    "reward": [],
+    "mission_icon": "assets/badges/default.png",
+    "due_date": "",
+    "start_date": "2025-10-11",
+    "completion_date": "2025-11-22"
+}

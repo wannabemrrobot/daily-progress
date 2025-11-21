@@ -1,0 +1,47 @@
+{
+    "archetype": "kei",
+    "mission_code": "K01",
+    "title": "Mindfulness 10 days",
+    "description": "Meditate daily for 10 days",
+    "difficulty": "easy",
+    "status": "not-started",
+    "progress": {
+        "current": 0,
+        "total": 10
+    },
+    "archetype_stat_change": {
+        "on_complete": {
+            "health": 5,
+            "energy": 5,
+            "abilities": {
+                "self-control": 5,
+                "peace": 5,
+                "wisdom": 2,
+                "focus": 10,
+                "resilience": 5,
+                "harmony": 10,
+                "mindfulness": 10,
+                "intuition": 5
+            }
+        },
+        "on_failure": {
+            "health": -5,
+            "energy": -5,
+            "abilities": {
+                "self-control": -5,
+                "peace": -5,
+                "wisdom": -5,
+                "focus": -10,
+                "resilience": -5,
+                "harmony": -10,
+                "mindfulness": -10,
+                "intuition": -5
+            }
+        }
+    },
+    "reward": [],
+    "mission_icon": "assets/badges/default.png",
+    "due_date": "",
+    "start_date": "2025-12-01",
+    "completion_date": null
+}
