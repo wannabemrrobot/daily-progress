@@ -283,5 +283,55 @@
     },
     "date": "2025-11-21",
     "unlocked_rewards": []
-  }
+  },
+  {
+  "history_index": 9,
+  "alter-ego": "tyler",
+  "mission_associated": "T04-some-mission",
+  "state": "completed",
+  "delta_changed": {
+    "xp": 10,
+    "health": 5,
+    "energy": 2,
+    "abilities": {
+      "discipline": 25,
+      "agression": 5,
+      "confidence": 25,
+      "dominance": 5,
+      "honor": 5,
+      "determination": 25
+    }
+  },
+  "state_after_delta_applied": {
+    "level": 1,
+    "title": "Awakened",
+    "xp": 35,
+    "health": 10.5,
+    "energy": 6,
+    "abilities": {
+      "strength": 20,
+      "discipline": 60,
+      "agression": 15,
+      "confidence": 60,
+      "dominance": 20,
+      "pain tolerance": 15,
+      "honor": 25,
+      "determination": 70
+    }
+  },
+  "synergy_before": {
+    "mind": 45.5,
+    "body": -35.0,
+    "soul": 62.3,
+    "total": 72.8
+  },
+  "synergy_after": {
+    "mind": 45.5,
+    "body": -25.0,
+    "soul": 62.3,
+    "total": 82.8
+  },
+  "date": "2025-11-21",
+  "unlocked_rewards": []
+}
 ]
