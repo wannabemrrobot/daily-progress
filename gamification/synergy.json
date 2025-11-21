@@ -4,72 +4,72 @@
     "chapter": "THE AWAKENING",
     "description": "The first spark \u2014 chaos, calm, and code are born.",
     "xp_details": {
-      "current_xp": 11,
+      "current_xp": 0,
       "xp_to_next_level": 500
     },
     "synergy": {
-      "mind": 16.88,
-      "body": -35.0,
-      "soul": 9.38
+      "mind": 0.0,
+      "body": 0.0,
+      "soul": 0.0
     },
-    "total_synergy": -8.74,
+    "total_synergy": 0.0,
     "missions": {
-      "total": 10,
-      "completed": 2,
-      "failed": 2,
-      "not-started": 1,
-      "in-progress": 5
+      "total": 0,
+      "completed": 0,
+      "failed": 0,
+      "not-started": 0,
+      "in-progress": 0
     },
     "rewards": {
-      "total": 2,
+      "total": 0,
       "unlocked": 0,
-      "locked": 2
+      "locked": 0
     },
     "daily_progress": {
-      "daily_progress_streak": 2,
-      "days_checked_in": 2,
+      "daily_progress_streak": 0,
+      "days_checked_in": 0,
       "habits": {
         "no-sugar": {
           "streak": 0,
           "best_streak": 0,
           "total_success": 0,
-          "total_failures": 2
+          "total_failures": 0
         },
         "workout": {
           "streak": 0,
           "best_streak": 0,
           "total_success": 0,
-          "total_failures": 2
+          "total_failures": 0
         },
         "meditation": {
           "streak": 0,
           "best_streak": 0,
           "total_success": 0,
-          "total_failures": 2
+          "total_failures": 0
         },
         "reading": {
           "streak": 0,
           "best_streak": 0,
           "total_success": 0,
-          "total_failures": 2
+          "total_failures": 0
         },
         "coding": {
           "streak": 0,
           "best_streak": 0,
           "total_success": 0,
-          "total_failures": 2
+          "total_failures": 0
         },
         "no-fap": {
           "streak": 0,
-          "best_streak": 1,
-          "total_success": 1,
-          "total_failures": 1
+          "best_streak": 0,
+          "total_success": 0,
+          "total_failures": 0
         },
         "no-junk-food": {
           "streak": 0,
           "best_streak": 0,
           "total_success": 0,
-          "total_failures": 2
+          "total_failures": 0
         }
       }
     }

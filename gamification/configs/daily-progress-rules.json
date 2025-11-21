@@ -62,5 +62,29 @@
             }
         },
         "comment": "One-time bonus when milestone is reached for any habit"
+    },
+    "soap_points": {
+        "description": "SOAP (Second Opportunity Action Points) system for restarting failed missions",
+        "mission_completion_reward": {
+            "easy": 5,
+            "medium": 10,
+            "hard": 15,
+            "comment": "SOAP points awarded per mission difficulty on successful completion"
+        },
+        "streak_milestone_reward": {
+            "7": 5,
+            "14": 10,
+            "30": 25,
+            "50": 50,
+            "100": 100,
+            "comment": "SOAP points awarded when daily progress streak hits milestones"
+        },
+        "failed_mission_restart_cost": {
+            "easy": 10,
+            "medium": 20,
+            "hard": 30,
+            "comment": "SOAP points required to restart a failed mission (cost is higher than reward to encourage success)"
+        },
+        "comment": "SOAP points are earned through mission completions and streaks, can be spent to restart failed missions. Never deducted on failures."
     }
 }
