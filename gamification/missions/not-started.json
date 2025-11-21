@@ -1,6 +1,53 @@
 {
     "missions": [
         {
+            "archetype": "kei",
+            "mission_code": "K01",
+            "title": "Mindfulness 10 days",
+            "description": "Meditate daily for 10 days",
+            "difficulty": "easy",
+            "status": "not-started",
+            "progress": {
+                "current": 0,
+                "total": 10
+            },
+            "archetype_stat_change": {
+                "on_complete": {
+                    "health": 5,
+                    "energy": 5,
+                    "abilities": {
+                        "self-control": 5,
+                        "peace": 5,
+                        "wisdom": 2,
+                        "focus": 10,
+                        "resilience": 5,
+                        "harmony": 10,
+                        "mindfulness": 10,
+                        "intuition": 5
+                    }
+                },
+                "on_failure": {
+                    "health": -5,
+                    "energy": -5,
+                    "abilities": {
+                        "self-control": -5,
+                        "peace": -5,
+                        "wisdom": -5,
+                        "focus": -10,
+                        "resilience": -5,
+                        "harmony": -10,
+                        "mindfulness": -10,
+                        "intuition": -5
+                    }
+                }
+            },
+            "reward": [],
+            "mission_icon": "assets/badges/default.png",
+            "due_date": "2025-12-31",
+            "start_date": "2025-12-01",
+            "completion_date": null
+        },
+        {
             "archetype": "mr-robot",
             "mission_code": "M03",
             "title": "LeetCode Grind 100",
@@ -54,106 +101,6 @@
             "completion_date": null
         },
         {
-            "archetype": "kei",
-            "mission_code": "K01",
-            "title": "Mindfulness 10 days",
-            "description": "Meditate daily for 10 days",
-            "difficulty": "easy",
-            "status": "not-started",
-            "progress": {
-                "current": 0,
-                "total": 10
-            },
-            "archetype_stat_change": {
-                "on_complete": {
-                    "health": 5,
-                    "energy": 5,
-                    "abilities": {
-                        "self-control": 5,
-                        "peace": 5,
-                        "wisdom": 2,
-                        "focus": 10,
-                        "resilience": 5,
-                        "harmony": 10,
-                        "mindfulness": 10,
-                        "intuition": 5
-                    }
-                },
-                "on_failure": {
-                    "health": -5,
-                    "energy": -5,
-                    "abilities": {
-                        "self-control": -5,
-                        "peace": -5,
-                        "wisdom": -5,
-                        "focus": -10,
-                        "resilience": -5,
-                        "harmony": -10,
-                        "mindfulness": -10,
-                        "intuition": -5
-                    }
-                }
-            },
-            "reward": [],
-            "mission_icon": "assets/badges/default.png",
-            "due_date": "",
-            "start_date": "2025-12-01",
-            "completion_date": null
-        },
-        {
-            "archetype": "kei",
-            "mission_code": "K02",
-            "title": "Semen Retention 100",
-            "description": "Avoid Adult Content and No-Fap for 100 days",
-            "difficulty": "easy",
-            "status": "not-started",
-            "progress": {
-                "current": 0,
-                "total": 100
-            },
-            "archetype_stat_change": {
-                "on_complete": {
-                    "health": 25,
-                    "energy": 35,
-                    "abilities": {
-                        "self-control": 100,
-                        "peace": 25,
-                        "wisdom": 25,
-                        "focus": 25,
-                        "resilience": 100,
-                        "harmony": 25,
-                        "mindfulness": 100,
-                        "intuition": 10
-                    }
-                },
-                "on_failure": {
-                    "health": -25,
-                    "energy": -35,
-                    "abilities": {
-                        "self-control": -100,
-                        "peace": -25,
-                        "wisdom": -25,
-                        "focus": -25,
-                        "resilience": -100,
-                        "harmony": -25,
-                        "mindfulness": -100,
-                        "intuition": -10
-                    }
-                }
-            },
-            "reward": [
-                {
-                    "reward_type": "street",
-                    "title": "Portable Monitor",
-                    "reward_id": "R02"
-                }
-            ],
-            "mission_icon": "assets/badges/default.png",
-            "due_date": "",
-            "start_date": "2025-11-21",
-            "completion_date": null
-        },
-        {
             "archetype": "tyler",
             "mission_code": "T02",
             "title": "Gym Streak 30",
@@ -201,6 +148,6 @@
             "completion_date": null
         }
     ],
-    "count": 4,
-    "last_updated": "2025-11-22T01:12:54.207161"
+    "count": 3,
+    "last_updated": "2025-11-22T01:25:13.211898"
 }
