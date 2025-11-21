@@ -1,0 +1,12 @@
+{
+    "reward_id": "R02",
+    "title": "Portable Monitor",
+    "description": "Portable Monitor for RPI",
+    "associated_mission_ids": [
+        "K02",
+        "M03"
+    ],
+    "reward_type": "street",
+    "is_locked": true,
+    "badge_icon": "assets/rewards/default.png"
+}

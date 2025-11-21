@@ -1,0 +1,53 @@
+{
+    "archetype": "mr-robot",
+    "mission_code": "M03",
+    "title": "LeetCode Grind 100",
+    "description": "Complete 100 problems in LC",
+    "difficulty": "medium",
+    "status": "not-started",
+    "progress": {
+        "current": 0,
+        "total": 30
+    },
+    "archetype_stat_change": {
+        "on_complete": {
+            "health": 10,
+            "energy": 10,
+            "abilities": {
+                "intelligence": 15,
+                "logic": 10,
+                "adaptability": 10,
+                "innovation": 10,
+                "focus": 15,
+                "systemization": 20,
+                "precision": 20,
+                "speed": 10
+            }
+        },
+        "on_failure": {
+            "health": -10,
+            "energy": -10,
+            "abilities": {
+                "intelligence": -15,
+                "logic": -10,
+                "adaptability": -10,
+                "innovation": -10,
+                "focus": -15,
+                "systemization": -20,
+                "precision": -20,
+                "speed": -10
+            }
+        }
+    },
+    "reward": [
+        {
+            "reward_type": "street",
+            "title": "Portable Monitor",
+            "reward_id": "R02"
+        }
+    ],
+    "mission_icon": "assets/badges/default.png",
+    "due_date": "2025-12-31",
+    "start_date": "2025-11-21",
+    "completion_date": null
+}

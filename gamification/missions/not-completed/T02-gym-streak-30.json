@@ -1,0 +1,47 @@
+{
+    "archetype": "tyler",
+    "mission_code": "T02",
+    "title": "Gym Streak 30",
+    "description": "Workout for 30 working days",
+    "difficulty": "medium",
+    "status": "not-started",
+    "progress": {
+        "current": 0,
+        "total": 30
+    },
+    "archetype_stat_change": {
+        "on_complete": {
+            "health": 15,
+            "energy": 15,
+            "abilities": {
+                "strength": 30,
+                "discipline": 30,
+                "agression": 15,
+                "confidence": 15,
+                "dominance": 15,
+                "pain tolerance": 30,
+                "honor": 30,
+                "determination": 30
+            }
+        },
+        "on_failure": {
+            "health": -15,
+            "energy": -15,
+            "abilities": {
+                "strength": -30,
+                "discipline": -30,
+                "agression": -15,
+                "confidence": -15,
+                "dominance": -15,
+                "pain tolerance": -30,
+                "honor": -30,
+                "determination": -30
+            }
+        }
+    },
+    "reward": [],
+    "mission_icon": "assets/badges/default.png",
+    "due_date": "",
+    "start_date": "2025-11-21",
+    "completion_date": null
+}

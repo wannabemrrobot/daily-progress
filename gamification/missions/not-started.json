@@ -1,6 +1,59 @@
 {
     "missions": [
         {
+            "archetype": "mr-robot",
+            "mission_code": "M03",
+            "title": "LeetCode Grind 100",
+            "description": "Complete 100 problems in LC",
+            "difficulty": "medium",
+            "status": "not-started",
+            "progress": {
+                "current": 0,
+                "total": 30
+            },
+            "archetype_stat_change": {
+                "on_complete": {
+                    "health": 10,
+                    "energy": 10,
+                    "abilities": {
+                        "intelligence": 15,
+                        "logic": 10,
+                        "adaptability": 10,
+                        "innovation": 10,
+                        "focus": 15,
+                        "systemization": 20,
+                        "precision": 20,
+                        "speed": 10
+                    }
+                },
+                "on_failure": {
+                    "health": -10,
+                    "energy": -10,
+                    "abilities": {
+                        "intelligence": -15,
+                        "logic": -10,
+                        "adaptability": -10,
+                        "innovation": -10,
+                        "focus": -15,
+                        "systemization": -20,
+                        "precision": -20,
+                        "speed": -10
+                    }
+                }
+            },
+            "reward": [
+                {
+                    "reward_type": "street",
+                    "title": "Portable Monitor",
+                    "reward_id": "R02"
+                }
+            ],
+            "mission_icon": "assets/badges/default.png",
+            "due_date": "2025-12-31",
+            "start_date": "2025-11-21",
+            "completion_date": null
+        },
+        {
             "archetype": "kei",
             "mission_code": "K01",
             "title": "Mindfulness 10 days",
@@ -46,8 +99,108 @@
             "due_date": "",
             "start_date": "2025-12-01",
             "completion_date": null
+        },
+        {
+            "archetype": "kei",
+            "mission_code": "K02",
+            "title": "Semen Retention 100",
+            "description": "Avoid Adult Content and No-Fap for 100 days",
+            "difficulty": "easy",
+            "status": "not-started",
+            "progress": {
+                "current": 0,
+                "total": 100
+            },
+            "archetype_stat_change": {
+                "on_complete": {
+                    "health": 25,
+                    "energy": 35,
+                    "abilities": {
+                        "self-control": 100,
+                        "peace": 25,
+                        "wisdom": 25,
+                        "focus": 25,
+                        "resilience": 100,
+                        "harmony": 25,
+                        "mindfulness": 100,
+                        "intuition": 10
+                    }
+                },
+                "on_failure": {
+                    "health": -25,
+                    "energy": -35,
+                    "abilities": {
+                        "self-control": -100,
+                        "peace": -25,
+                        "wisdom": -25,
+                        "focus": -25,
+                        "resilience": -100,
+                        "harmony": -25,
+                        "mindfulness": -100,
+                        "intuition": -10
+                    }
+                }
+            },
+            "reward": [
+                {
+                    "reward_type": "street",
+                    "title": "Portable Monitor",
+                    "reward_id": "R02"
+                }
+            ],
+            "mission_icon": "assets/badges/default.png",
+            "due_date": "",
+            "start_date": "2025-11-21",
+            "completion_date": null
+        },
+        {
+            "archetype": "tyler",
+            "mission_code": "T02",
+            "title": "Gym Streak 30",
+            "description": "Workout for 30 working days",
+            "difficulty": "medium",
+            "status": "not-started",
+            "progress": {
+                "current": 0,
+                "total": 30
+            },
+            "archetype_stat_change": {
+                "on_complete": {
+                    "health": 15,
+                    "energy": 15,
+                    "abilities": {
+                        "strength": 30,
+                        "discipline": 30,
+                        "agression": 15,
+                        "confidence": 15,
+                        "dominance": 15,
+                        "pain tolerance": 30,
+                        "honor": 30,
+                        "determination": 30
+                    }
+                },
+                "on_failure": {
+                    "health": -15,
+                    "energy": -15,
+                    "abilities": {
+                        "strength": -30,
+                        "discipline": -30,
+                        "agression": -15,
+                        "confidence": -15,
+                        "dominance": -15,
+                        "pain tolerance": -30,
+                        "honor": -30,
+                        "determination": -30
+                    }
+                }
+            },
+            "reward": [],
+            "mission_icon": "assets/badges/default.png",
+            "due_date": "",
+            "start_date": "2025-11-21",
+            "completion_date": null
         }
     ],
-    "count": 1,
-    "last_updated": "2025-11-22T01:01:13.391959"
+    "count": 4,
+    "last_updated": "2025-11-22T01:12:54.207161"
 }
