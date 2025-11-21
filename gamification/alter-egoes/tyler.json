@@ -7,8 +7,8 @@
   "level": 1,
   "title": "Awakened",
   "status": {
-    "current_status": "active",
-    "note": ""
+    "current_status": "disabled",
+    "note": "Disabled due to negative vital stats"
   },
   "soap_points": 5,
   "earned_badges": [],
@@ -23,21 +23,21 @@
     "xp_to_next_level": 100
   },
   "health_details": {
-    "current_health": 10,
+    "current_health": -25,
     "max_health": 100
   },
   "energy_details": {
-    "current_energy": 10,
+    "current_energy": -25,
     "max_energy": 100
   },
   "abilities": {
-    "strength": 5,
-    "discipline": 25,
-    "agression": 5,
-    "confidence": 25,
-    "dominance": 5,
-    "pain tolerance": 0,
-    "honor": 25,
-    "determination": 25
+    "strength": -20,
+    "discipline": -125,
+    "agression": -15,
+    "confidence": -125,
+    "dominance": -15,
+    "pain tolerance": -10,
+    "honor": -125,
+    "determination": -125
   }
 }

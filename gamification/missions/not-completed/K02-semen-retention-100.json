@@ -4,7 +4,7 @@
     "title": "Semen Retention 100",
     "description": "Avoid Adult Content and No-Fap for 100 days",
     "difficulty": "easy",
-    "status": "not-started",
+    "status": "in-progress",
     "progress": {
         "current": 0,
         "total": 100
@@ -47,7 +47,7 @@
         }
     ],
     "mission_icon": "assets/badges/default.png",
-    "due_date": "",
+    "due_date": "2026-01-10",
     "start_date": "2025-11-21",
     "completion_date": null
 }

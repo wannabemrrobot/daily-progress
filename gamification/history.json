@@ -138,5 +138,153 @@
     },
     "date": "2025-11-22",
     "unlocked_rewards": []
+  },
+  {
+    "history_index": 4,
+    "alter-ego": "kei",
+    "mission_associated": "K02-semen-retention-100",
+    "state": "in-progress",
+    "event_type": "mission_started",
+    "status_change": {
+      "from": "not-started",
+      "to": "in-progress"
+    },
+    "mission_progress": {
+      "current": 0,
+      "total": 100
+    },
+    "delta_changed": {},
+    "state_after_delta_applied": {
+      "level": 1,
+      "title": "Awakened",
+      "xp": 0,
+      "health": 0,
+      "energy": 0,
+      "abilities": {
+        "self-control": 0,
+        "peace": 0,
+        "wisdom": 0,
+        "focus": 0,
+        "resilience": 0,
+        "harmony": 0,
+        "mindfulness": 0,
+        "intuition": 0
+      }
+    },
+    "synergy_before": {
+      "mind": 5.0,
+      "body": 14.38,
+      "soul": 0.0,
+      "total": 19.38
+    },
+    "synergy_after": {
+      "mind": 5.0,
+      "body": 14.38,
+      "soul": 0.0,
+      "total": 19.38
+    },
+    "date": "2025-11-22",
+    "unlocked_rewards": []
+  },
+  {
+    "history_index": 5,
+    "alter-ego": "tyler",
+    "mission_associated": "T03-quit-smoking-50-days",
+    "state": "failed",
+    "delta_changed": {
+      "xp": 0,
+      "health": -15,
+      "energy": -15,
+      "abilities": {
+        "strength": -15,
+        "discipline": -50,
+        "agression": -10,
+        "confidence": -50,
+        "dominance": -10,
+        "pain tolerance": -10,
+        "honor": -50,
+        "determination": -50
+      }
+    },
+    "state_after_delta_applied": {
+      "level": 1,
+      "title": "Awakened",
+      "xp": 0,
+      "health": -5,
+      "energy": -5,
+      "abilities": {
+        "strength": -10,
+        "discipline": -25,
+        "agression": -5,
+        "confidence": -25,
+        "dominance": -5,
+        "pain tolerance": -10,
+        "honor": -25,
+        "determination": -25
+      }
+    },
+    "synergy_before": {
+      "mind": 5.0,
+      "body": 14.38,
+      "soul": 0.0,
+      "total": 19.38
+    },
+    "synergy_after": {
+      "mind": 5.0,
+      "body": -16.25,
+      "soul": 0.0,
+      "total": -11.25
+    },
+    "date": "2025-11-22"
+  },
+  {
+    "history_index": 6,
+    "alter-ego": "tyler",
+    "mission_associated": "T03-quit-smoking-100-days",
+    "state": "failed",
+    "delta_changed": {
+      "xp": 0,
+      "health": -20,
+      "energy": -20,
+      "abilities": {
+        "strength": -10,
+        "discipline": -100,
+        "agression": -10,
+        "confidence": -100,
+        "dominance": -10,
+        "honor": -100,
+        "determination": -100
+      }
+    },
+    "state_after_delta_applied": {
+      "level": 1,
+      "title": "Awakened",
+      "xp": 0,
+      "health": -25,
+      "energy": -25,
+      "abilities": {
+        "strength": -20,
+        "discipline": -125,
+        "agression": -15,
+        "confidence": -125,
+        "dominance": -15,
+        "pain tolerance": -10,
+        "honor": -125,
+        "determination": -125
+      }
+    },
+    "synergy_before": {
+      "mind": 5.0,
+      "body": -16.25,
+      "soul": 0.0,
+      "total": -11.25
+    },
+    "synergy_after": {
+      "mind": 5.0,
+      "body": -70.0,
+      "soul": 0.0,
+      "total": -65.0
+    },
+    "date": "2025-11-22"
   }
 ]

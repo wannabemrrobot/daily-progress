@@ -1,0 +1,47 @@
+{
+    "archetype": "tyler",
+    "mission_code": "T03",
+    "title": "Quit Smoking 100 days",
+    "description": "Quit Smoking for 100 days",
+    "difficulty": "medium",
+    "status": "failed",
+    "progress": {
+        "current": 0,
+        "total": 100
+    },
+    "archetype_stat_change": {
+        "on_complete": {
+            "health": 20,
+            "energy": 20,
+            "abilities": {
+                "strength": 10,
+                "discipline": 100,
+                "agression": 10,
+                "confidence": 100,
+                "dominance": 10,
+                "pain tolerance": 0,
+                "honor": 100,
+                "determination": 100
+            }
+        },
+        "on_failure": {
+            "health": -20,
+            "energy": -20,
+            "abilities": {
+                "strength": -10,
+                "discipline": -100,
+                "agression": -10,
+                "confidence": -100,
+                "dominance": -10,
+                "pain tolerance": 0,
+                "honor": -100,
+                "determination": -100
+            }
+        }
+    },
+    "reward": [],
+    "mission_icon": "assets/badges/default.png",
+    "due_date": "2026-02-20",
+    "start_date": "2025-10-11",
+    "completion_date": "2025-11-22"
+}

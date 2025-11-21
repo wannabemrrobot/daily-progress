@@ -1,6 +1,59 @@
 {
     "missions": [
         {
+            "archetype": "kei",
+            "mission_code": "K02",
+            "title": "Semen Retention 100",
+            "description": "Avoid Adult Content and No-Fap for 100 days",
+            "difficulty": "easy",
+            "status": "in-progress",
+            "progress": {
+                "current": 0,
+                "total": 100
+            },
+            "archetype_stat_change": {
+                "on_complete": {
+                    "health": 25,
+                    "energy": 35,
+                    "abilities": {
+                        "self-control": 100,
+                        "peace": 25,
+                        "wisdom": 25,
+                        "focus": 25,
+                        "resilience": 100,
+                        "harmony": 25,
+                        "mindfulness": 100,
+                        "intuition": 10
+                    }
+                },
+                "on_failure": {
+                    "health": -25,
+                    "energy": -35,
+                    "abilities": {
+                        "self-control": -100,
+                        "peace": -25,
+                        "wisdom": -25,
+                        "focus": -25,
+                        "resilience": -100,
+                        "harmony": -25,
+                        "mindfulness": -100,
+                        "intuition": -10
+                    }
+                }
+            },
+            "reward": [
+                {
+                    "reward_type": "street",
+                    "title": "Portable Monitor",
+                    "reward_id": "R02"
+                }
+            ],
+            "mission_icon": "assets/badges/default.png",
+            "due_date": "2026-01-10",
+            "start_date": "2025-11-21",
+            "completion_date": null
+        },
+        {
             "archetype": "mr-robot",
             "mission_code": "M02",
             "title": "Career Switch",
@@ -54,6 +107,6 @@
             "completion_date": null
         }
     ],
-    "count": 1,
-    "last_updated": "2025-11-22T01:12:54.207161"
+    "count": 2,
+    "last_updated": "2025-11-22T01:25:13.211898"
 }

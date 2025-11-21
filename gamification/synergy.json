@@ -9,16 +9,16 @@
     },
     "synergy": {
       "mind": 5.0,
-      "body": 14.38,
+      "body": -70.0,
       "soul": 0.0
     },
-    "total_synergy": 19.38,
+    "total_synergy": -65.0,
     "missions": {
-      "total": 7,
+      "total": 9,
       "completed": 2,
-      "failed": 0,
+      "failed": 1,
       "not-started": 4,
-      "in-progress": 1
+      "in-progress": 2
     },
     "rewards": {
       "total": 2,
