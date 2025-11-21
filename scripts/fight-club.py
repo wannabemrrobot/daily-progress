@@ -512,7 +512,14 @@ def count_missions() -> Dict[str, int]:
             status = mission_data.get("status", "completed")
             if status == "completed":
                 counts["completed"] += 1
-            elif status == "failed":
+    
+    # Count failed missions
+    for mission_file in MISSIONS_FAILED.glob("*.json"):
+        mission_data = load_json(mission_file)
+        if mission_data:
+            counts["total"] += 1
+            status = mission_data.get("status", "failed")
+            if status == "failed":
                 counts["failed"] += 1
     
     return counts

@@ -2,7 +2,10 @@
     "reward_id": "R02",
     "title": "Portable Monitor for RPI",
     "description": "Monitor for Alter Ego Dashboard",
-    "associated_mission_ids": [],
+    "associated_mission_ids": [
+        "T04",
+        "M03"
+    ],
     "reward_type": "street",
     "is_locked": true,
     "badge_icon": "assets/rewards/default.png"
