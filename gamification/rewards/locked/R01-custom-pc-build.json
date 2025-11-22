@@ -6,6 +6,6 @@
         "M02"
     ],
     "reward_type": "legendary",
-    "is_locked": true,
+    "is_locked": false,
     "badge_icon": "assets/rewards/default.png"
 }
