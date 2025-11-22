@@ -4,9 +4,9 @@
     "title": "Career Switch",
     "description": "Switch company as SDE3",
     "difficulty": "medium",
-    "status": "in-progress",
+    "status": "completed",
     "progress": {
-        "current": 0,
+        "current": 1,
         "total": 1
     },
     "archetype_stat_change": {
@@ -49,5 +49,5 @@
     "mission_icon": "assets/badges/default.png",
     "due_date": "2026-03-31",
     "start_date": "2025-10-10",
-    "completion_date": null
+    "completion_date": "2025-11-22"
 }

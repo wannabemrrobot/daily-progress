@@ -1,17 +1,6 @@
 {
     "rewards": [
         {
-            "reward_id": "R01",
-            "title": "Custom PC Build",
-            "description": "Build a Gaming PC",
-            "associated_mission_ids": [
-                "M02"
-            ],
-            "reward_type": "legendary",
-            "is_locked": true,
-            "badge_icon": "assets/rewards/default.png"
-        },
-        {
             "reward_id": "R02",
             "title": "Portable Monitor",
             "description": "Portable Monitor for RPI",
@@ -24,6 +13,6 @@
             "badge_icon": "assets/rewards/default.png"
         }
     ],
-    "count": 2,
-    "last_updated": "2025-11-22T01:25:13.214556"
+    "count": 1,
+    "last_updated": "2025-11-22T22:49:51.690706"
 }

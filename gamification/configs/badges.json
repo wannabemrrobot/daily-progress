@@ -1,468 +1,473 @@
 {
-  "description": "Badge definitions and unlock criteria for alter egos",
-  "badges": [
-    {
-      "badge_id": "B001",
-      "name": "First Steps",
-      "description": "Reach level 5",
-      "rarity": "common",
-      "category": "progression",
-      "status": "locked",
-      "earned_by": [],
-      "criteria": {
-        "type": "level",
-        "value": 5
-      }
-    },
-    {
-      "badge_id": "B002",
-      "name": "Rising Star",
-      "description": "Reach level 10",
-      "rarity": "common",
-      "category": "progression",
-      "criteria": {
-        "type": "level",
-        "value": 10
-      },
-      "status": "locked",
-      "earned_by": []
-    },
-    {
-      "badge_id": "B003",
-      "name": "Veteran",
-      "description": "Reach level 25",
-      "rarity": "rare",
-      "category": "progression",
-      "criteria": {
-        "type": "level",
-        "value": 25
-      },
-      "status": "locked",
-      "earned_by": []
-    },
-    {
-      "badge_id": "B004",
-      "name": "Legendary",
-      "description": "Reach level 50",
-      "rarity": "legendary",
-      "category": "progression",
-      "criteria": {
-        "type": "level",
-        "value": 50
-      },
-      "status": "locked",
-      "earned_by": []
-    },
-    {
-      "badge_id": "B005",
-      "name": "Week Warrior",
-      "description": "Maintain a 7-day streak",
-      "rarity": "common",
-      "category": "streaks",
-      "criteria": {
-        "type": "streak",
-        "value": 7
-      },
-      "status": "locked",
-      "earned_by": []
-    },
-    {
-      "badge_id": "B006",
-      "name": "Fortnight Fighter",
-      "description": "Maintain a 14-day streak",
-      "rarity": "uncommon",
-      "category": "streaks",
-      "criteria": {
-        "type": "streak",
-        "value": 14
-      },
-      "status": "locked",
-      "earned_by": []
-    },
-    {
-      "badge_id": "B007",
-      "name": "Monthly Master",
-      "description": "Maintain a 30-day streak",
-      "rarity": "rare",
-      "category": "streaks",
-      "criteria": {
-        "type": "streak",
-        "value": 30
-      },
-      "status": "locked",
-      "earned_by": []
-    },
-    {
-      "badge_id": "B008",
-      "name": "Unstoppable",
-      "description": "Maintain a 50-day streak",
-      "rarity": "epic",
-      "category": "streaks",
-      "criteria": {
-        "type": "streak",
-        "value": 50
-      },
-      "status": "locked",
-      "earned_by": []
-    },
-    {
-      "badge_id": "B009",
-      "name": "Century Club",
-      "description": "Maintain a 100-day streak",
-      "rarity": "legendary",
-      "category": "streaks",
-      "criteria": {
-        "type": "streak",
-        "value": 100
-      },
-      "status": "locked",
-      "earned_by": []
-    },
-    {
-      "badge_id": "B010",
-      "name": "Mission Starter",
-      "description": "Complete 5 missions",
-      "rarity": "common",
-      "category": "missions",
-      "criteria": {
-        "type": "missions_completed",
-        "value": 5
-      },
-      "status": "locked",
-      "earned_by": []
-    },
-    {
-      "badge_id": "B011",
-      "name": "Task Master",
-      "description": "Complete 15 missions",
-      "rarity": "uncommon",
-      "category": "missions",
-      "criteria": {
-        "type": "missions_completed",
-        "value": 15
-      },
-      "status": "locked",
-      "earned_by": []
-    },
-    {
-      "badge_id": "B012",
-      "name": "Mission Veteran",
-      "description": "Complete 30 missions",
-      "rarity": "rare",
-      "category": "missions",
-      "criteria": {
-        "type": "missions_completed",
-        "value": 30
-      },
-      "status": "locked",
-      "earned_by": []
-    },
-    {
-      "badge_id": "B013",
-      "name": "Mission Legend",
-      "description": "Complete 50 missions",
-      "rarity": "epic",
-      "category": "missions",
-      "criteria": {
-        "type": "missions_completed",
-        "value": 50
-      },
-      "status": "locked",
-      "earned_by": []
-    },
-    {
-      "badge_id": "B014",
-      "name": "Century Missions",
-      "description": "Complete 100 missions",
-      "rarity": "legendary",
-      "category": "missions",
-      "criteria": {
-        "type": "missions_completed",
-        "value": 100
-      },
-      "status": "locked",
-      "earned_by": []
-    },
-    {
-      "badge_id": "B015",
-      "name": "Healthy Mind",
-      "description": "Reach 50+ health points",
-      "rarity": "common",
-      "category": "stats",
-      "criteria": {
-        "type": "health",
-        "value": 50
-      },
-      "status": "locked",
-      "earned_by": []
-    },
-    {
-      "badge_id": "B016",
-      "name": "Peak Health",
-      "description": "Reach 100+ health points",
-      "rarity": "rare",
-      "category": "stats",
-      "criteria": {
-        "type": "health",
-        "value": 100
-      },
-      "status": "locked",
-      "earned_by": []
-    },
-    {
-      "badge_id": "B017",
-      "name": "Energized",
-      "description": "Reach 50+ energy points",
-      "rarity": "common",
-      "category": "stats",
-      "criteria": {
-        "type": "energy",
-        "value": 50
-      },
-      "status": "locked",
-      "earned_by": []
-    },
-    {
-      "badge_id": "B018",
-      "name": "Boundless Energy",
-      "description": "Reach 100+ energy points",
-      "rarity": "rare",
-      "category": "stats",
-      "criteria": {
-        "type": "energy",
-        "value": 100
-      },
-      "status": "locked",
-      "earned_by": []
-    },
-    {
-      "badge_id": "B019",
-      "name": "Ability Awakening",
-      "description": "Reach 50+ in any ability",
-      "rarity": "uncommon",
-      "category": "abilities",
-      "criteria": {
-        "type": "any_ability",
-        "value": 50
-      },
-      "status": "locked",
-      "earned_by": []
-    },
-    {
-      "badge_id": "B020",
-      "name": "Ability Master",
-      "description": "Reach 100+ in any ability",
-      "rarity": "rare",
-      "category": "abilities",
-      "criteria": {
-        "type": "any_ability",
-        "value": 100
-      },
-      "status": "locked",
-      "earned_by": []
-    },
-    {
-      "badge_id": "B021",
-      "name": "All-Rounder",
-      "description": "Reach 30+ in all abilities",
-      "rarity": "epic",
-      "category": "abilities",
-      "criteria": {
-        "type": "all_abilities",
-        "value": 30
-      },
-      "status": "locked",
-      "earned_by": []
-    },
-    {
-      "badge_id": "B022",
-      "name": "Perfect Balance",
-      "description": "Reach 50+ in all abilities",
-      "rarity": "legendary",
-      "category": "abilities",
-      "criteria": {
-        "type": "all_abilities",
-        "value": 50
-      },
-      "status": "locked",
-      "earned_by": []
-    },
-    {
-      "badge_id": "B023",
-      "name": "Synergy Initiate",
-      "description": "Reach 50+ total synergy",
-      "rarity": "uncommon",
-      "category": "synergy",
-      "criteria": {
-        "type": "total_synergy",
-        "value": 50
-      },
-      "status": "locked",
-      "earned_by": []
-    },
-    {
-      "badge_id": "B024",
-      "name": "Synergy Master",
-      "description": "Reach 100+ total synergy",
-      "rarity": "rare",
-      "category": "synergy",
-      "criteria": {
-        "type": "total_synergy",
-        "value": 100
-      },
-      "status": "locked",
-      "earned_by": []
-    },
-    {
-      "badge_id": "B025",
-      "name": "Perfect Synergy",
-      "description": "Reach 150+ total synergy",
-      "rarity": "epic",
-      "category": "synergy",
-      "criteria": {
-        "type": "total_synergy",
-        "value": 150
-      },
-      "status": "locked",
-      "earned_by": []
-    },
-    {
-      "badge_id": "B026",
-      "name": "Absolute Harmony",
-      "description": "Reach 200+ total synergy",
-      "rarity": "legendary",
-      "category": "synergy",
-      "criteria": {
-        "type": "total_synergy",
-        "value": 200
-      },
-      "status": "locked",
-      "earned_by": []
-    },
-    {
-      "badge_id": "B027",
-      "name": "SOAP Collector",
-      "description": "Earn 50+ SOAP points",
-      "rarity": "uncommon",
-      "category": "soap",
-      "criteria": {
-        "type": "soap_points",
-        "value": 50
-      },
-      "status": "locked",
-      "earned_by": []
-    },
-    {
-      "badge_id": "B028",
-      "name": "SOAP Master",
-      "description": "Earn 100+ SOAP points",
-      "rarity": "rare",
-      "category": "soap",
-      "criteria": {
-        "type": "soap_points",
-        "value": 100
-      },
-      "status": "locked",
-      "earned_by": []
-    },
-    {
-      "badge_id": "B029",
-      "name": "Hard Mode",
-      "description": "Complete 5 hard difficulty missions",
-      "rarity": "rare",
-      "category": "missions",
-      "criteria": {
-        "type": "hard_missions_completed",
-        "value": 5
-      },
-      "status": "locked",
-      "earned_by": []
-    },
-    {
-      "badge_id": "B030",
-      "name": "Nightmare",
-      "description": "Complete 15 hard difficulty missions",
-      "rarity": "epic",
-      "category": "missions",
-      "criteria": {
-        "type": "hard_missions_completed",
-        "value": 15
-      },
-      "status": "locked",
-      "earned_by": []
-    },
-    {
-      "badge_id": "B031",
-      "name": "Phoenix",
-      "description": "Restart and complete a failed mission",
-      "rarity": "uncommon",
-      "category": "redemption",
-      "criteria": {
-        "type": "restarted_missions_completed",
-        "value": 1
-      },
-      "status": "locked",
-      "earned_by": []
-    },
-    {
-      "badge_id": "B032",
-      "name": "Never Give Up",
-      "description": "Restart and complete 5 failed missions",
-      "rarity": "rare",
-      "category": "redemption",
-      "criteria": {
-        "type": "restarted_missions_completed",
-        "value": 5
-      },
-      "status": "locked",
-      "earned_by": []
-    },
-    {
-      "badge_id": "B033",
-      "name": "Treasure Hunter",
-      "description": "Unlock 10 rewards",
-      "rarity": "uncommon",
-      "category": "rewards",
-      "criteria": {
-        "type": "rewards_unlocked",
-        "value": 10
-      },
-      "status": "locked",
-      "earned_by": []
-    },
-    {
-      "badge_id": "B034",
-      "name": "Collector",
-      "description": "Unlock 25 rewards",
-      "rarity": "rare",
-      "category": "rewards",
-      "criteria": {
-        "type": "rewards_unlocked",
-        "value": 25
-      },
-      "status": "locked",
-      "earned_by": []
-    },
-    {
-      "badge_id": "B035",
-      "name": "Hoarder",
-      "description": "Unlock 50 rewards",
-      "rarity": "epic",
-      "category": "rewards",
-      "criteria": {
-        "type": "rewards_unlocked",
-        "value": 50
-      },
-      "status": "locked",
-      "earned_by": []
-    }
-  ],
-  "rarity_hierarchy": [
-    "common",
-    "uncommon",
-    "rare",
-    "epic",
-    "legendary"
-  ],
-  "comment": "Badges are checked after daily progress updates and mission completions. Each alter ego tracks their own earned badges."
+    "description": "Badge definitions and unlock criteria for alter egos",
+    "badges": [
+        {
+            "badge_id": "B001",
+            "name": "First Steps",
+            "description": "Reach level 5",
+            "rarity": "common",
+            "category": "progression",
+            "status": "locked",
+            "earned_by": [],
+            "criteria": {
+                "type": "level",
+                "value": 5
+            }
+        },
+        {
+            "badge_id": "B002",
+            "name": "Rising Star",
+            "description": "Reach level 10",
+            "rarity": "common",
+            "category": "progression",
+            "criteria": {
+                "type": "level",
+                "value": 10
+            },
+            "status": "locked",
+            "earned_by": []
+        },
+        {
+            "badge_id": "B003",
+            "name": "Veteran",
+            "description": "Reach level 25",
+            "rarity": "rare",
+            "category": "progression",
+            "criteria": {
+                "type": "level",
+                "value": 25
+            },
+            "status": "locked",
+            "earned_by": []
+        },
+        {
+            "badge_id": "B004",
+            "name": "Legendary",
+            "description": "Reach level 50",
+            "rarity": "legendary",
+            "category": "progression",
+            "criteria": {
+                "type": "level",
+                "value": 50
+            },
+            "status": "locked",
+            "earned_by": []
+        },
+        {
+            "badge_id": "B005",
+            "name": "Week Warrior",
+            "description": "Maintain a 7-day streak",
+            "rarity": "common",
+            "category": "streaks",
+            "criteria": {
+                "type": "streak",
+                "value": 7
+            },
+            "status": "locked",
+            "earned_by": []
+        },
+        {
+            "badge_id": "B006",
+            "name": "Fortnight Fighter",
+            "description": "Maintain a 14-day streak",
+            "rarity": "uncommon",
+            "category": "streaks",
+            "criteria": {
+                "type": "streak",
+                "value": 14
+            },
+            "status": "locked",
+            "earned_by": []
+        },
+        {
+            "badge_id": "B007",
+            "name": "Monthly Master",
+            "description": "Maintain a 30-day streak",
+            "rarity": "rare",
+            "category": "streaks",
+            "criteria": {
+                "type": "streak",
+                "value": 30
+            },
+            "status": "locked",
+            "earned_by": []
+        },
+        {
+            "badge_id": "B008",
+            "name": "Unstoppable",
+            "description": "Maintain a 50-day streak",
+            "rarity": "epic",
+            "category": "streaks",
+            "criteria": {
+                "type": "streak",
+                "value": 50
+            },
+            "status": "locked",
+            "earned_by": []
+        },
+        {
+            "badge_id": "B009",
+            "name": "Century Club",
+            "description": "Maintain a 100-day streak",
+            "rarity": "legendary",
+            "category": "streaks",
+            "criteria": {
+                "type": "streak",
+                "value": 100
+            },
+            "status": "locked",
+            "earned_by": []
+        },
+        {
+            "badge_id": "B010",
+            "name": "Mission Starter",
+            "description": "Complete 5 missions",
+            "rarity": "common",
+            "category": "missions",
+            "criteria": {
+                "type": "missions_completed",
+                "value": 5
+            },
+            "status": "locked",
+            "earned_by": []
+        },
+        {
+            "badge_id": "B011",
+            "name": "Task Master",
+            "description": "Complete 15 missions",
+            "rarity": "uncommon",
+            "category": "missions",
+            "criteria": {
+                "type": "missions_completed",
+                "value": 15
+            },
+            "status": "locked",
+            "earned_by": []
+        },
+        {
+            "badge_id": "B012",
+            "name": "Mission Veteran",
+            "description": "Complete 30 missions",
+            "rarity": "rare",
+            "category": "missions",
+            "criteria": {
+                "type": "missions_completed",
+                "value": 30
+            },
+            "status": "locked",
+            "earned_by": []
+        },
+        {
+            "badge_id": "B013",
+            "name": "Mission Legend",
+            "description": "Complete 50 missions",
+            "rarity": "epic",
+            "category": "missions",
+            "criteria": {
+                "type": "missions_completed",
+                "value": 50
+            },
+            "status": "locked",
+            "earned_by": []
+        },
+        {
+            "badge_id": "B014",
+            "name": "Century Missions",
+            "description": "Complete 100 missions",
+            "rarity": "legendary",
+            "category": "missions",
+            "criteria": {
+                "type": "missions_completed",
+                "value": 100
+            },
+            "status": "locked",
+            "earned_by": []
+        },
+        {
+            "badge_id": "B015",
+            "name": "Healthy Mind",
+            "description": "Reach 50+ health points",
+            "rarity": "common",
+            "category": "stats",
+            "criteria": {
+                "type": "health",
+                "value": 50
+            },
+            "status": "locked",
+            "earned_by": []
+        },
+        {
+            "badge_id": "B016",
+            "name": "Peak Health",
+            "description": "Reach 100+ health points",
+            "rarity": "rare",
+            "category": "stats",
+            "criteria": {
+                "type": "health",
+                "value": 100
+            },
+            "status": "locked",
+            "earned_by": []
+        },
+        {
+            "badge_id": "B017",
+            "name": "Energized",
+            "description": "Reach 50+ energy points",
+            "rarity": "common",
+            "category": "stats",
+            "criteria": {
+                "type": "energy",
+                "value": 50
+            },
+            "status": "locked",
+            "earned_by": []
+        },
+        {
+            "badge_id": "B018",
+            "name": "Boundless Energy",
+            "description": "Reach 100+ energy points",
+            "rarity": "rare",
+            "category": "stats",
+            "criteria": {
+                "type": "energy",
+                "value": 100
+            },
+            "status": "locked",
+            "earned_by": []
+        },
+        {
+            "badge_id": "B019",
+            "name": "Ability Awakening",
+            "description": "Reach 50+ in any ability",
+            "rarity": "uncommon",
+            "category": "abilities",
+            "criteria": {
+                "type": "any_ability",
+                "value": 50
+            },
+            "status": "unlocked",
+            "earned_by": [
+                {
+                    "archetype": "mr-robot",
+                    "earned_date": "2025-11-22"
+                }
+            ]
+        },
+        {
+            "badge_id": "B020",
+            "name": "Ability Master",
+            "description": "Reach 100+ in any ability",
+            "rarity": "rare",
+            "category": "abilities",
+            "criteria": {
+                "type": "any_ability",
+                "value": 100
+            },
+            "status": "locked",
+            "earned_by": []
+        },
+        {
+            "badge_id": "B021",
+            "name": "All-Rounder",
+            "description": "Reach 30+ in all abilities",
+            "rarity": "epic",
+            "category": "abilities",
+            "criteria": {
+                "type": "all_abilities",
+                "value": 30
+            },
+            "status": "locked",
+            "earned_by": []
+        },
+        {
+            "badge_id": "B022",
+            "name": "Perfect Balance",
+            "description": "Reach 50+ in all abilities",
+            "rarity": "legendary",
+            "category": "abilities",
+            "criteria": {
+                "type": "all_abilities",
+                "value": 50
+            },
+            "status": "locked",
+            "earned_by": []
+        },
+        {
+            "badge_id": "B023",
+            "name": "Synergy Initiate",
+            "description": "Reach 50+ total synergy",
+            "rarity": "uncommon",
+            "category": "synergy",
+            "criteria": {
+                "type": "total_synergy",
+                "value": 50
+            },
+            "status": "locked",
+            "earned_by": []
+        },
+        {
+            "badge_id": "B024",
+            "name": "Synergy Master",
+            "description": "Reach 100+ total synergy",
+            "rarity": "rare",
+            "category": "synergy",
+            "criteria": {
+                "type": "total_synergy",
+                "value": 100
+            },
+            "status": "locked",
+            "earned_by": []
+        },
+        {
+            "badge_id": "B025",
+            "name": "Perfect Synergy",
+            "description": "Reach 150+ total synergy",
+            "rarity": "epic",
+            "category": "synergy",
+            "criteria": {
+                "type": "total_synergy",
+                "value": 150
+            },
+            "status": "locked",
+            "earned_by": []
+        },
+        {
+            "badge_id": "B026",
+            "name": "Absolute Harmony",
+            "description": "Reach 200+ total synergy",
+            "rarity": "legendary",
+            "category": "synergy",
+            "criteria": {
+                "type": "total_synergy",
+                "value": 200
+            },
+            "status": "locked",
+            "earned_by": []
+        },
+        {
+            "badge_id": "B027",
+            "name": "SOAP Collector",
+            "description": "Earn 50+ SOAP points",
+            "rarity": "uncommon",
+            "category": "soap",
+            "criteria": {
+                "type": "soap_points",
+                "value": 50
+            },
+            "status": "locked",
+            "earned_by": []
+        },
+        {
+            "badge_id": "B028",
+            "name": "SOAP Master",
+            "description": "Earn 100+ SOAP points",
+            "rarity": "rare",
+            "category": "soap",
+            "criteria": {
+                "type": "soap_points",
+                "value": 100
+            },
+            "status": "locked",
+            "earned_by": []
+        },
+        {
+            "badge_id": "B029",
+            "name": "Hard Mode",
+            "description": "Complete 5 hard difficulty missions",
+            "rarity": "rare",
+            "category": "missions",
+            "criteria": {
+                "type": "hard_missions_completed",
+                "value": 5
+            },
+            "status": "locked",
+            "earned_by": []
+        },
+        {
+            "badge_id": "B030",
+            "name": "Nightmare",
+            "description": "Complete 15 hard difficulty missions",
+            "rarity": "epic",
+            "category": "missions",
+            "criteria": {
+                "type": "hard_missions_completed",
+                "value": 15
+            },
+            "status": "locked",
+            "earned_by": []
+        },
+        {
+            "badge_id": "B031",
+            "name": "Phoenix",
+            "description": "Restart and complete a failed mission",
+            "rarity": "uncommon",
+            "category": "redemption",
+            "criteria": {
+                "type": "restarted_missions_completed",
+                "value": 1
+            },
+            "status": "locked",
+            "earned_by": []
+        },
+        {
+            "badge_id": "B032",
+            "name": "Never Give Up",
+            "description": "Restart and complete 5 failed missions",
+            "rarity": "rare",
+            "category": "redemption",
+            "criteria": {
+                "type": "restarted_missions_completed",
+                "value": 5
+            },
+            "status": "locked",
+            "earned_by": []
+        },
+        {
+            "badge_id": "B033",
+            "name": "Treasure Hunter",
+            "description": "Unlock 10 rewards",
+            "rarity": "uncommon",
+            "category": "rewards",
+            "criteria": {
+                "type": "rewards_unlocked",
+                "value": 10
+            },
+            "status": "locked",
+            "earned_by": []
+        },
+        {
+            "badge_id": "B034",
+            "name": "Collector",
+            "description": "Unlock 25 rewards",
+            "rarity": "rare",
+            "category": "rewards",
+            "criteria": {
+                "type": "rewards_unlocked",
+                "value": 25
+            },
+            "status": "locked",
+            "earned_by": []
+        },
+        {
+            "badge_id": "B035",
+            "name": "Hoarder",
+            "description": "Unlock 50 rewards",
+            "rarity": "epic",
+            "category": "rewards",
+            "criteria": {
+                "type": "rewards_unlocked",
+                "value": 50
+            },
+            "status": "locked",
+            "earned_by": []
+        }
+    ],
+    "rarity_hierarchy": [
+        "common",
+        "uncommon",
+        "rare",
+        "epic",
+        "legendary"
+    ],
+    "comment": "Badges are checked after daily progress updates and mission completions. Each alter ego tracks their own earned badges."
 }
