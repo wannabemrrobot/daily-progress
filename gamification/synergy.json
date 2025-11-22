@@ -8,22 +8,22 @@
       "xp_to_next_level": 500
     },
     "synergy": {
-      "mind": 5.0,
+      "mind": 25.0,
       "body": -70.0,
       "soul": 0.0
     },
-    "total_synergy": -65.0,
+    "total_synergy": -45.0,
     "missions": {
       "total": 9,
       "completed": 2,
-      "failed": 1,
-      "not-started": 4,
+      "failed": 2,
+      "not-started": 3,
       "in-progress": 2
     },
     "rewards": {
       "total": 2,
-      "unlocked": 0,
-      "locked": 2
+      "unlocked": 1,
+      "locked": 1
     },
     "daily_progress": {
       "daily_progress_streak": 0,

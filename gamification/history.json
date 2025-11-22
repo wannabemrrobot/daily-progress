@@ -286,5 +286,99 @@
       "total": -65.0
     },
     "date": "2025-11-22"
+  },
+  {
+    "history_index": 7,
+    "alter-ego": "mr-robot",
+    "mission_associated": "M02-career-switch",
+    "state": "completed",
+    "delta_changed": {
+      "xp": 100,
+      "health": 20,
+      "energy": 20,
+      "abilities": {
+        "intelligence": 20,
+        "logic": 20,
+        "adaptability": 10,
+        "innovation": 10,
+        "focus": 20,
+        "systemization": 30,
+        "precision": 30,
+        "speed": 20
+      }
+    },
+    "state_after_delta_applied": {
+      "level": 2,
+      "title": "Seeker",
+      "xp": 0,
+      "health": 30,
+      "energy": 30,
+      "abilities": {
+        "intelligence": 20,
+        "logic": 20,
+        "adaptability": 10,
+        "innovation": 30,
+        "focus": 20,
+        "systemization": 50,
+        "precision": 30,
+        "speed": 20
+      }
+    },
+    "synergy_before": {
+      "mind": 5.0,
+      "body": -70.0,
+      "soul": 0.0,
+      "total": -65.0
+    },
+    "synergy_after": {
+      "mind": 25.0,
+      "body": -70.0,
+      "soul": 0.0,
+      "total": -45.0
+    },
+    "date": "2025-11-22",
+    "unlocked_rewards": [
+      "R01"
+    ]
+  },
+  {
+    "history_index": 8,
+    "alter-ego": "mr-robot",
+    "event_type": "badge_unlock",
+    "badge_id": "B019",
+    "badge_name": "Ability Awakening",
+    "badge_category": "abilities",
+    "badge_rarity": "uncommon",
+    "delta_changed": {},
+    "state_after_delta_applied": {
+      "level": 2,
+      "title": "Seeker",
+      "xp": 0,
+      "health": 30,
+      "energy": 30,
+      "abilities": {
+        "intelligence": 20,
+        "logic": 20,
+        "adaptability": 10,
+        "innovation": 30,
+        "focus": 20,
+        "systemization": 50,
+        "precision": 30,
+        "speed": 20
+      }
+    },
+    "synergy_before": {
+      "mind": 25.0,
+      "body": -70.0,
+      "soul": 0.0,
+      "total": -45.0
+    },
+    "synergy_after": {
+      "mind": 25.0,
+      "body": -70.0,
+      "soul": 0.0,
+      "total": -45.0
+    },
+    "date": "2025-11-22"
   }
 ]

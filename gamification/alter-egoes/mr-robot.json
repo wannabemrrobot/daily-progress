@@ -4,40 +4,49 @@
   "profile_url": "https://raw.githubusercontent.com/wannabemrrobot/daily-progress/main/gamification/assets/images/banner/mrrobot-new.png",
   "tag_line": "The Architect",
   "creed_text": "Control is an illusion",
-  "level": 1,
-  "title": "Awakened",
+  "level": 2,
+  "title": "Seeker",
   "status": {
     "current_status": "active",
     "note": ""
   },
-  "soap_points": 5,
-  "earned_badges": [],
+  "soap_points": 15,
+  "earned_badges": [
+    {
+      "badge_id": "B019",
+      "name": "Ability Awakening",
+      "description": "Reach 50+ in any ability",
+      "rarity": "uncommon",
+      "category": "abilities",
+      "earned_date": "2025-11-22"
+    }
+  ],
   "stats": {
-    "missions_completed": 1,
+    "missions_completed": 2,
     "hard_missions_completed": 0,
     "restarted_missions_completed": 0,
-    "rewards_unlocked": 0
+    "rewards_unlocked": 1
   },
   "xp_details": {
     "current_xp": 0,
-    "xp_to_next_level": 100
+    "xp_to_next_level": 250
   },
   "health_details": {
-    "current_health": 10,
+    "current_health": 30,
     "max_health": 100
   },
   "energy_details": {
-    "current_energy": 10,
+    "current_energy": 30,
     "max_energy": 100
   },
   "abilities": {
-    "intelligence": 0,
-    "logic": 0,
-    "adaptability": 0,
-    "innovation": 20,
-    "focus": 0,
-    "systemization": 20,
-    "precision": 0,
-    "speed": 0
+    "intelligence": 20,
+    "logic": 20,
+    "adaptability": 10,
+    "innovation": 30,
+    "focus": 20,
+    "systemization": 50,
+    "precision": 30,
+    "speed": 20
   }
 }
