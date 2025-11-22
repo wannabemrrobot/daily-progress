@@ -7,7 +7,7 @@
             "associated_mission_ids": [
                 "M02"
             ],
-            "reward_type": "mythic",
+            "reward_type": "apex",
             "is_locked": false,
             "badge_icon": "assets/rewards/default.png"
         }
