@@ -8,7 +8,7 @@
                 "K02",
                 "M03"
             ],
-            "reward_type": "street",
+            "reward_type": "apex",
             "is_locked": true,
             "badge_icon": "assets/rewards/default.png"
         }
