@@ -715,9 +715,10 @@ def check_and_award_badges(archetype: str) -> List[Dict]:
     return newly_awarded
 
 
-def generate_badges_aggregate() -> bool:
+def sync_badges_status() -> bool:
     """
-    Generate badges aggregate JSON showing all badges with locked/unlocked status.
+    Sync badge status in config file based on alter ego earned badges.
+    Updates status and earned_by directly in configs/badges.json.
     Returns True if successful, False otherwise.
     """
     try:
@@ -733,9 +734,8 @@ def generate_badges_aggregate() -> bool:
             if ego_data:
                 alter_egos_badges[archetype] = ego_data.get('earned_badges', [])
         
-        # Build aggregate
-        badges_aggregate = []
-        
+        # Update each badge's status and earned_by
+        unlocked_count = 0
         for badge in badges_config.get('badges', []):
             badge_id = badge.get('badge_id')
             
@@ -753,34 +753,21 @@ def generate_badges_aggregate() -> bool:
                         'earned_date': earned_date
                     })
             
-            badge_entry = {
-                'badge_id': badge_id,
-                'name': badge.get('name'),
-                'description': badge.get('description'),
-                'rarity': badge.get('rarity'),
-                'category': badge.get('category'),
-                'status': 'unlocked' if earned_by else 'locked',
-                'earned_by': earned_by,
-                'criteria': badge.get('criteria')
-            }
-            badges_aggregate.append(badge_entry)
+            # Update badge status and earned_by in place
+            badge['status'] = 'unlocked' if earned_by else 'locked'
+            badge['earned_by'] = earned_by
+            if earned_by:
+                unlocked_count += 1
         
-        # Save aggregate
-        aggregate_data = {
-            'badges': badges_aggregate,
-            'last_updated': datetime.datetime.now().isoformat(),
-            'total_badges': len(badges_aggregate),
-            'unlocked_count': sum(1 for b in badges_aggregate if b['status'] == 'unlocked')
-        }
-        
-        if save_json(BADGES_AGGREGATE_FILE, aggregate_data):
-            print_success(f"📛 Generated badges aggregate: {aggregate_data['unlocked_count']}/{aggregate_data['total_badges']} unlocked")
+        # Save updated config
+        if save_json(BADGES_CONFIG_FILE, badges_config):
+            print_success(f"📛 Synced badge status: {unlocked_count}/{len(badges_config.get('badges', []))} unlocked")
             return True
         
         return False
         
     except Exception as e:
-        print_error(f"Failed to generate badges aggregate: {e}")
+        print_error(f"Failed to sync badge status: {e}")
         return False
 
 
@@ -997,12 +984,13 @@ def generate_rewards_aggregates() -> bool:
 
 def regenerate_all_aggregates() -> bool:
     """
-    Regenerate all aggregate files (missions and rewards).
+    Regenerate all aggregate files (missions, rewards, and badges).
     Should be called after any mission or reward modification.
     """
     missions_success = generate_missions_aggregates()
     rewards_success = generate_rewards_aggregates()
-    return missions_success and rewards_success
+    badges_success = sync_badges_status()
+    return missions_success and rewards_success and badges_success
 
 
 def count_rewards() -> Dict[str, int]:
@@ -1445,7 +1433,7 @@ def apply_habit_rewards(habit_results: Dict[str, str]):
         
         # Generate badges aggregate if any were awarded
         if badges_awarded:
-            generate_badges_aggregate()
+            sync_badges_status()
         
         return True
     
@@ -1942,6 +1930,13 @@ def add_new_mission():
     
     # Get stat changes for completion
     print(f"\n{Colors.BOLD}STAT CHANGES ON COMPLETION:{Colors.ENDC}")
+    
+    # Auto-suggest XP based on difficulty
+    xp_suggestions = {"easy": 50, "medium": 100, "hard": 200}
+    suggested_xp = xp_suggestions.get(difficulty, 50)
+    print_info(f"Suggested XP for {difficulty} difficulty: {suggested_xp}")
+    
+    xp_complete = int(get_input("XP reward", str(suggested_xp)))
     health_complete = int(get_input("Health change", "0"))
     energy_complete = int(get_input("Energy change", "0"))
     
@@ -1953,6 +1948,7 @@ def add_new_mission():
     
     # Get stat changes for failure
     print(f"\n{Colors.BOLD}STAT CHANGES ON FAILURE:{Colors.ENDC}")
+    xp_failure = int(get_input("XP penalty (negative value)", "0"))
     health_failure = int(get_input("Health change", "0"))
     energy_failure = int(get_input("Energy change", "0"))
     
@@ -2019,11 +2015,13 @@ def add_new_mission():
         },
         "archetype_stat_change": {
             "on_complete": {
+                "xp": xp_complete,
                 "health": health_complete,
                 "energy": energy_complete,
                 "abilities": abilities_complete
             },
             "on_failure": {
+                "xp": xp_failure,
                 "health": health_failure,
                 "energy": energy_failure,
                 "abilities": abilities_failure
@@ -2155,7 +2153,18 @@ def mark_mission_completed():
     
     if ego_data and xp_rules:
         # Get stat changes from mission
-        on_complete = mission["archetype_stat_change"]["on_complete"]
+        on_complete = mission["archetype_stat_change"]["on_complete"].copy()
+        
+        # Add XP if not defined based on difficulty
+        if 'xp' not in on_complete or on_complete.get('xp') == 0:
+            difficulty = mission.get('difficulty', 'easy').lower()
+            xp_by_difficulty = {
+                'easy': 50,
+                'medium': 100,
+                'hard': 200
+            }
+            on_complete['xp'] = xp_by_difficulty.get(difficulty, 50)
+            print_info(f"Auto-calculated XP reward: {on_complete['xp']} (difficulty: {difficulty})")
         
         # Store state before changes
         state_before = {
@@ -2293,8 +2302,8 @@ def mark_mission_completed():
                 }
                 record_history(history_entry)
             
-            # Generate badges aggregate
-            generate_badges_aggregate()
+            # Sync badge status
+            sync_badges_status()
     else:
         print_error("Failed to mark mission as completed")
 
@@ -3215,9 +3224,9 @@ def create_new_badge():
         print_info(f"Rarity: {rarity} | Category: {category}")
         print_info(f"Criteria: {criteria_type} >= {criteria_value}")
         
-        # Regenerate aggregate
-        if generate_badges_aggregate():
-            print_success("📦 Badge aggregate regenerated")
+        # Sync badge status
+        if sync_badges_status():
+            print_success("📦 Badge status synced")
     else:
         print_error("Failed to create badge")
 
@@ -3297,9 +3306,9 @@ def modify_badge():
     if save_json(BADGES_CONFIG_FILE, badges_config):
         print_success(f"✅ Badge updated: {badge.get('name')}")
         
-        # Regenerate aggregate
-        if generate_badges_aggregate():
-            print_success("📦 Badge aggregate regenerated")
+        # Sync badge status
+        if sync_badges_status():
+            print_success("📦 Badge status synced")
     else:
         print_error("Failed to update badge")
 
@@ -3372,9 +3381,9 @@ def delete_badge():
         if removed_count > 0:
             print_success(f"Badge removed from {removed_count} alter ego(s)")
         
-        # Regenerate aggregate
-        if generate_badges_aggregate():
-            print_success("📦 Badge aggregate regenerated")
+        # Sync badge status
+        if sync_badges_status():
+            print_success("📦 Badge status synced")
     else:
         print_error("Failed to delete badge")
 

@@ -7,6 +7,8 @@
       "description": "Reach level 5",
       "rarity": "common",
       "category": "progression",
+      "status": "locked",
+      "earned_by": [],
       "criteria": {
         "type": "level",
         "value": 5
@@ -21,7 +23,9 @@
       "criteria": {
         "type": "level",
         "value": 10
-      }
+      },
+      "status": "locked",
+      "earned_by": []
     },
     {
       "badge_id": "B003",
@@ -32,7 +36,9 @@
       "criteria": {
         "type": "level",
         "value": 25
-      }
+      },
+      "status": "locked",
+      "earned_by": []
     },
     {
       "badge_id": "B004",
@@ -43,7 +49,9 @@
       "criteria": {
         "type": "level",
         "value": 50
-      }
+      },
+      "status": "locked",
+      "earned_by": []
     },
     {
       "badge_id": "B005",
@@ -54,7 +62,9 @@
       "criteria": {
         "type": "streak",
         "value": 7
-      }
+      },
+      "status": "locked",
+      "earned_by": []
     },
     {
       "badge_id": "B006",
@@ -65,7 +75,9 @@
       "criteria": {
         "type": "streak",
         "value": 14
-      }
+      },
+      "status": "locked",
+      "earned_by": []
     },
     {
       "badge_id": "B007",
@@ -76,7 +88,9 @@
       "criteria": {
         "type": "streak",
         "value": 30
-      }
+      },
+      "status": "locked",
+      "earned_by": []
     },
     {
       "badge_id": "B008",
@@ -87,7 +101,9 @@
       "criteria": {
         "type": "streak",
         "value": 50
-      }
+      },
+      "status": "locked",
+      "earned_by": []
     },
     {
       "badge_id": "B009",
@@ -98,7 +114,9 @@
       "criteria": {
         "type": "streak",
         "value": 100
-      }
+      },
+      "status": "locked",
+      "earned_by": []
     },
     {
       "badge_id": "B010",
@@ -109,7 +127,9 @@
       "criteria": {
         "type": "missions_completed",
         "value": 5
-      }
+      },
+      "status": "locked",
+      "earned_by": []
     },
     {
       "badge_id": "B011",
@@ -120,7 +140,9 @@
       "criteria": {
         "type": "missions_completed",
         "value": 15
-      }
+      },
+      "status": "locked",
+      "earned_by": []
     },
     {
       "badge_id": "B012",
@@ -131,7 +153,9 @@
       "criteria": {
         "type": "missions_completed",
         "value": 30
-      }
+      },
+      "status": "locked",
+      "earned_by": []
     },
     {
       "badge_id": "B013",
@@ -142,7 +166,9 @@
       "criteria": {
         "type": "missions_completed",
         "value": 50
-      }
+      },
+      "status": "locked",
+      "earned_by": []
     },
     {
       "badge_id": "B014",
@@ -153,7 +179,9 @@
       "criteria": {
         "type": "missions_completed",
         "value": 100
-      }
+      },
+      "status": "locked",
+      "earned_by": []
     },
     {
       "badge_id": "B015",
@@ -164,7 +192,9 @@
       "criteria": {
         "type": "health",
         "value": 50
-      }
+      },
+      "status": "locked",
+      "earned_by": []
     },
     {
       "badge_id": "B016",
@@ -175,7 +205,9 @@
       "criteria": {
         "type": "health",
         "value": 100
-      }
+      },
+      "status": "locked",
+      "earned_by": []
     },
     {
       "badge_id": "B017",
@@ -186,7 +218,9 @@
       "criteria": {
         "type": "energy",
         "value": 50
-      }
+      },
+      "status": "locked",
+      "earned_by": []
     },
     {
       "badge_id": "B018",
@@ -197,7 +231,9 @@
       "criteria": {
         "type": "energy",
         "value": 100
-      }
+      },
+      "status": "locked",
+      "earned_by": []
     },
     {
       "badge_id": "B019",
@@ -208,7 +244,9 @@
       "criteria": {
         "type": "any_ability",
         "value": 50
-      }
+      },
+      "status": "locked",
+      "earned_by": []
     },
     {
       "badge_id": "B020",
@@ -219,7 +257,9 @@
       "criteria": {
         "type": "any_ability",
         "value": 100
-      }
+      },
+      "status": "locked",
+      "earned_by": []
     },
     {
       "badge_id": "B021",
@@ -230,7 +270,9 @@
       "criteria": {
         "type": "all_abilities",
         "value": 30
-      }
+      },
+      "status": "locked",
+      "earned_by": []
     },
     {
       "badge_id": "B022",
@@ -241,7 +283,9 @@
       "criteria": {
         "type": "all_abilities",
         "value": 50
-      }
+      },
+      "status": "locked",
+      "earned_by": []
     },
     {
       "badge_id": "B023",
@@ -252,7 +296,9 @@
       "criteria": {
         "type": "total_synergy",
         "value": 50
-      }
+      },
+      "status": "locked",
+      "earned_by": []
     },
     {
       "badge_id": "B024",
@@ -263,7 +309,9 @@
       "criteria": {
         "type": "total_synergy",
         "value": 100
-      }
+      },
+      "status": "locked",
+      "earned_by": []
     },
     {
       "badge_id": "B025",
@@ -274,7 +322,9 @@
       "criteria": {
         "type": "total_synergy",
         "value": 150
-      }
+      },
+      "status": "locked",
+      "earned_by": []
     },
     {
       "badge_id": "B026",
@@ -285,7 +335,9 @@
       "criteria": {
         "type": "total_synergy",
         "value": 200
-      }
+      },
+      "status": "locked",
+      "earned_by": []
     },
     {
       "badge_id": "B027",
@@ -296,7 +348,9 @@
       "criteria": {
         "type": "soap_points",
         "value": 50
-      }
+      },
+      "status": "locked",
+      "earned_by": []
     },
     {
       "badge_id": "B028",
@@ -307,7 +361,9 @@
       "criteria": {
         "type": "soap_points",
         "value": 100
-      }
+      },
+      "status": "locked",
+      "earned_by": []
     },
     {
       "badge_id": "B029",
@@ -318,7 +374,9 @@
       "criteria": {
         "type": "hard_missions_completed",
         "value": 5
-      }
+      },
+      "status": "locked",
+      "earned_by": []
     },
     {
       "badge_id": "B030",
@@ -329,7 +387,9 @@
       "criteria": {
         "type": "hard_missions_completed",
         "value": 15
-      }
+      },
+      "status": "locked",
+      "earned_by": []
     },
     {
       "badge_id": "B031",
@@ -340,7 +400,9 @@
       "criteria": {
         "type": "restarted_missions_completed",
         "value": 1
-      }
+      },
+      "status": "locked",
+      "earned_by": []
     },
     {
       "badge_id": "B032",
@@ -351,7 +413,9 @@
       "criteria": {
         "type": "restarted_missions_completed",
         "value": 5
-      }
+      },
+      "status": "locked",
+      "earned_by": []
     },
     {
       "badge_id": "B033",
@@ -362,7 +426,9 @@
       "criteria": {
         "type": "rewards_unlocked",
         "value": 10
-      }
+      },
+      "status": "locked",
+      "earned_by": []
     },
     {
       "badge_id": "B034",
@@ -373,7 +439,9 @@
       "criteria": {
         "type": "rewards_unlocked",
         "value": 25
-      }
+      },
+      "status": "locked",
+      "earned_by": []
     },
     {
       "badge_id": "B035",
@@ -384,7 +452,9 @@
       "criteria": {
         "type": "rewards_unlocked",
         "value": 50
-      }
+      },
+      "status": "locked",
+      "earned_by": []
     }
   ],
   "rarity_hierarchy": [
