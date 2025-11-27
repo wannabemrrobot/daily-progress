@@ -14,16 +14,16 @@
     },
     "total_synergy": -45.0,
     "missions": {
-      "total": 9,
-      "completed": 2,
+      "total": 10,
+      "completed": 3,
       "failed": 2,
-      "not-started": 3,
-      "in-progress": 2
+      "not-started": 4,
+      "in-progress": 1
     },
     "rewards": {
-      "total": 2,
+      "total": 3,
       "unlocked": 1,
-      "locked": 1
+      "locked": 2
     },
     "daily_progress": {
       "daily_progress_streak": 0,
