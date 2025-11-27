@@ -1,0 +1,11 @@
+{
+    "reward_id": "R03",
+    "title": "bike",
+    "description": "",
+    "associated_mission_ids": [
+        "T03"
+    ],
+    "reward_type": "mythic",
+    "is_locked": true,
+    "badge_icon": "assets/rewards/default.png"
+}

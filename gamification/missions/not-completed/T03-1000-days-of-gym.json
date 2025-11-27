@@ -1,0 +1,55 @@
+{
+    "archetype": "tyler",
+    "mission_code": "T03",
+    "title": "1000 days of Gym",
+    "description": "bla bla",
+    "difficulty": "hard",
+    "status": "not-started",
+    "progress": {
+        "current": 0,
+        "total": 1000
+    },
+    "archetype_stat_change": {
+        "on_complete": {
+            "xp": 200,
+            "health": 10,
+            "energy": 10,
+            "abilities": {
+                "strength": 10,
+                "discipline": 10,
+                "agression": 10,
+                "confidence": 10,
+                "dominance": 10,
+                "pain tolerance": 10,
+                "honor": 10,
+                "determination": 190
+            }
+        },
+        "on_failure": {
+            "xp": 10,
+            "health": 10,
+            "energy": 10,
+            "abilities": {
+                "strength": 10,
+                "discipline": 10,
+                "agression": 10,
+                "confidence": 10,
+                "dominance": 10,
+                "pain tolerance": 10,
+                "honor": 0,
+                "determination": 10
+            }
+        }
+    },
+    "reward": [
+        {
+            "reward_type": "mythic",
+            "title": "bike",
+            "reward_id": "R03"
+        }
+    ],
+    "mission_icon": "assets/badges/default.png",
+    "due_date": "",
+    "start_date": "2025-11-27",
+    "completion_date": null
+}

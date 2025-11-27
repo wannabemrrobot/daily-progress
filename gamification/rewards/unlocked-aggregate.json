@@ -7,11 +7,11 @@
             "associated_mission_ids": [
                 "M02"
             ],
-            "reward_type": "apex",
+            "reward_type": "legendary",
             "is_locked": false,
             "badge_icon": "assets/rewards/default.png"
         }
     ],
     "count": 1,
-    "last_updated": "2025-11-22T22:49:51.690706"
+    "last_updated": "2025-11-27T19:30:47.531776"
 }
